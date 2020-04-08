@@ -17,8 +17,7 @@ def login():
     print(user)
     print(password)
     if user=="user" and password =="password":
-
-        return render_template('login.html')
+        return render_template('login.jinja')
     return render_template('test.html')
 
 
