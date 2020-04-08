@@ -7,15 +7,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return  render_template('index.jinja', title='Welcome')
-@app.route('/login',methods = ['POST'])
+    return  render_template('index.jinja', title='Please login')
+@app.route('/login',methods = ['POST','GET'])
 def login():
+    if request.method== "GET":
+        return redirect("/")
     user = request.form.get('username')
     password= request.form.get('pass')
     print(user)
     print(password)
     if user=="user" and password =="password":
-        return render_template('login.jinja')
+
+        return render_template('login.html')
     return render_template('test.html')
 
 
