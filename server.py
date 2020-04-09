@@ -31,7 +31,7 @@ def login():
 def dashboard(): 
     if not 'username' in session and session['username'] !="user":
         return redirect("/logout")
-    return  render_template('index.jinja', title='hello '+ session['username'], loggedin=True)
+    return  render_template('dashboard.jinja', title='hello '+ session['username'])
 
 @app.route('/logout')
 def logout(): 
