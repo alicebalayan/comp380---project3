@@ -1,1 +1,40 @@
-//here goes the pseudocode for the database part of the project
+//extra credit pseudocode for database 
+
+//table for deliverables 
+CREATE TABLE Deliverables (
+    uniqueIdDeliverable integer, 
+    nameDeliverable string, 
+    descriptionDeliverable text, 
+    dueDateDeliverable integer,
+); 
+
+//table for taks
+CREATE TABLE Tasks (
+    uniqueIdTask integer, 
+    nameTask string, 
+    descriptionTask text, 
+    resourceAssignedTask string, 
+    expectedStartDateTask integer, 
+    expectedEndDateTask integer, 
+    expectedDurationTask integer, 
+    expectedEffortTask string, 
+    actualStartDateTask integer, 
+    actualEndDateTask integer, 
+    actualDurationTask integer, 
+    effortCompletionTask string, 
+    actualEffortTask string, 
+    percentCompletedTask integer, 
+    uniqueIdDeliverable integer,
+); 
+
+//table for issues
+CREATE TABLE Issues ();
+
+//table for action items 
+CREATE TABLE ActionItems (); 
+
+//table for resources 
+CREATE TABLE Resources (); 
+
+//table for decisions
+CREATE TABLE Decisions (); 
