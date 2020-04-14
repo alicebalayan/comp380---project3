@@ -1,1 +1,70 @@
 //here goes the middleware pseudocode 
+//add this one based on erd 
+
+AddDeliverable(deliverable:Deliverable)  
+
+ 
+
+//save the deliverable 
+
+saveDeliverable(deliverable:Deliverable) 
+
+IF deliverableExists(Deliverable.UniqueID) 
+
+updateDeliverable( Deliverable.UniqueID,  
+
+Deliverable.Name,  
+
+Deliverable.Decription, 
+
+Deliverable.ExpectedCompletionDate 
+
+Deliverable.ActualCompletionDate) 
+
+updateAssociatedTasks(Deliverable.UniqueID, associatedTasks) 
+
+updateAssociatedRequirements(Deliverable.UniqueID, associatedRequirements) 
+
+ELSE 
+
+createDeliverable( Deliverable.UniqueID 
+
+Deliverable.Name,  
+
+Deliverable.Decription, 
+
+Deliverable.ExpectedCompletionDate 
+
+Deliverable.ActualCompletionDate) 
+
+addAssociatedTasks(Deliverable.UniqueID, associatedTasks) 
+
+addAssociatedRequirements(Deliverable.UniqueID, associatedRequirements) 
+
+END IF 
+
+RETURN deliverableSaved 
+
+END saveDeliverable 
+
+ 
+
+//update the deliverable  
+
+updateDeliverable(deliverable:Deliverable)  
+
+ 
+
+//delete the deliverable  
+
+deleteDeliverable(deliverable:Deliverable) 
+
+ 
+
+//add task  
+
+//save task  
+
+//update task  
+
+//delete task 
