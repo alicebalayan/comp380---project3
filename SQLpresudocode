@@ -24,17 +24,50 @@ CREATE TABLE Tasks (
     effortCompletionTask string, 
     actualEffortTask string, 
     percentCompletedTask integer, 
-    uniqueIdDeliverable integer,
+    uniqueIdDeliverable integer, //unique id of tasks goes here
 ); 
 
 //table for issues
-CREATE TABLE Issues ();
+CREATE TABLE Issues (
+    uniqueIdIssue integer, 
+    nameIssue string, 
+    descriptionIssue text, 
+    priorityIssue integer, 
+    severityIssue integer, 
+    dateRaisedIssue integer, 
+    dateAssignedIssue integer, 
+    expectedCompletionDateInssue integer, 
+    actualCompletionDateIssue integer, 
+    statusIssue integer,
+    statusDescriptionIssue text, 
+    updateDateIssue integer,
+);
 
 //table for action items 
-CREATE TABLE ActionItems (); 
+CREATE TABLE ActionItems (
+    uniqueIdActionItem integer,
+    nameActionItem text, 
+    descriptionActionItem text, 
+    dateCreatedActionItem integer, 
+    dateAssignedActionItem integer, 
+    resourceAssignedActionItem string, 
+    expectedCompletionDateActionItem integer, 
+    actualCompletionDateActionItem integer, 
+    statusActionItem integer, 
+    statusDescriptionActionItem text, 
+    updateDateActionItem integer, 
+    uniqueIdIssue integer, //unique id of issues goes here
+); 
 
 //table for resources 
-CREATE TABLE Resources (); 
+CREATE TABLE Resources (
+    uniqueIdResource integer, 
+    nameResource text, 
+    uniqueIdActionItem integer, //unique id of action items goes here
+); 
 
 //table for decisions
-CREATE TABLE Decisions (); 
+CREATE TABLE Decisions (
+    uniqueIdDecision integer, 
+    
+); 
