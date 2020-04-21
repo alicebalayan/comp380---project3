@@ -26,7 +26,7 @@ def login():
     if user=="user" and password =="password":
         session['username'] = user
         return redirect("/dashboard")
-    return render_template('test.html')
+    return redirect("/")
 @app.route('/dashboard')
 def dashboard(): 
     if not 'username' in session and session['username'] !="user":
