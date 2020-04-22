@@ -3,12 +3,23 @@
 
 {% block content %}
 <main>
-<section id="sideBar">
-    
-</section>
-<section id="mainContent">
+    <section id="sideBar">
+        <div class="d-flex menuBtn"><h5 class="p-2 m-0"><i class="fas fa-bars m-2"></i><strong>Pane title</strong></h5></div>
+        <form class="navbar-form navbar-right" role="search" style="width: 100%;">
+            <div class="form-group">
+                <input type="search" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default"></button>
+        </form>
+        <div class="d-flex menuBtn"><h6 class="p-2 m-0"><i class="fas fa-home m-2"></i> <span>Dashboard<span></span></span></h6></div>
+        {# <ul>
+            <li>test</li>
+            <li>why</li>
+        </ul> #}
+    </section>
+    <section id="mainContent">
 
-{{self.footer()}}
-</section>
+        {{self.footer()}}
+    </section>
 </main>
 {% endblock %}

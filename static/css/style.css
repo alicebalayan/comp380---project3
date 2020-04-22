@@ -25,3 +25,15 @@ main {
     overflow: visible;
     width: 100%;
 }
+
+.menuBtn {
+    cursor: pointer;
+}
+
+.menuBtn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.navbar-right {
+    float: none!important;
+}
