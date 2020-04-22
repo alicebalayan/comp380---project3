@@ -19,6 +19,7 @@ main {
     width: 20vw;
     background: #FBF5F5;
     height: 100vh;
+    min-width: 300px;
 }
 
 #mainContent {
