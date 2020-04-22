@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import Flask, session, redirect, url_for, escape, request
+from flaskext.mysql import MySQL
+
 import random
 import string
 def randomString(stringLength=10):
@@ -40,6 +42,13 @@ def logout():
         session.pop('username', None)
     return redirect("/")
 
+
+app.config['MYSQL_DATABASE_USER'] = 'lizard'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'ashrab_shai'
+app.config['MYSQL_DATABASE_DB'] = 'PMS'
+app.config['MYSQL_DATABASE_HOST'] = '192.168.0.27'
+mysql = MySQL()
+mysql.init_app(app)
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
