@@ -35,6 +35,31 @@ def dashboard():
         return redirect("/logout")
     return  render_template('dashboard.jinja', title='hello '+ session['username'])
 
+@app.route('/testSQL')
+def mySQL():
+    # Connect to the database
+    connection = pymysql.connect(host='192.168.0.27',
+                                user='lizard',
+                                password='ashrab_shai',
+                                db='PMS',
+                                charset='utf8mb4',
+                                cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            # Create a new record
+            sql = "SHOW TABLES;"
+            cursor.execute(sql)
+            result = cursor.fetchone()
+            print(result)
+            return result
+
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        # connection.commit()
+
+    finally:
+        connection.close()
+    
 @app.route('/logout')
 def logout(): 
     if 'username' in session:
@@ -44,26 +69,10 @@ def logout():
 
 
 
-# Connect to the database
-connection = pymysql.connect(host='192.168.0.27',
-                             user='lizard',
-                             password='ashrab_shai',
-                             db='PMS',
-                             charset='utf8mb4',
-                             cursorclass=pymysql.cursors.DictCursor)
-try:
-    with connection.cursor() as cursor:
-        # Create a new record
-        sql = "create table test1;"
-        cursor.execute(sql)
 
-    # connection is not autocommit by default. So you must commit to save
-    # your changes.
-    connection.commit()
-finally:
-    connection.close()
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(debug=True,host= '0.0.0.0')
+    
