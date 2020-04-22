@@ -54,7 +54,7 @@ connection = pymysql.connect(host='192.168.0.27',
 try:
     with connection.cursor() as cursor:
         # Create a new record
-        sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
+        sql = "create table test1;"
         cursor.execute(sql)
 
     # connection is not autocommit by default. So you must commit to save
