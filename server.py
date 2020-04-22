@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import Flask, session, redirect, url_for, escape, request
-from flaskext.mysql import MySQL
+import pymysql.cursors
 
 import random
 import string
@@ -43,12 +43,23 @@ def logout():
     return redirect("/")
 
 
-app.config['MYSQL_DATABASE_USER'] = 'lizard'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'ashrab_shai'
-app.config['MYSQL_DATABASE_DB'] = 'PMS'
-app.config['MYSQL_DATABASE_HOST'] = '192.168.0.27'
-mysql = MySQL()
-mysql.init_app(app)
+
+# Connect to the database
+connection = pymysql.connect(host='192.168.0.27',
+                             user='lizard',
+                             password='ashrab_shai',
+                             db='PMS',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
+try:
+    with connection.cursor() as cursor:
+        # Read a single record
+        sql = "SELECT `id`, `password` FROM `users` WHERE `email`=%s"
+        cursor.execute(sql, ('webmaster@python.org',))
+        result = cursor.fetchone()
+        print(result)
+finally:
+    connection.close()
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
