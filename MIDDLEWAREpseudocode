@@ -8,40 +8,27 @@ AddDeliverable(deliverable:Deliverable)
 
 saveDeliverable(deliverable:Deliverable) 
 
-IF deliverableExists(Deliverable.UniqueID) 
+    IF deliverableExists(Deliverable.UniqueID) 
+        updateDeliverable( Deliverable.UniqueID,  
+                            Deliverable.Name,  
+                            Deliverable.Decription, 
+                            Deliverable.ExpectedCompletionDate 
+                            Deliverable.ActualCompletionDate) 
+                            updateAssociatedTasks(Deliverable.UniqueID, associatedTasks) 
+                            updateAssociatedRequirements(Deliverable.UniqueID, associatedRequirements) 
 
-updateDeliverable( Deliverable.UniqueID,  
+    ELSE 
+        createDeliverable( Deliverable.UniqueID 
+                            Deliverable.Name,  
+                            Deliverable.Decription, 
+                            Deliverable.ExpectedCompletionDate 
+                            Deliverable.ActualCompletionDate) 
 
-Deliverable.Name,  
+        addAssociatedTasks(Deliverable.UniqueID, associatedTasks) 
 
-Deliverable.Decription, 
+        addAssociatedRequirements(Deliverable.UniqueID, associatedRequirements) 
 
-Deliverable.ExpectedCompletionDate 
-
-Deliverable.ActualCompletionDate) 
-
-updateAssociatedTasks(Deliverable.UniqueID, associatedTasks) 
-
-updateAssociatedRequirements(Deliverable.UniqueID, associatedRequirements) 
-
-ELSE 
-
-createDeliverable( Deliverable.UniqueID 
-
-Deliverable.Name,  
-
-Deliverable.Decription, 
-
-Deliverable.ExpectedCompletionDate 
-
-Deliverable.ActualCompletionDate) 
-
-addAssociatedTasks(Deliverable.UniqueID, associatedTasks) 
-
-addAssociatedRequirements(Deliverable.UniqueID, associatedRequirements) 
-
-END IF 
-
+    END IF 
 RETURN deliverableSaved 
 
 END saveDeliverable 
