@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-04-25T02:48:55.356Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="MvuK6B58ZFfBqtJw2wNX" version="13.0.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-25T02:57:27.135Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="BCpH-AYMt_JDZbiLUuUR" version="13.0.1" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="10813" dy="10435" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="10000" pageHeight="10000" math="0" shadow="0">
       <root>
@@ -699,9 +699,6 @@
         </mxCell>
         <mxCell id="dz90iiXJ-fXM9Wgo-V_7-72" value="FK&#xa;" style="shape=partialRectangle;top=0;left=0;bottom=0;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;part=1;fontSize=12;" parent="dz90iiXJ-fXM9Wgo-V_7-71" vertex="1" connectable="0">
           <mxGeometry width="30" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="0EwCI8Qn3aeCYRkBaAdi-0" value="&lt;p class=&quot;Paragraph&quot;&gt;effort is decimal&amp;nbsp;&lt;/p&gt;&lt;p class=&quot;Paragraph&quot;&gt;default list has a duplicate&lt;/p&gt;&lt;p class=&quot;Paragraph&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-460" y="940" width="210" height="110" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
