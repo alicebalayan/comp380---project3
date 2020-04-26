@@ -30,10 +30,15 @@ createDeliverable(deliverable:Deliverable)
     END IF 
 END createDeliverable
 
- 
+deleteDeliverable(deliverableID:Int) 
+    IF deliverableExists(deliverableID) AND queryDeleteDeliverableFromDatabase(deliverableID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteDeliverable 
 
 //save the deliverable 
-
 saveDeliverable(deliverable:Deliverable) 
 
     IF deliverableExists(deliverable.UniqueID) 
@@ -56,15 +61,15 @@ END getDeliverable
 getAllDeliverable()
     RETURN queryAllDeliverableDatabase()
 END getDeliverable
+
+
 //update the deliverable  
 
 updateDeliverable(deliverable:Deliverable)  
 
  
 
-//delete the deliverable  
 
-deleteDeliverable(deliverable:Deliverable) 
 
 //add these stuff
 addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
