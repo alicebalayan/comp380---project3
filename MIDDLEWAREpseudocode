@@ -160,7 +160,6 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
 END addAssociatedRequirements
 
 //task pseudocode
-
 taskExists(taskID:Int)
     IF queryTaskDatabase(taskID)
         RETURN true
@@ -168,7 +167,31 @@ taskExists(taskID:Int)
         RETURN false
     END IF 
 END taskExists
-//add task  
+
+//create task  
+createTask(deliverable:Task)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToTaskDatabase(task.uniqueID,
+                                task.Name,
+                                task.description,
+                                task.expectedStartDate,
+                                task.expectedEndDate,
+                                task.expectedDuration,
+                                task.expectedEffort,
+                                task.actualStartDate,
+                                task.actualEndDate,
+                                task.actualDuration,
+                                task.effortCompleted,
+                                task.actualEffort,
+                                task.percentComplete,
+                                task.deliverableID,
+                                task.taskType,
+                                task.parentID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createTask
 
 //save task  
 
