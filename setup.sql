@@ -5,7 +5,7 @@
 -- No dependencies
 CREATE TABLE IF NOT EXISTS deliverables (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     description LONGTEXT,
     due_date DATE,
     PRIMARY KEY (id)
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS deliverables (
 -- Depends on deliverables
 CREATE TABLE IF NOT EXISTS requirements (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     deliverable_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (deliverable_id)
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS requirements (
 -- Depends on deliverables
 CREATE TABLE IF NOT EXISTS tasks (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     description LONGTEXT,
     due_date DATE,
     expected_start_date DATE,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS task_pred_succ (
 -- No dependencies
 CREATE TABLE IF NOT EXISTS issues (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     description LONGTEXT,
     priority TEXT,
     severity TEXT,
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS task_issue (
 -- Depends on issues
 CREATE TABLE IF NOT EXISTS action_items (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     description LONGTEXT,
     date_created DATE,
     date_assigned DATE,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS action_items (
 -- No dependencies
 CREATE TABLE IF NOT EXISTS decisions (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     description LONGTEXT,
     priority TEXT,
     impact TEXT,
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS decision_issue (
 -- Depends on action_items and decisions
 CREATE TABLE IF NOT EXISTS resources (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     action_items_id INT NOT NULL,
     decision_id INT NOT NULL,
     PRIMARY KEY (id),
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS task_resource (
 -- Depends on decisions
 CREATE TABLE IF NOT EXISTS reference_documents (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     decision_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (decision_id)
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS reference_documents (
 -- Depends on decisions
 CREATE TABLE IF NOT EXISTS meeting_notes (
     id INT NOT NULL AUTO_INCREMENT,
-    name TEXT,
+    title TEXT,
     note LONGTEXT,
     decision_id INT NOT NULL,
     PRIMARY KEY (id),
