@@ -6,7 +6,22 @@ requirementExists(requirementID:Int)
         RETURN false
     END IF 
 END requirementExists
+//save the requirement 
+saveRequirement(requirement:Requirement) 
+    IF requirementExists(requirement.uniqueID) 
+        IF NOT updateRequirement(requirement) 
+            //displayUpdateFailed exist in gui
+            displayUpdateFailed("ErrorSQL", requirement)
+        END IF
+    ELSE 
+        IF NOT createRequirement(requirement) 
+            //displayAddFailed exist in gui
+            displayAddFailed("ErrorSQL", requirement)
 
+        END IF        
+    END IF 
+    RETURN requirementSaved 
+END saveRequirement 
 createRequirement(requirement:Requirement)
     //database attributes validations will be verified in gui and database part of the program
     IF queryAddToRequirementDatabase(requirement.uniqueID,
