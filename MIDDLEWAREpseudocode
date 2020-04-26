@@ -173,3 +173,10 @@ updateTask(task:Task)
 END updateTask
 //delete task 
 deleteTask(taskID:Int) 
+    IF taskExists(taskID)
+        queryDeleteTaskFromDatabase(taskID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteTask
