@@ -10,8 +10,8 @@ END deliverableExists
 
 addDeliverable(deliverable:Deliverable)
     IF NOT createDeliverable(deliverable) 
-        //displayAddDeliverableFailed exist in gui
-        displayAddDeliverableFailed("ErrorSQL")
+        //displayAddFailed exist in gui
+        displayAddFailed("ErrorSQL", deliverable)
     ELSE 
         addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
         addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
@@ -29,6 +29,18 @@ createDeliverable(deliverable:Deliverable)
         RETURN false
     END IF 
 END createDeliverable
+//update the deliverable  
+updateDeliverable(deliverable:Deliverable)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateDeliverableDatabase(deliverable.UniqueID,
+                                        deliverable.Name,
+                                        deliverable.description,
+                                        deliverable.dueDate)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updateDeliverable
 
 deleteDeliverable(deliverableID:Int) 
     IF deliverableExists(deliverableID) AND queryDeleteDeliverableFromDatabase(deliverableID)
@@ -40,12 +52,14 @@ END deleteDeliverable
 
 //save the deliverable 
 saveDeliverable(deliverable:Deliverable) 
-
     IF deliverableExists(deliverable.UniqueID) 
-        updateDeliverable(deliverable) 
-        
-        updateAssociatedTasks(deliverable.UniqueID, associatedTasks) 
-        updateAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
+        IF updateDeliverable(deliverable) 
+            updateAssociatedTasks(deliverable.UniqueID, associatedTasks) 
+            updateAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
+        ELSE
+            //displayUpdateFailed exist in gui
+            displayUpdateFailed("ErrorSQL", deliverable)
+        END IF
     ELSE 
         addDeliverable(deliverable)           
     END IF 
@@ -61,11 +75,6 @@ END getDeliverable
 getAllDeliverable()
     RETURN queryAllDeliverableDatabase()
 END getDeliverable
-
-
-//update the deliverable  
-
-updateDeliverable(deliverable:Deliverable)  
 
  
 
