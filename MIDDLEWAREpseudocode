@@ -1,4 +1,5 @@
 //here goes the middleware pseudocode 
+//requirement pseudocode
 requirementExists(requirementID:Int)
     IF queryRequirementDatabase(requirementID)
         RETURN true
@@ -58,7 +59,7 @@ updateRequirement(requirement:Requirement)
     END IF 
 END updateRequirement
 
-
+//deliverable pseudocode
 deliverableExists(deliverableID:Int)
     IF queryDeliverableDatabase(deliverableID)
         RETURN true
@@ -158,8 +159,8 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
     END FOR
 END addAssociatedRequirements
 
+//task pseudocode
 
-//add task  
 taskExists(taskID:Int)
     IF queryTaskDatabase(taskID)
         RETURN true
@@ -167,6 +168,8 @@ taskExists(taskID:Int)
         RETURN false
     END IF 
 END taskExists
+//add task  
+
 //save task  
 
 //update task  
