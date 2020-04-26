@@ -9,7 +9,7 @@ END requirementExists
 
 createRequirement(requirement:Requirement)
     //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToRequirementDatabase(requirement.UniqueID,
+    IF queryAddToRequirementDatabase(requirement.uniqueID,
                                     requirement.Name,
                                     requirement.deliverableID)
         RETURN true
@@ -23,7 +23,7 @@ deleteRequirement(requirementID:INT)
 //update Requirement  
 updateRequirement(requirement:Requirement)  
     //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateRequirementDatabase(requirement.UniqueID,
+    IF queryUpdateRequirementDatabase(requirement.uniqueID,
                                     requirement.Name,
                                     requirement.deliverableID)
         RETURN true
@@ -43,7 +43,7 @@ END deliverableExists
 
 createDeliverable(deliverable:Deliverable)
     //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToDeliverableDatabase(deliverable.UniqueID,
+    IF queryAddToDeliverableDatabase(deliverable.uniqueID,
                                     deliverable.Name,
                                     deliverable.description,
                                     deliverable.dueDate)
@@ -55,7 +55,7 @@ END createDeliverable
 //update the deliverable  
 updateDeliverable(deliverable:Deliverable)  
     //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateDeliverableDatabase(deliverable.UniqueID,
+    IF queryUpdateDeliverableDatabase(deliverable.uniqueID,
                                         deliverable.Name,
                                         deliverable.description,
                                         deliverable.dueDate)
@@ -66,8 +66,12 @@ updateDeliverable(deliverable:Deliverable)
 END updateDeliverable
 
 deleteDeliverable(deliverableID:Int) 
-
-    IF deliverableExists(deliverableID) AND queryDeleteDeliverableFromDatabase(deliverableID)
+    IF deliverableExists(deliverableID)
+        Task[] associatedTasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
+        FOR EACH task IN associatedTasks
+            deleteTask(associatedTasks.uniqueID)
+        END FOR
+        queryDeleteDeliverableFromDatabase(deliverableID) 
         RETURN true
     ELSE
         RETURN false
@@ -76,10 +80,10 @@ END deleteDeliverable
 
 //save the deliverable 
 saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequirements:Int[] ) 
-    IF deliverableExists(deliverable.UniqueID) 
+    IF deliverableExists(deliverable.uniqueID) 
         IF updateDeliverable(deliverable) 
-            updateAssociatedTasks(deliverable.UniqueID, associatedTasks) 
-            updateAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
+            updateAssociatedTasks(deliverable.uniqueID, associatedTasks) 
+            updateAssociatedRequirements(deliverable.uniqueID, associatedRequirements) 
         ELSE
             //displayUpdateFailed exist in gui
             displayUpdateFailed("ErrorSQL", deliverable)
@@ -89,8 +93,8 @@ saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequir
             //displayAddFailed exist in gui
             displayAddFailed("ErrorSQL", deliverable)
         ELSE 
-            addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
-            addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
+            addAssociatedTasks(deliverable.uniqueID, associatedTasks) 
+            addAssociatedRequirements(deliverable.uniqueID, associatedRequirements) 
         END IF        
     END IF 
     RETURN deliverableSaved 
@@ -110,7 +114,6 @@ END getDeliverable
 
 
 
-//add these stuff
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
         Task temp = queryTaskDatabase(task)
@@ -147,7 +150,7 @@ END taskExists
 //update task  
 updateTask(task:Task)  
     //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(task.UniqueID,
+    IF queryUpdateTaskDatabase(task.uniqueID,
                                 task.Name,
                                 task.description,
                                 task.expectedStartDate,
@@ -169,3 +172,4 @@ updateTask(task:Task)
     END IF 
 END updateTask
 //delete task 
+deleteTask(taskID:Int) 
