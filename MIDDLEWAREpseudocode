@@ -1,11 +1,31 @@
 //here goes the middleware pseudocode 
+requirementExists(requirementID:Int)
+    IF queryRequirementDatabase(requirementID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END requirementExists
+
+createRequirement(requirement:Requirement)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToRequirementDatabase(requirement.UniqueID,
+                                    requirement.Name,
+                                    requirement.deliverableID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createRequirement
+
+deleteRequirement(requirementID:INT)
 
 //update Requirement  
 updateRequirement(requirement:Requirement)  
     //database attributes validations will be verified in gui and database part of the program
     IF queryUpdateRequirementDatabase(requirement.UniqueID,
-                                requirement.Name,
-                                requirement.deliverableID)
+                                    requirement.Name,
+                                    requirement.deliverableID)
         RETURN true
     ELSE
         RETURN false
@@ -46,6 +66,7 @@ updateDeliverable(deliverable:Deliverable)
 END updateDeliverable
 
 deleteDeliverable(deliverableID:Int) 
+
     IF deliverableExists(deliverableID) AND queryDeleteDeliverableFromDatabase(deliverableID)
         RETURN true
     ELSE
