@@ -1,6 +1,40 @@
 //here goes the middleware pseudocode 
 
-AddDeliverable(deliverable:Deliverable)  
+deliverableExists(deliverableID:Int)
+    IF queryDeliverableDatabase(deliverableID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END deliverableExists
+
+addDeliverable(deliverable:Deliverable)
+    IF deliverableExists(deliverable.UniqueID)
+        //displayAddDeliverableFailed exist in gui
+        displayAddDeliverableFailed("Exist")
+    ELSE
+        IF NOT createDeliverable(deliverable) 
+            //displayAddDeliverableFailed exist in gui
+            displayAddDeliverableFailed("ErrorSQL")
+        ELSE 
+            addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
+            addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
+        END IF 
+    END IF 
+END addDeliverable
+
+createDeliverable(deliverable:Deliverable)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToDeliverableDatabase(deliverable.UniqueID,
+                                    deliverable.Name,
+                                    deliverable.description,
+                                    deliverable.dueDate)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+
+END createDeliverable
 
  
 
@@ -9,25 +43,12 @@ AddDeliverable(deliverable:Deliverable)
 saveDeliverable(deliverable:Deliverable) 
 
     IF deliverableExists(deliverable.UniqueID) 
-        updateDeliverable( deliverable.UniqueID,  
-                            deliverable.Name,  
-                            deliverable.Decription, 
-                            deliverable.ExpectedCompletionDate, 
-                            deliverable.ActualCompletionDate) 
+        updateDeliverable(deliverable) 
+        
         updateAssociatedTasks(deliverable.UniqueID, associatedTasks) 
         updateAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
-
     ELSE 
-        createDeliverable( deliverable.UniqueID, 
-                            deliverable.Name,  
-                            deliverable.Decription, 
-                            deliverable.ExpectedCompletionDate,
-                            deliverable.ActualCompletionDate) 
-
-        addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
-
-        addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
-
+        addDeliverable(deliverable)           
     END IF 
 RETURN deliverableSaved 
 
