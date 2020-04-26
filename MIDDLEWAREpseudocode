@@ -9,17 +9,12 @@ deliverableExists(deliverableID:Int)
 END deliverableExists
 
 addDeliverable(deliverable:Deliverable)
-    IF deliverableExists(deliverable.UniqueID)
+    IF NOT createDeliverable(deliverable) 
         //displayAddDeliverableFailed exist in gui
-        displayAddDeliverableFailed("Exist")
-    ELSE
-        IF NOT createDeliverable(deliverable) 
-            //displayAddDeliverableFailed exist in gui
-            displayAddDeliverableFailed("ErrorSQL")
-        ELSE 
-            addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
-            addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
-        END IF 
+        displayAddDeliverableFailed("ErrorSQL")
+    ELSE 
+        addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
+        addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
     END IF 
 END addDeliverable
 
@@ -33,7 +28,6 @@ createDeliverable(deliverable:Deliverable)
     ELSE
         RETURN false
     END IF 
-
 END createDeliverable
 
  
@@ -50,12 +44,18 @@ saveDeliverable(deliverable:Deliverable)
     ELSE 
         addDeliverable(deliverable)           
     END IF 
-RETURN deliverableSaved 
-
+    RETURN deliverableSaved 
 END saveDeliverable 
 
- 
-
+//get one deliverable
+getDeliverable(deliverableID:Int)
+    Deliverable deliverable = queryDeliverableDatabase(deliverableID)
+    RETURN deliverable
+END getDeliverable
+//get one deliverable
+getAllDeliverable()
+    RETURN queryAllDeliverableDatabase()
+END getDeliverable
 //update the deliverable  
 
 updateDeliverable(deliverable:Deliverable)  
@@ -66,7 +66,9 @@ updateDeliverable(deliverable:Deliverable)
 
 deleteDeliverable(deliverable:Deliverable) 
 
- 
+//add these stuff
+addAssociatedTasks(deliverable.UniqueID, associatedTasks) 
+addAssociatedRequirements(deliverable.UniqueID, associatedRequirements) 
 
 //add task  
 
