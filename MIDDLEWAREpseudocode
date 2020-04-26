@@ -19,7 +19,18 @@ createRequirement(requirement:Requirement)
 END createRequirement
 
 deleteRequirement(requirementID:INT)
-
+    IF requirementExists(requirementID)
+        Requirement requirement=queryRequirementDatabase(requirementID)
+        Deliverable[] otherRequirementsWithSameDeliverable=queryRequirementDatabaseWithConnectedDeliverable(requirement.deliverableID)
+        IF otherRequirementsWithSameDeliverable.length==0
+            deleteDeliverable(requirement.deliverableID)
+        END IF
+        queryDeleteRequirementFromDatabase(requirementID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteRequirement
 //update Requirement  
 updateRequirement(requirement:Requirement)  
     //database attributes validations will be verified in gui and database part of the program
@@ -110,10 +121,6 @@ getAllDeliverable()
     RETURN queryAllDeliverableDatabase()
 END getDeliverable
 
- 
-
-
-
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
         Task temp = queryTaskDatabase(task)
@@ -127,7 +134,7 @@ END addAssociatedTasks
 
 addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
     FOR EACH requirment IN associatedRequirements
-        Requirment temp = queryRequirmentDatabase(requirment)
+        Requirement temp = queryRequirementDatabase(requirment)
         temp.deliverableID=deliverableID
         IF NOT updateRequirement(temp)
             //displayUpdateFailed exist in gui
