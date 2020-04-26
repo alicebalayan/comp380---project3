@@ -137,6 +137,30 @@ getAllDeliverable()
     RETURN queryAllDeliverableDatabase()
 END getDeliverable
 
+//help how do I do this
+updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
+    Task[] tasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
+    FOR EACH task IN associatedTasks
+        Task temp = queryTaskDatabase(task)
+        temp.deliverableID=deliverableID
+        IF NOT updateTask(temp)
+            //displayUpdateFailed exist in gui
+            displayUpdateFailed("ErrorSQL", temp)
+        END IF
+    END FOR
+END updateAssociatedTasks
+//help how do I do this
+updateAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
+    FOR EACH requirment IN associatedRequirements
+        Requirement temp = queryRequirementDatabase(requirment)
+        temp.deliverableID=deliverableID
+        IF NOT updateRequirement(temp)
+            //displayUpdateFailed exist in gui
+            displayUpdateFailed("ErrorSQL", temp)
+        END IF
+    END FOR
+END updateAssociatedRequirements
+
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
         Task temp = queryTaskDatabase(task)
@@ -194,7 +218,26 @@ createTask(deliverable:Task)
 END createTask
 
 //save task  
-
+saveTask(task:Task, associatedTasks:INT[], associatedRequirements:Int[] ) 
+    IF taskExists(task.uniqueID) 
+        IF updateTask(task) 
+            updateAssociatedTasks(task.uniqueID, associatedTasks) 
+            updateAssociatedRequirements(task.uniqueID, associatedRequirements) 
+        ELSE
+            //displayUpdateFailed exist in gui
+            displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createTask(task) 
+            //displayAddFailed exist in gui
+            displayAddFailed("ErrorSQL", task)
+        ELSE 
+            addAssociatedTasks(task.uniqueID, associatedTasks) 
+            addAssociatedRequirements(task.uniqueID, associatedRequirements) 
+        END IF        
+    END IF 
+    RETURN taskSaved 
+END saveTask 
 //update task  
 updateTask(task:Task)  
     //database attributes validations will be verified in gui and database part of the program
