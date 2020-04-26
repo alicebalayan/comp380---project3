@@ -1,5 +1,18 @@
 //here goes the middleware pseudocode 
 
+//update Requirement  
+updateRequirement(requirement:Requirement)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateRequirementDatabase(requirement.UniqueID,
+                                requirement.Name,
+                                requirement.deliverableID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updateRequirement
+
+
 deliverableExists(deliverableID:Int)
     IF queryDeliverableDatabase(deliverableID)
         RETURN true
@@ -89,6 +102,16 @@ addAssociatedTasks(deliverableID:INT, associatedTasks:INT[])
 END addAssociatedTasks
 
 addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
+    FOR EACH requirment IN associatedRequirements
+        Requirment temp = queryRequirmentDatabase(requirment)
+        temp.deliverableID=deliverableID
+        IF NOT updateRequirement(temp)
+            //displayUpdateFailed exist in gui
+            displayUpdateFailed("ErrorSQL", temp)
+        END IF
+    END FOR
+END addAssociatedRequirements
+
 
 //add task  
 taskExists(taskID:Int)
