@@ -45,6 +45,20 @@ CREATE TABLE IF NOT EXISTS tasks (
       REFERENCES deliverables(id)
 );
 
+-- Table for tasks' predecessors and successors
+-- Depends on tasks
+CREATE TABLE IF NOT EXISTS task_pred_succ (
+    task_id INT NOT NULL,
+    predecessor_id INT NOT NULL,
+    successor_id INT NOT NULL,
+    FOREIGN KEY (task_id)
+      REFERENCES tasks(id),
+    FOREIGN KEY (predecessor_id)
+      REFERENCES tasks(id),
+    FOREIGN KEY (successor_id)
+      REFERENCES tasks(id)
+);
+
 -- Table for issues
 -- No dependencies
 CREATE TABLE IF NOT EXISTS issues (
@@ -65,7 +79,7 @@ CREATE TABLE IF NOT EXISTS issues (
 
 -- Table for the task-issue relation
 -- Depends on issues and tasks
-CREATE TABLE task_issue (
+CREATE TABLE IF NOT EXISTS task_issue (
     issue_id INT NOT NULL,
     task_id INT NOT NULL,
     FOREIGN KEY (issue_id)
@@ -76,7 +90,7 @@ CREATE TABLE task_issue (
 
 -- Table for action items
 -- Depends on issues
-CREATE TABLE action_items (
+CREATE TABLE IF NOT EXISTS action_items (
     id INT NOT NULL AUTO_INCREMENT,
     name TEXT,
     description LONGTEXT,
@@ -96,7 +110,7 @@ CREATE TABLE action_items (
 
 -- Table for decisions
 -- No dependencies
-CREATE TABLE decisions (
+CREATE TABLE IF NOT EXISTS decisions (
     id INT NOT NULL AUTO_INCREMENT,
     name TEXT,
     description LONGTEXT,
@@ -114,13 +128,62 @@ CREATE TABLE decisions (
     PRIMARY KEY (id)
 );
 
+
+-- Table for decision-issue relation
+CREATE TABLE IF NOT EXISTS decision_issue (
+    decision_id INT NOT NULL,
+    issue_id INT NOT NULL,
+    FOREIGN KEY (decision_id)
+      REFERENCES decisions(id),
+    FOREIGN KEY (issue_id)
+      REFERENCES issues(id)
+);
+
 -- Table for resources 
--- Depends on action_items
-CREATE TABLE resources (
+-- Depends on action_items and decisions
+CREATE TABLE IF NOT EXISTS resources (
     id INT NOT NULL AUTO_INCREMENT,
     name TEXT,
     action_items_id INT NOT NULL,
+    decision_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (action_items_id)
-      REFERENCES action_items(id)
+      REFERENCES action_items(id),
+    FOREIGN KEY (decision_id)
+      REFERENCES decisions(id)
+);
+
+-- Table for the task-resouce relation
+-- Depends on tasks decisions
+CREATE TABLE IF NOT EXISTS task_resource (
+    task_id INT NOT NULL,
+    resource_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (task_id)
+      REFERENCES tasks(id),
+    FOREIGN KEY (resource_id)
+      REFERENCES resources(id)
+);
+
+-- Table for reference documents
+-- Depends on decisions
+CREATE TABLE IF NOT EXISTS reference_documents (
+    id INT NOT NULL AUTO_INCREMENT,
+    name TEXT,
+    decision_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (decision_id)
+      REFERENCES decisions(id)
+);
+
+-- Table for meeting notes
+-- Depends on decisions
+CREATE TABLE IF NOT EXISTS meeting_notes (
+    id INT NOT NULL AUTO_INCREMENT,
+    name TEXT,
+    note LONGTEXT,
+    decision_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (decision_id)
+      REFERENCES decisions(id)
 );
