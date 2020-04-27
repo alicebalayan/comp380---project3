@@ -12,12 +12,12 @@ saveRequirement(requirement:Requirement)
     IF requirementExists(requirement.uniqueID) 
         IF NOT updateRequirement(requirement) 
             //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", requirement)
+            RETURN displayUpdateFailed("ErrorSQL", requirement)
         END IF
     ELSE 
         IF NOT createRequirement(requirement) 
             //displayAddFailed exist in gui
-            displayAddFailed("ErrorSQL", requirement)
+            RETURN displayAddFailed("ErrorSQL", requirement)
 
         END IF        
     END IF 
@@ -26,7 +26,7 @@ END saveRequirement
 createRequirement(requirement:Requirement)
     //database attributes validations will be verified in gui and database part of the program
     IF queryAddToRequirementDatabase(requirement.uniqueID,
-                                    requirement.Name,
+                                    requirement.name,
                                     requirement.deliverableID)
         RETURN true
     ELSE
@@ -51,7 +51,7 @@ END deleteRequirement
 updateRequirement(requirement:Requirement)  
     //database attributes validations will be verified in gui and database part of the program
     IF queryUpdateRequirementDatabase(requirement.uniqueID,
-                                    requirement.Name,
+                                    requirement.name,
                                     requirement.deliverableID)
         RETURN true
     ELSE
@@ -71,7 +71,7 @@ END deliverableExists
 createDeliverable(deliverable:Deliverable)
     //database attributes validations will be verified in gui and database part of the program
     IF queryAddToDeliverableDatabase(deliverable.uniqueID,
-                                    deliverable.Name,
+                                    deliverable.name,
                                     deliverable.description,
                                     deliverable.dueDate)
         RETURN true
@@ -83,7 +83,7 @@ END createDeliverable
 updateDeliverable(deliverable:Deliverable)  
     //database attributes validations will be verified in gui and database part of the program
     IF queryUpdateDeliverableDatabase(deliverable.uniqueID,
-                                        deliverable.Name,
+                                        deliverable.name,
                                         deliverable.description,
                                         deliverable.dueDate)
         RETURN true
@@ -114,12 +114,12 @@ saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequir
             updateAssociatedRequirements(deliverable.uniqueID, associatedRequirements) 
         ELSE
             //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", deliverable)
+            RETURN displayUpdateFailed("ErrorSQL", deliverable)
         END IF
     ELSE 
         IF NOT createDeliverable(deliverable) 
             //displayAddFailed exist in gui
-            displayAddFailed("ErrorSQL", deliverable)
+            RETURN displayAddFailed("ErrorSQL", deliverable)
         ELSE 
             addAssociatedTasks(deliverable.uniqueID, associatedTasks) 
             addAssociatedRequirements(deliverable.uniqueID, associatedRequirements) 
@@ -159,7 +159,7 @@ removeAssociatedTasks(taskID:INT)
     task.deliverableID=NULL
      IF NOT updateTask(task)
         //displayUpdateFailed exist in gui
-        displayUpdateFailed("ErrorSQL", temp)
+        RETURN displayUpdateFailed("ErrorSQL", temp)
     END IF    
 END removeAssociatedTasks
 removeAssociatedRequirements(requirementID:INT) 
@@ -167,7 +167,7 @@ removeAssociatedRequirements(requirementID:INT)
     requirement.deliverableID=NULL
      IF NOT updateRequirement(requirement)
         //displayUpdateFailed exist in gui
-        displayUpdateFailed("ErrorSQL", temp)
+        RETURN displayUpdateFailed("ErrorSQL", temp)
     END IF    
 END removeAssociatedTasks
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
@@ -176,7 +176,7 @@ addAssociatedTasks(deliverableID:INT, associatedTasks:INT[])
         temp.deliverableID=deliverableID
         IF NOT updateTask(temp)
             //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", temp)
+            RETURN displayUpdateFailed("ErrorSQL", temp)
         END IF
     END FOR
 END addAssociatedTasks
@@ -187,7 +187,7 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
         temp.deliverableID=deliverableID
         IF NOT updateRequirement(temp)
             //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", temp)
+            RETURN displayUpdateFailed("ErrorSQL", temp)
         END IF
     END FOR
 END addAssociatedRequirements
@@ -205,7 +205,7 @@ END taskExists
 createTask(deliverable:Task)
     //database attributes validations will be verified in gui and database part of the program
     IF queryAddToTaskDatabase(task.uniqueID,
-                                task.Name,
+                                task.name,
                                 task.description,
                                 task.expectedStartDate,
                                 task.expectedEndDate,
@@ -236,12 +236,12 @@ saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecesso
             updateSuccessorsTasks(task.uniqueID, successorsTasks) 
         ELSE
             //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", task)
+            RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
         IF NOT createTask(task) 
             //displayAddFailed exist in gui
-            displayAddFailed("ErrorSQL", task)
+            RETURN displayAddFailed("ErrorSQL", task)
         ELSE 
             addAssociatedIssues(task.uniqueID, associatedIssues) 
             addAssociatedResources(task.uniqueID, associatedResources) 
@@ -256,7 +256,7 @@ END saveTask
 updateTask(task:Task)  
     //database attributes validations will be verified in gui and database part of the program
     IF queryUpdateTaskDatabase(task.uniqueID,
-                                task.Name,
+                                task.name,
                                 task.description,
                                 task.expectedStartDate,
                                 task.expectedEndDate,
@@ -295,3 +295,52 @@ updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
+
+
+//default list
+priorityDefaultExists(priorityDefaultID:Int)
+    IF queryPriorityDefaultDatabase(priorityDefaultID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END priorityDefaultExists
+createPriorityDefault(priorityDefault:PriorityDefault)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createPriorityDefault
+deletePriorityDefault(priorityDefaultID:Int) 
+    IF priorityDefaultExists(priorityDefaultID)
+        queryDeletePriorityDefaultFromDatabase(priorityDefaultID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deletePriorityDefault
+updatePriorityDefault(priorityDefault:PriorityDefault)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateTaskDatabase(priorityDefault.uniqueID,
+                                priorityDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updatePriorityDefault
+savePriorityDefault(priorityDefault:PriorityDefault)  
+    IF priorityDefaultExists(priorityDefault.uniqueID) 
+        IF NOT updatePriorityDefault(priorityDefault) 
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createPriorityDefault(priorityDefault) 
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", priorityDefault)
+        END IF        
+    END IF 
+    RETURN priorityDefaultSaved
+END savePriorityDefault 
