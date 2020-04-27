@@ -576,8 +576,21 @@ END deleteTask
 
 //add those 
 addAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
+    FOR EACH issue IN associatedIssues
+        IF NOT createTaskIssueRealtion(issue,taskID)
+            RETURN displayUpdateFailed("ErrorSQL", "task issue relation")
+        END IF
+    END FOR
+END addAssociatedIssues
 addAssociatedResources(taskID:INT, associatedResources:INT[]) 
+    FOR EACH resource IN associatedResources
+        IF NOT createTaskResourceRealtion(resource,taskID)
+            RETURN displayUpdateFailed("ErrorSQL", "task resource relation")
+        END IF
+    END FOR
+END addAssociatedResources
 addPredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
+
 addSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
 updateAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
@@ -585,10 +598,40 @@ updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[])
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
 
 
+//tasks issues relation
+getIssuesWithTask(taskID:INT)
+    RETURN queryIssuesRelationsFromDatabase(taskID, "task")
+END getIssuesWithTask
+getTaskWithIssue(issueID:INT)
+    RETURN queryIssuesRelationsFromDatabase(issueID, "issue")
+END getIssuesWithIssue
+
+createTaskIssueRealtion(issueID:INT,taskID:INT)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToIssuesRelationsDatabase(issueID,taskID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END addTaskIssueRealtion
 
 
+//tasks resources relation
+getResourcesWithTask(taskID:INT)
+    RETURN queryResourcesRelationsFromDatabase(taskID, "task")
+END getResourcesWithTask
+getTaskWithResource(resourceID:INT)
+    RETURN queryResourcesRelationsFromDatabase(resourceID, "resource")
+END getResourcesWithResource
 
-
+createTaskResourceRealtion(resourceID:INT,taskID:INT)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToResourcesRelationsDatabase(resourceID,taskID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END addTaskResourceRealtion
 
 
 
