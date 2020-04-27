@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-04-27T04:25:37.095Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="bdZ6Ft_QjI8Ba99Bdst5" version="13.0.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-27T04:26:38.047Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" etag="veZ4ZcimYT3AThlcfxbQ" version="13.0.1" type="github">
   <diagram id="-ZuuH8YDX5pSfNfYPNRn" name="Page-1">
-    <mxGraphModel dx="2073" dy="896" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1822" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -49,10 +49,10 @@
         <mxCell id="QBGQ36DKpfltj2shuMql-7" value="&lt;span style=&quot;white-space: normal; font-size: 9px;&quot;&gt;Decisions&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;opacity=70;strokeColor=#000000;dashed=1;textOpacity=70;horizontal=1;fontSize=9;" parent="QBGQ36DKpfltj2shuMql-16" vertex="1">
           <mxGeometry y="127.5" width="59.5" height="17" as="geometry" />
         </mxCell>
-        <mxCell id="fjUbv3TZbDnCcwW3qH2g-1" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;Diagram 1: The diagram 1 is showing the overall system architecture of the Project Management Software which is broken down into 3 parts such as GUI, Middle-ware and Database. The 3 pieces communicate data with each other to achieve the system&#39;s functionality.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeWidth=2;spacingLeft=5;spacingRight=5;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="fjUbv3TZbDnCcwW3qH2g-1" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;Diagram 1: The diagram 1 is showing the overall system architecture of the Project Management Software which is broken down into 3 parts such as GUI, Middle-ware and Database. The 3 pieces communicate data with each other to achieve the system&#39;s functionality.&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeWidth=2;spacingLeft=5;spacingRight=5;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="275" y="590" width="510" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="fjUbv3TZbDnCcwW3qH2g-2" value="&lt;div style=&quot;font-size: 20px;&quot;&gt;Project Management Software High Level Design&lt;/div&gt;&lt;div style=&quot;font-size: 20px;&quot;&gt;&lt;br style=&quot;font-size: 20px;&quot;&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;strokeWidth=2;spacingLeft=5;spacingRight=5;fontSize=20;fontStyle=1;strokeColor=#FFFFFF;spacingTop=15;fontFamily=Verdana;" vertex="1" parent="1">
+        <mxCell id="fjUbv3TZbDnCcwW3qH2g-2" value="&lt;div style=&quot;font-size: 20px;&quot;&gt;Project Management Software High Level Design&lt;/div&gt;&lt;div style=&quot;font-size: 20px;&quot;&gt;&lt;br style=&quot;font-size: 20px;&quot;&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;strokeWidth=2;spacingLeft=5;spacingRight=5;fontSize=20;fontStyle=1;strokeColor=#FFFFFF;spacingTop=15;fontFamily=Verdana;" parent="1" vertex="1">
           <mxGeometry x="220" y="30" width="620" height="50" as="geometry" />
         </mxCell>
       </root>
