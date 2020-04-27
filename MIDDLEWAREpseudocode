@@ -138,14 +138,20 @@ getAllDeliverable()
     RETURN queryAllDeliverableDatabase()
 END getDeliverable
 
-//help how do I do this
 updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     Task[] tasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
-    
+    FOR EACH task IN tasks
+        removeAssociatedTasks(task.uniqueID) 
+    END FOR
+    addAssociatedTasks(deliverableID, associatedTasks) 
 END updateAssociatedTasks
 
 updateAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
-    
+    Requirements[] requirements=queryRequirementDatabaseWithConnectedDeliverable(deliverableID)
+    FOR EACH requirement IN requirements
+        removeAssociatedRequirements(requirement.uniqueID) 
+    END FOR
+    addAssociatedRequirements(deliverableID, associatedTasks) 
 END updateAssociatedRequirements
 
 removeAssociatedTasks(taskID:INT) 
