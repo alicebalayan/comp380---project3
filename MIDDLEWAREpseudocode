@@ -273,8 +273,15 @@ saveCategoryDefault(categoryDefault:CategoryDefault)
 END saveCategoryDefault 
 
 //requirement pseudocode
+//get requirements
+getRequirement(requirementID:Int)
+    RETURN queryRequirementDatabase(requirementID)
+END getRequirement
+getAllRequirement()
+    RETURN queryAllRequirementDatabase()
+END getRequirement
 requirementExists(requirementID:Int)
-    IF queryRequirementDatabase(requirementID)
+    IF getRequirement(requirementID)
         RETURN true
     ELSE
         RETURN false
@@ -333,8 +340,15 @@ updateRequirement(requirement:Requirement)
 END updateRequirement
 
 //deliverable pseudocode
+//get deliverables
+getDeliverable(deliverableID:Int)
+    RETURN  queryDeliverableDatabase(deliverableID)
+END getDeliverable
+getAllDeliverable()
+    RETURN queryAllDeliverableDatabase()
+END getDeliverable
 deliverableExists(deliverableID:Int)
-    IF queryDeliverableDatabase(deliverableID)
+    IF getDeliverable(deliverableID)
         RETURN true
     ELSE
         RETURN false
@@ -401,15 +415,6 @@ saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequir
     RETURN deliverableSaved 
 END saveDeliverable 
 
-//get one deliverable
-getDeliverable(deliverableID:Int)
-    Deliverable deliverable = queryDeliverableDatabase(deliverableID)
-    RETURN deliverable
-END getDeliverable
-//get one deliverable
-getAllDeliverable()
-    RETURN queryAllDeliverableDatabase()
-END getDeliverable
 
 updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     Task[] tasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
@@ -455,8 +460,8 @@ addAssociatedTasks(deliverableID:INT, associatedTasks:INT[])
 END addAssociatedTasks
 
 addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
-    FOR EACH requirment IN associatedRequirements
-        Requirement temp = queryRequirementDatabase(requirment)
+    FOR EACH requirement IN associatedRequirements
+        Requirement temp = getRequirement(requirement)
         temp.deliverableID=deliverableID
         IF NOT updateRequirement(temp)
             //displayUpdateFailed exist in gui
@@ -466,8 +471,15 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
 END addAssociatedRequirements
 
 //task pseudocode
+//get one tasks
+getTask(taskID:Int)
+    RETURN queryTaskDatabase(taskID)
+END getTask
+getAllTask()
+    RETURN queryAllTaskDatabase()
+END getTask
 taskExists(taskID:Int)
-    IF queryTaskDatabase(taskID)
+    IF getTask(taskID)
         RETURN true
     ELSE
         RETURN false
@@ -558,7 +570,6 @@ deleteTask(taskID:Int)
         RETURN false
     END IF
 END deleteTask
-
 
 
 
