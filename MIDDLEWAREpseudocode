@@ -96,7 +96,8 @@ deleteDeliverable(deliverableID:Int)
     IF deliverableExists(deliverableID)
         Task[] associatedTasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
         FOR EACH task IN associatedTasks
-            deleteTask(associatedTasks.uniqueID)
+            removeAssociatedTasks(associatedTasks.uniqueID)
+            removeAssociated(associatedTasks.uniqueID)
         END FOR
         queryDeleteDeliverableFromDatabase(deliverableID) 
         RETURN true
@@ -140,27 +141,29 @@ END getDeliverable
 //help how do I do this
 updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     Task[] tasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
-    FOR EACH task IN associatedTasks
-        Task temp = queryTaskDatabase(task)
-        temp.deliverableID=deliverableID
-        IF NOT updateTask(temp)
-            //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", temp)
-        END IF
-    END FOR
+    
 END updateAssociatedTasks
-//help how do I do this
+
 updateAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
-    FOR EACH requirment IN associatedRequirements
-        Requirement temp = queryRequirementDatabase(requirment)
-        temp.deliverableID=deliverableID
-        IF NOT updateRequirement(temp)
-            //displayUpdateFailed exist in gui
-            displayUpdateFailed("ErrorSQL", temp)
-        END IF
-    END FOR
+    
 END updateAssociatedRequirements
 
+removeAssociatedTasks(taskID:INT) 
+    Task task=queryTaskDatabase(taskID)
+    task.deliverableID=NULL
+     IF NOT updateTask(task)
+        //displayUpdateFailed exist in gui
+        displayUpdateFailed("ErrorSQL", temp)
+    END IF    
+END removeAssociatedTasks
+removeAssociatedRequirements(requirementID:INT) 
+    Requirement requirement=queryTaskDatabase(requirementID)
+    requirement.deliverableID=NULL
+     IF NOT updateRequirement(requirement)
+        //displayUpdateFailed exist in gui
+        displayUpdateFailed("ErrorSQL", temp)
+    END IF    
+END removeAssociatedTasks
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
         Task temp = queryTaskDatabase(task)
