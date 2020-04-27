@@ -592,18 +592,25 @@ END addAssociatedResources
 addPredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
 
 addSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
-updateAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
+updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
+    queryDeleteTaskIssuesRelationsFromDatabase(getIssuesWithTask(taskID))
+    addAssociatedIssues(taskID, associatedIssues) 
+END updateAssociatedIssues 
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
+    queryDeleteTaskResourcesRelationsFromDatabase(getResourcesWithTask(taskID))
+    addAssociatedResources(taskID, associatedResources) 
+END updateAssociatedResources
+
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
 
 
 //tasks issues relation
 getIssuesWithTask(taskID:INT)
-    RETURN queryIssuesRelationsFromDatabase(taskID, "task")
+    RETURN queryTaskIssuesRelationsFromDatabase(taskID, "task")
 END getIssuesWithTask
 getTaskWithIssue(issueID:INT)
-    RETURN queryIssuesRelationsFromDatabase(issueID, "issue")
+    RETURN queryTaskIssuesRelationsFromDatabase(issueID, "issue")
 END getIssuesWithIssue
 
 createTaskIssueRealtion(issueID:INT,taskID:INT)
@@ -618,10 +625,10 @@ END addTaskIssueRealtion
 
 //tasks resources relation
 getResourcesWithTask(taskID:INT)
-    RETURN queryResourcesRelationsFromDatabase(taskID, "task")
+    RETURN queryTaskResourcesRelationsFromDatabase(taskID, "task")
 END getResourcesWithTask
 getTaskWithResource(resourceID:INT)
-    RETURN queryResourcesRelationsFromDatabase(resourceID, "resource")
+    RETURN queryTaskResourcesRelationsFromDatabase(resourceID, "resource")
 END getResourcesWithResource
 
 createTaskResourceRealtion(resourceID:INT,taskID:INT)
