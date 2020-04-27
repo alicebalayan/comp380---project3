@@ -227,11 +227,13 @@ createTask(deliverable:Task)
 END createTask
 
 //save task  
-saveTask(task:Task, associatedTasks:INT[], associatedRequirements:Int[] ) 
+saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecessorsTasks:INT[],successorsTasks:INT[]) 
     IF taskExists(task.uniqueID) 
         IF updateTask(task) 
-            updateAssociatedTasks(task.uniqueID, associatedTasks) 
-            updateAssociatedRequirements(task.uniqueID, associatedRequirements) 
+            updateAssociatedIssues(task.uniqueID, associatedIssues) 
+            updateAssociatedResources(task.uniqueID, associatedResources) 
+            updatePredecessorsTasks(task.uniqueID, predecessorsTasks) 
+            updateSuccessorsTasks(task.uniqueID, successorsTasks) 
         ELSE
             //displayUpdateFailed exist in gui
             displayUpdateFailed("ErrorSQL", task)
@@ -241,8 +243,11 @@ saveTask(task:Task, associatedTasks:INT[], associatedRequirements:Int[] )
             //displayAddFailed exist in gui
             displayAddFailed("ErrorSQL", task)
         ELSE 
-            addAssociatedTasks(task.uniqueID, associatedTasks) 
-            addAssociatedRequirements(task.uniqueID, associatedRequirements) 
+            addAssociatedIssues(task.uniqueID, associatedIssues) 
+            addAssociatedResources(task.uniqueID, associatedResources) 
+            addPredecessorsTasks(task.uniqueID, predecessorsTasks) 
+            addSuccessorsTasks(task.uniqueID, successorsTasks) 
+
         END IF        
     END IF 
     RETURN taskSaved 
@@ -280,3 +285,13 @@ deleteTask(taskID:Int)
         RETURN false
     END IF
 END deleteTask
+
+//add those 
+addAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
+addAssociatedResources(taskID:INT, associatedResources:INT[]) 
+addPredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
+addSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
+updateAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
+updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
+updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
+updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
