@@ -286,6 +286,10 @@ deleteTask(taskID:Int)
     END IF
 END deleteTask
 
+
+
+
+
 //add those 
 addAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
 addAssociatedResources(taskID:INT, associatedResources:INT[]) 
@@ -295,6 +299,12 @@ updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
+
+
+
+
+
+
 
 
 //default values lists
