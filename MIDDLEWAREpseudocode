@@ -1,4 +1,277 @@
 //here goes the middleware pseudocode 
+
+//default values lists
+//get one queryPriorityDefault
+getPriorityDefault(priorityDefaultID:Int)
+    RETURN queryPriorityDefaultDatabase(priorityDefaultID)
+END getPriorityDefault
+//get one queryPriorityDefault
+getAllPriorityDefault()
+    RETURN queryAllPriorityDefaultDatabase()
+END getPriorityDefault
+priorityDefaultExists(priorityDefaultID:Int)
+    IF queryPriorityDefaultDatabase(priorityDefaultID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END priorityDefaultExists
+createPriorityDefault(priorityDefault:PriorityDefault)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createPriorityDefault
+deletePriorityDefault(priorityDefaultID:Int) 
+    IF priorityDefaultExists(priorityDefaultID)
+        queryDeletePriorityDefaultFromDatabase(priorityDefaultID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deletePriorityDefault
+updatePriorityDefault(priorityDefault:PriorityDefault)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateTaskDatabase(priorityDefault.uniqueID,
+                                priorityDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updatePriorityDefault
+savePriorityDefault(priorityDefault:PriorityDefault)  
+    IF priorityDefaultExists(priorityDefault.uniqueID) 
+        IF NOT updatePriorityDefault(priorityDefault) 
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createPriorityDefault(priorityDefault) 
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", priorityDefault)
+        END IF        
+    END IF 
+    RETURN priorityDefaultSaved
+END savePriorityDefault 
+//get one SeverityDefault
+getSeverityDefault(id:Int)
+    RETURN querySeverityDefaultDatabase(id)
+END getSeverityDefault
+//get one querySeverityDefault
+getAllSeverityDefault()
+    RETURN queryAllSeverityDefaultDatabase()
+END getSeverityDefault
+severityDefaultExists(severityDefaultID:Int)
+    IF querySeverityDefaultDatabase(severityDefaultID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END severityDefaultExists
+createSeverityDefault(severityDefault:SeverityDefault)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToSeverityDefaultDatabase(severityDefault.uniqueID, severityDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createSeverityDefault
+deleteSeverityDefault(severityDefaultID:Int) 
+    IF severityDefaultExists(severityDefaultID)
+        queryDeleteSeverityDefaultFromDatabase(severityDefaultID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteSeverityDefault
+updateSeverityDefault(severityDefault:SeverityDefault)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateTaskDatabase(severityDefault.uniqueID,
+                                severityDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updateSeverityDefault
+saveSeverityDefault(severityDefault:SeverityDefault)  
+    IF severityDefaultExists(severityDefault.uniqueID) 
+        IF NOT updateSeverityDefault(severityDefault) 
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createSeverityDefault(severityDefault) 
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", severityDefault)
+        END IF        
+    END IF 
+    RETURN severityDefaultSaved
+END saveSeverityDefault 
+//get one ImpactDefault
+getImpactDefault(id:Int)
+    RETURN queryImpactDefaultDatabase(id)
+END getImpactDefault
+//get one queryImpactDefault
+getAllImpactDefault()
+    RETURN queryAllImpactDefaultDatabase()
+END getImpactDefault
+impactDefaultExists(impactDefaultID:Int)
+    IF queryImpactDefaultDatabase(impactDefaultID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END impactDefaultExists
+createImpactDefault(impactDefault:ImpactDefault)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToImpactDefaultDatabase(impactDefault.uniqueID, impactDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createImpactDefault
+deleteImpactDefault(impactDefaultID:Int) 
+    IF impactDefaultExists(impactDefaultID)
+        queryDeleteImpactDefaultFromDatabase(impactDefaultID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteImpactDefault
+updateImpactDefault(impactDefault:ImpactDefault)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateTaskDatabase(impactDefault.uniqueID,
+                                impactDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updateImpactDefault
+saveImpactDefault(impactDefault:ImpactDefault)  
+    IF impactDefaultExists(impactDefault.uniqueID) 
+        IF NOT updateImpactDefault(impactDefault) 
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createImpactDefault(impactDefault) 
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", impactDefault)
+        END IF        
+    END IF 
+    RETURN impactDefaultSaved
+END saveImpactDefault 
+//get one StatusDefault
+getStatusDefault(id:Int)
+    RETURN queryStatusDefaultDatabase(id)
+END getStatusDefault
+//get one queryStatusDefault
+getAllStatusDefault()
+    RETURN queryAllStatusDefaultDatabase()
+END getStatusDefault
+statusDefaultExists(statusDefaultID:Int)
+    IF queryStatusDefaultDatabase(statusDefaultID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END statusDefaultExists
+createStatusDefault(statusDefault:StatusDefault)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToStatusDefaultDatabase(statusDefault.uniqueID, statusDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createStatusDefault
+deleteStatusDefault(statusDefaultID:Int) 
+    IF statusDefaultExists(statusDefaultID)
+        queryDeleteStatusDefaultFromDatabase(statusDefaultID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteStatusDefault
+updateStatusDefault(statusDefault:StatusDefault)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateTaskDatabase(statusDefault.uniqueID,
+                                statusDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updateStatusDefault
+saveStatusDefault(statusDefault:StatusDefault)  
+    IF statusDefaultExists(statusDefault.uniqueID) 
+        IF NOT updateStatusDefault(statusDefault) 
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createStatusDefault(statusDefault) 
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", statusDefault)
+        END IF        
+    END IF 
+    RETURN statusDefaultSaved
+END saveStatusDefault 
+//get one CategoryDefault
+getCategoryDefault(id:Int)
+    RETURN queryCategoryDefaultDatabase(id)
+END getCategoryDefault
+//get one queryCategoryDefault
+getAllCategoryDefault()
+    RETURN queryAllCategoryDefaultDatabase()
+END getCategoryDefault
+categoryDefaultExists(categoryDefaultID:Int)
+    IF queryCategoryDefaultDatabase(categoryDefaultID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END categoryDefaultExists
+createCategoryDefault(categoryDefault:CategoryDefault)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToCategoryDefaultDatabase(categoryDefault.uniqueID, categoryDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createCategoryDefault
+deleteCategoryDefault(categoryDefaultID:Int) 
+    IF categoryDefaultExists(categoryDefaultID)
+        queryDeleteCategoryDefaultFromDatabase(categoryDefaultID) 
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END deleteCategoryDefault
+updateCategoryDefault(categoryDefault:CategoryDefault)  
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryUpdateTaskDatabase(categoryDefault.uniqueID,
+                                categoryDefault.name)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END updateCategoryDefault
+saveCategoryDefault(categoryDefault:CategoryDefault)  
+    IF categoryDefaultExists(categoryDefault.uniqueID) 
+        IF NOT updateCategoryDefault(categoryDefault) 
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF NOT createCategoryDefault(categoryDefault) 
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", categoryDefault)
+        END IF        
+    END IF 
+    RETURN categoryDefaultSaved
+END saveCategoryDefault 
+
 //requirement pseudocode
 requirementExists(requirementID:Int)
     IF queryRequirementDatabase(requirementID)
@@ -307,238 +580,6 @@ updateSuccessorsTasks(taskID:INT, successorsTasks:INT[])
 
 
 
-//default values lists
-priorityDefaultExists(priorityDefaultID:Int)
-    IF queryPriorityDefaultDatabase(priorityDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END priorityDefaultExists
-createPriorityDefault(priorityDefault:PriorityDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END createPriorityDefault
-deletePriorityDefault(priorityDefaultID:Int) 
-    IF priorityDefaultExists(priorityDefaultID)
-        queryDeletePriorityDefaultFromDatabase(priorityDefaultID) 
-        RETURN true
-    ELSE
-        RETURN false
-    END IF
-END deletePriorityDefault
-updatePriorityDefault(priorityDefault:PriorityDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(priorityDefault.uniqueID,
-                                priorityDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END updatePriorityDefault
-savePriorityDefault(priorityDefault:PriorityDefault)  
-    IF priorityDefaultExists(priorityDefault.uniqueID) 
-        IF NOT updatePriorityDefault(priorityDefault) 
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF NOT createPriorityDefault(priorityDefault) 
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", priorityDefault)
-        END IF        
-    END IF 
-    RETURN priorityDefaultSaved
-END savePriorityDefault 
 
-severityDefaultExists(severityDefaultID:Int)
-    IF querySeverityDefaultDatabase(severityDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END severityDefaultExists
-createSeverityDefault(severityDefault:SeverityDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToSeverityDefaultDatabase(severityDefault.uniqueID, severityDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END createSeverityDefault
-deleteSeverityDefault(severityDefaultID:Int) 
-    IF severityDefaultExists(severityDefaultID)
-        queryDeleteSeverityDefaultFromDatabase(severityDefaultID) 
-        RETURN true
-    ELSE
-        RETURN false
-    END IF
-END deleteSeverityDefault
-updateSeverityDefault(severityDefault:SeverityDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(severityDefault.uniqueID,
-                                severityDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END updateSeverityDefault
-saveSeverityDefault(severityDefault:SeverityDefault)  
-    IF severityDefaultExists(severityDefault.uniqueID) 
-        IF NOT updateSeverityDefault(severityDefault) 
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF NOT createSeverityDefault(severityDefault) 
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", severityDefault)
-        END IF        
-    END IF 
-    RETURN severityDefaultSaved
-END saveSeverityDefault 
 
-impactDefaultExists(impactDefaultID:Int)
-    IF queryImpactDefaultDatabase(impactDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END impactDefaultExists
-createImpactDefault(impactDefault:ImpactDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToImpactDefaultDatabase(impactDefault.uniqueID, impactDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END createImpactDefault
-deleteImpactDefault(impactDefaultID:Int) 
-    IF impactDefaultExists(impactDefaultID)
-        queryDeleteImpactDefaultFromDatabase(impactDefaultID) 
-        RETURN true
-    ELSE
-        RETURN false
-    END IF
-END deleteImpactDefault
-updateImpactDefault(impactDefault:ImpactDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(impactDefault.uniqueID,
-                                impactDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END updateImpactDefault
-saveImpactDefault(impactDefault:ImpactDefault)  
-    IF impactDefaultExists(impactDefault.uniqueID) 
-        IF NOT updateImpactDefault(impactDefault) 
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF NOT createImpactDefault(impactDefault) 
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", impactDefault)
-        END IF        
-    END IF 
-    RETURN impactDefaultSaved
-END saveImpactDefault 
 
-statusDefaultExists(statusDefaultID:Int)
-    IF queryStatusDefaultDatabase(statusDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END statusDefaultExists
-createStatusDefault(statusDefault:StatusDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToStatusDefaultDatabase(statusDefault.uniqueID, statusDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END createStatusDefault
-deleteStatusDefault(statusDefaultID:Int) 
-    IF statusDefaultExists(statusDefaultID)
-        queryDeleteStatusDefaultFromDatabase(statusDefaultID) 
-        RETURN true
-    ELSE
-        RETURN false
-    END IF
-END deleteStatusDefault
-updateStatusDefault(statusDefault:StatusDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(statusDefault.uniqueID,
-                                statusDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END updateStatusDefault
-saveStatusDefault(statusDefault:StatusDefault)  
-    IF statusDefaultExists(statusDefault.uniqueID) 
-        IF NOT updateStatusDefault(statusDefault) 
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF NOT createStatusDefault(statusDefault) 
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", statusDefault)
-        END IF        
-    END IF 
-    RETURN statusDefaultSaved
-END saveStatusDefault 
-
-categoryDefaultExists(categoryDefaultID:Int)
-    IF queryCategoryDefaultDatabase(categoryDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END categoryDefaultExists
-createCategoryDefault(categoryDefault:CategoryDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToCategoryDefaultDatabase(categoryDefault.uniqueID, categoryDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END createCategoryDefault
-deleteCategoryDefault(categoryDefaultID:Int) 
-    IF categoryDefaultExists(categoryDefaultID)
-        queryDeleteCategoryDefaultFromDatabase(categoryDefaultID) 
-        RETURN true
-    ELSE
-        RETURN false
-    END IF
-END deleteCategoryDefault
-updateCategoryDefault(categoryDefault:CategoryDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(categoryDefault.uniqueID,
-                                categoryDefault.name)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END updateCategoryDefault
-saveCategoryDefault(categoryDefault:CategoryDefault)  
-    IF categoryDefaultExists(categoryDefault.uniqueID) 
-        IF NOT updateCategoryDefault(categoryDefault) 
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF NOT createCategoryDefault(categoryDefault) 
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", categoryDefault)
-        END IF        
-    END IF 
-    RETURN categoryDefaultSaved
-END saveCategoryDefault 
