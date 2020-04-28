@@ -590,8 +590,21 @@ addAssociatedResources(taskID:INT, associatedResources:INT[])
     END FOR
 END addAssociatedResources
 addPredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
+    FOR EACH predecessorTask IN predecessorsTasks
+        IF NOT createTaskPredecessor(issue,taskID)
+            RETURN displayUpdateFailed("ErrorSQL", "task predecessor relation")
+        END IF
+    END FOR
+END addPredecessorsTasks
 
 addSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
+    FOR EACH successorTask IN successorsTasks
+        IF NOT createTaskPredecessor(issue,taskID)
+            RETURN displayUpdateFailed("ErrorSQL", "task successor relation")
+        END IF
+    END FOR
+END addSuccessorsTasks
+
 updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
     queryDeleteTaskIssuesRelationsFromDatabase(getIssuesWithTask(taskID))
     addAssociatedIssues(taskID, associatedIssues) 
@@ -602,8 +615,13 @@ updateAssociatedResources(taskID:INT, associatedResources:INT[])
 END updateAssociatedResources
 
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
+    queryDeletePredecessorsTasksFromDatabase(getTaskPredecessors(taskID))
+    addPredecessorsTasks(taskID, predecessorsTasks) 
+END updatePredecessorsTasks
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
-
+    queryDeleteSuccessorsTasksFromDatabase(getTaskSuccessors(taskID))
+    addAssociatedResources(taskID, successorsTasks) 
+END updateSuccessorsTasks
 
 //tasks issues relation
 getIssuesWithTask(taskID:INT)
@@ -640,6 +658,33 @@ createTaskResourceRealtion(resourceID:INT,taskID:INT)
     END IF 
 END addTaskResourceRealtion
 
+//tasks predecessors relation
+getTaskPredecessors(taskID:INT)
+    RETURN queryTaskPredecessorsFromDatabase(taskID)
+END getTaskPredecessors
+
+createTaskPredecessor(taskID:INT,taskPredecessorID:INT)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToTaskPredecessorsDatabase(taskID,taskPredecessorID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createTaskPredecessor
+
+//tasks successors relation
+getTaskSuccessors(taskID:INT)
+    RETURN queryTaskSuccessorsFromDatabase(taskID)
+END getTaskSuccessors
+
+createTaskSuccessor(taskID:INT,taskSuccessorID:INT)
+    //database attributes validations will be verified in gui and database part of the program
+    IF queryAddToTaskSuccessorsDatabase(taskID,taskSuccessorID)
+        RETURN true
+    ELSE
+        RETURN false
+    END IF 
+END createTaskSuccessor
 
 
 
