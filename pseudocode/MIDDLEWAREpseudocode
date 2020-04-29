@@ -1,162 +1,120 @@
 //here goes the middleware pseudocode 
 
 //default values lists
-//get one queryPriorityDefault
-getPriorityDefault(priorityDefaultID:Int)
-    RETURN queryPriorityDefaultDatabase(priorityDefaultID)
-END getPriorityDefault
-//get one queryPriorityDefault
-getAllPriorityDefault()
-    RETURN queryAllPriorityDefaultDatabase()
-END getPriorityDefault
-priorityDefaultExists(priorityDefaultID:Int)
-    IF queryPriorityDefaultDatabase(priorityDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END priorityDefaultExists
+
+
 createPriorityDefault(priorityDefault:PriorityDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
-        RETURN true
+
+    IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createPriorityDefault
 deletePriorityDefault(priorityDefaultID:Int) 
     IF priorityDefaultExists(priorityDefaultID)
-        queryDeletePriorityDefaultFromDatabase(priorityDefaultID) 
-        RETURN true
+        deletePriorityDefaultFromDatabase(priorityDefaultID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deletePriorityDefault
 updatePriorityDefault(priorityDefault:PriorityDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(priorityDefault.uniqueID,
+
+    IF updateTaskDatabase(priorityDefault.uniqueID,
                                 priorityDefault.name)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updatePriorityDefault
 savePriorityDefault(priorityDefault:PriorityDefault)  
     IF priorityDefaultExists(priorityDefault.uniqueID) 
-        IF NOT updatePriorityDefault(priorityDefault) 
+        IF updatePriorityDefault(priorityDefault) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
-        IF NOT createPriorityDefault(priorityDefault) 
+        IF createPriorityDefault(priorityDefault) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", priorityDefault)
         END IF        
     END IF 
     RETURN priorityDefaultSaved
 END savePriorityDefault 
-//get one SeverityDefault
-getSeverityDefault(id:Int)
-    RETURN querySeverityDefaultDatabase(id)
-END getSeverityDefault
-//get one querySeverityDefault
-getAllSeverityDefault()
-    RETURN queryAllSeverityDefaultDatabase()
-END getSeverityDefault
-severityDefaultExists(severityDefaultID:Int)
-    IF querySeverityDefaultDatabase(severityDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END severityDefaultExists
+
 createSeverityDefault(severityDefault:SeverityDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToSeverityDefaultDatabase(severityDefault.uniqueID, severityDefault.name)
-        RETURN true
+
+    IF addToSeverityDefaultDatabase(severityDefault.uniqueID, severityDefault.name)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createSeverityDefault
 deleteSeverityDefault(severityDefaultID:Int) 
     IF severityDefaultExists(severityDefaultID)
-        queryDeleteSeverityDefaultFromDatabase(severityDefaultID) 
-        RETURN true
+        deleteSeverityDefaultFromDatabase(severityDefaultID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteSeverityDefault
 updateSeverityDefault(severityDefault:SeverityDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(severityDefault.uniqueID,
+
+    IF updateTaskDatabase(severityDefault.uniqueID,
                                 severityDefault.name)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateSeverityDefault
 saveSeverityDefault(severityDefault:SeverityDefault)  
     IF severityDefaultExists(severityDefault.uniqueID) 
-        IF NOT updateSeverityDefault(severityDefault) 
+        IF updateSeverityDefault(severityDefault) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
-        IF NOT createSeverityDefault(severityDefault) 
+        IF createSeverityDefault(severityDefault) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", severityDefault)
         END IF        
     END IF 
     RETURN severityDefaultSaved
 END saveSeverityDefault 
-//get one ImpactDefault
-getImpactDefault(id:Int)
-    RETURN queryImpactDefaultDatabase(id)
-END getImpactDefault
-//get one queryImpactDefault
-getAllImpactDefault()
-    RETURN queryAllImpactDefaultDatabase()
-END getImpactDefault
-impactDefaultExists(impactDefaultID:Int)
-    IF queryImpactDefaultDatabase(impactDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END impactDefaultExists
 createImpactDefault(impactDefault:ImpactDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToImpactDefaultDatabase(impactDefault.uniqueID, impactDefault.name)
-        RETURN true
+
+    IF addToImpactDefaultDatabase(impactDefault.uniqueID, impactDefault.name)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createImpactDefault
 deleteImpactDefault(impactDefaultID:Int) 
     IF impactDefaultExists(impactDefaultID)
-        queryDeleteImpactDefaultFromDatabase(impactDefaultID) 
-        RETURN true
+        deleteImpactDefaultFromDatabase(impactDefaultID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteImpactDefault
 updateImpactDefault(impactDefault:ImpactDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(impactDefault.uniqueID,
+
+    IF updateTaskDatabase(impactDefault.uniqueID,
                                 impactDefault.name)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateImpactDefault
 saveImpactDefault(impactDefault:ImpactDefault)  
     IF impactDefaultExists(impactDefault.uniqueID) 
-        IF NOT updateImpactDefault(impactDefault) 
+        IF updateImpactDefault(impactDefault) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
-        IF NOT createImpactDefault(impactDefault) 
+        IF createImpactDefault(impactDefault) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", impactDefault)
         END IF        
@@ -171,46 +129,40 @@ END getStatusDefault
 getAllStatusDefault()
     RETURN queryAllStatusDefaultDatabase()
 END getStatusDefault
-statusDefaultExists(statusDefaultID:Int)
-    IF queryStatusDefaultDatabase(statusDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END statusDefaultExists
+
 createStatusDefault(statusDefault:StatusDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToStatusDefaultDatabase(statusDefault.uniqueID, statusDefault.name)
-        RETURN true
+
+    IF addToStatusDefaultDatabase(statusDefault.uniqueID, statusDefault.name)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createStatusDefault
 deleteStatusDefault(statusDefaultID:Int) 
     IF statusDefaultExists(statusDefaultID)
-        queryDeleteStatusDefaultFromDatabase(statusDefaultID) 
-        RETURN true
+        deleteStatusDefaultFromDatabase(statusDefaultID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteStatusDefault
 updateStatusDefault(statusDefault:StatusDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(statusDefault.uniqueID,
+
+    IF updateTaskDatabase(statusDefault.uniqueID,
                                 statusDefault.name)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateStatusDefault
 saveStatusDefault(statusDefault:StatusDefault)  
     IF statusDefaultExists(statusDefault.uniqueID) 
-        IF NOT updateStatusDefault(statusDefault) 
+        IF updateStatusDefault(statusDefault) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
-        IF NOT createStatusDefault(statusDefault) 
+        IF createStatusDefault(statusDefault) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", statusDefault)
         END IF        
@@ -225,46 +177,40 @@ END getCategoryDefault
 getAllCategoryDefault()
     RETURN queryAllCategoryDefaultDatabase()
 END getCategoryDefault
-categoryDefaultExists(categoryDefaultID:Int)
-    IF queryCategoryDefaultDatabase(categoryDefaultID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END categoryDefaultExists
+
 createCategoryDefault(categoryDefault:CategoryDefault)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToCategoryDefaultDatabase(categoryDefault.uniqueID, categoryDefault.name)
-        RETURN true
+
+    IF addToCategoryDefaultDatabase(categoryDefault.uniqueID, categoryDefault.name)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createCategoryDefault
 deleteCategoryDefault(categoryDefaultID:Int) 
     IF categoryDefaultExists(categoryDefaultID)
-        queryDeleteCategoryDefaultFromDatabase(categoryDefaultID) 
-        RETURN true
+        deleteCategoryDefaultFromDatabase(categoryDefaultID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteCategoryDefault
 updateCategoryDefault(categoryDefault:CategoryDefault)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(categoryDefault.uniqueID,
+
+    IF updateTaskDatabase(categoryDefault.uniqueID,
                                 categoryDefault.name)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateCategoryDefault
 saveCategoryDefault(categoryDefault:CategoryDefault)  
     IF categoryDefaultExists(categoryDefault.uniqueID) 
-        IF NOT updateCategoryDefault(categoryDefault) 
+        IF updateCategoryDefault(categoryDefault) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
-        IF NOT createCategoryDefault(categoryDefault) 
+        IF createCategoryDefault(categoryDefault) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", categoryDefault)
         END IF        
@@ -280,22 +226,16 @@ END getRequirement
 getAllRequirement()
     RETURN queryAllRequirementDatabase()
 END getRequirement
-requirementExists(requirementID:Int)
-    IF getRequirement(requirementID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END requirementExists
+
 //save the requirement 
 saveRequirement(requirement:Requirement) 
     IF requirementExists(requirement.uniqueID) 
-        IF NOT updateRequirement(requirement) 
+        IF updateRequirement(requirement) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", requirement)
         END IF
     ELSE 
-        IF NOT createRequirement(requirement) 
+        IF createRequirement(requirement) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", requirement)
 
@@ -304,13 +244,13 @@ saveRequirement(requirement:Requirement)
     RETURN requirementSaved 
 END saveRequirement 
 createRequirement(requirement:Requirement)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToRequirementDatabase(requirement.uniqueID,
+
+    IF addToRequirementDatabase(requirement.uniqueID,
                                     requirement.name,
                                     requirement.deliverableID)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createRequirement
 
@@ -321,21 +261,21 @@ deleteRequirement(requirementID:INT)
         IF otherRequirementsWithSameDeliverable.length==0
             deleteDeliverable(requirement.deliverableID)
         END IF
-        queryDeleteRequirementFromDatabase(requirementID) 
-        RETURN true
+        deleteRequirementFromDatabase(requirementID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteRequirement
 //update Requirement  
 updateRequirement(requirement:Requirement)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateRequirementDatabase(requirement.uniqueID,
+
+    IF updateRequirementDatabase(requirement.uniqueID,
                                     requirement.name,
                                     requirement.deliverableID)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateRequirement
 
@@ -347,35 +287,28 @@ END getDeliverable
 getAllDeliverable()
     RETURN queryAllDeliverableDatabase()
 END getDeliverable
-deliverableExists(deliverableID:Int)
-    IF getDeliverable(deliverableID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END deliverableExists
 
 createDeliverable(deliverable:Deliverable)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToDeliverableDatabase(deliverable.uniqueID,
+
+    IF addToDeliverableDatabase(deliverable.uniqueID,
                                     deliverable.name,
                                     deliverable.description,
                                     deliverable.dueDate)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createDeliverable
 //update the deliverable  
 updateDeliverable(deliverable:Deliverable)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateDeliverableDatabase(deliverable.uniqueID,
+
+    IF updateDeliverableDatabase(deliverable.uniqueID,
                                         deliverable.name,
                                         deliverable.description,
                                         deliverable.dueDate)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateDeliverable
 
@@ -386,10 +319,10 @@ deleteDeliverable(deliverableID:Int)
             removeAssociatedTasks(associatedTasks.uniqueID)
             removeAssociated(associatedTasks.uniqueID)
         END FOR
-        queryDeleteDeliverableFromDatabase(deliverableID) 
-        RETURN true
+        deleteDeliverableFromDatabase(deliverableID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteDeliverable 
 
@@ -404,7 +337,7 @@ saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequir
             RETURN displayUpdateFailed("ErrorSQL", deliverable)
         END IF
     ELSE 
-        IF NOT createDeliverable(deliverable) 
+        IF createDeliverable(deliverable) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", deliverable)
         ELSE 
@@ -435,7 +368,7 @@ END updateAssociatedRequirements
 removeAssociatedTasks(taskID:INT) 
     Task task=queryTaskDatabase(taskID)
     task.deliverableID=NULL
-     IF NOT updateTask(task)
+     IF updateTask(task) EQUALS operationFailed
         //displayUpdateFailed exist in gui
         RETURN displayUpdateFailed("ErrorSQL", temp)
     END IF    
@@ -443,7 +376,7 @@ END removeAssociatedTasks
 removeAssociatedRequirements(requirementID:INT) 
     Requirement requirement=queryTaskDatabase(requirementID)
     requirement.deliverableID=NULL
-     IF NOT updateRequirement(requirement)
+     IF updateRequirement(requirement) EQUALS operationFailed
         //displayUpdateFailed exist in gui
         RETURN displayUpdateFailed("ErrorSQL", temp)
     END IF    
@@ -452,7 +385,7 @@ addAssociatedTasks(deliverableID:INT, associatedTasks:INT[])
     FOR EACH task IN associatedTasks
         Task temp = queryTaskDatabase(task)
         temp.deliverableID=deliverableID
-        IF NOT updateTask(temp)
+        IF updateTask(temp) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", temp)
         END IF
@@ -463,7 +396,7 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
     FOR EACH requirement IN associatedRequirements
         Requirement temp = getRequirement(requirement)
         temp.deliverableID=deliverableID
-        IF NOT updateRequirement(temp)
+        IF updateRequirement(temp) EQUALS operationFailed
             //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", temp)
         END IF
@@ -471,25 +404,10 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
 END addAssociatedRequirements
 
 //task pseudocode
-//get one tasks
-getTask(taskID:Int)
-    RETURN queryTaskDatabase(taskID)
-END getTask
-getAllTask()
-    RETURN queryAllTaskDatabase()
-END getTask
-taskExists(taskID:Int)
-    IF getTask(taskID)
-        RETURN true
-    ELSE
-        RETURN false
-    END IF 
-END taskExists
-
 //create task  
 createTask(deliverable:Task)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToTaskDatabase(task.uniqueID,
+
+    IF addToTaskDatabase(task.uniqueID,
                                 task.name,
                                 task.description,
                                 task.expectedStartDate,
@@ -505,9 +423,9 @@ createTask(deliverable:Task)
                                 task.deliverableID,
                                 task.taskType,
                                 task.parentID)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createTask
 
@@ -524,7 +442,7 @@ saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecesso
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
-        IF NOT createTask(task) 
+        IF createTask(task) EQUALS operationFailed
             //displayAddFailed exist in gui
             RETURN displayAddFailed("ErrorSQL", task)
         ELSE 
@@ -539,8 +457,8 @@ saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecesso
 END saveTask 
 //update task  
 updateTask(task:Task)  
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryUpdateTaskDatabase(task.uniqueID,
+
+    IF updateTaskDatabase(task.uniqueID,
                                 task.name,
                                 task.description,
                                 task.expectedStartDate,
@@ -556,18 +474,18 @@ updateTask(task:Task)
                                 task.deliverableID,
                                 task.taskType,
                                 task.parentID)
-        RETURN true
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END updateTask
 //delete task 
 deleteTask(taskID:Int) 
     IF taskExists(taskID)
-        queryDeleteTaskFromDatabase(taskID) 
-        RETURN true
+        deleteTaskFromDatabase(taskID) 
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF
 END deleteTask
 
@@ -577,21 +495,21 @@ END deleteTask
 //add those 
 addAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
     FOR EACH issue IN associatedIssues
-        IF NOT createTaskIssueRealtion(issue,taskID)
+        IF createTaskIssueRealtion(issue,taskID) EQUALS operationFailed
             RETURN displayUpdateFailed("ErrorSQL", "task issue relation")
         END IF
     END FOR
 END addAssociatedIssues
 addAssociatedResources(taskID:INT, associatedResources:INT[]) 
     FOR EACH resource IN associatedResources
-        IF NOT createTaskResourceRealtion(resource,taskID)
+        IF createTaskResourceRealtion(resource,taskID) EQUALS operationFailed
             RETURN displayUpdateFailed("ErrorSQL", "task resource relation")
         END IF
     END FOR
 END addAssociatedResources
 addPredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
     FOR EACH predecessorTask IN predecessorsTasks
-        IF NOT createTaskPredecessor(issue,taskID)
+        IF createTaskPredecessor(issue,taskID) EQUALS operationFailed
             RETURN displayUpdateFailed("ErrorSQL", "task predecessor relation")
         END IF
     END FOR
@@ -599,90 +517,68 @@ END addPredecessorsTasks
 
 addSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
     FOR EACH successorTask IN successorsTasks
-        IF NOT createTaskPredecessor(issue,taskID)
+        IF createTaskPredecessor(issue,taskID) EQUALS operationFailed
             RETURN displayUpdateFailed("ErrorSQL", "task successor relation")
         END IF
     END FOR
 END addSuccessorsTasks
 
 updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
-    queryDeleteTaskIssuesRelationsFromDatabase(getIssuesWithTask(taskID))
+    deleteTaskIssuesRelationsFromDatabase(getIssuesWithTask(taskID))
     addAssociatedIssues(taskID, associatedIssues) 
 END updateAssociatedIssues 
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
-    queryDeleteTaskResourcesRelationsFromDatabase(getResourcesWithTask(taskID))
+    deleteTaskResourcesRelationsFromDatabase(getResourcesWithTask(taskID))
     addAssociatedResources(taskID, associatedResources) 
 END updateAssociatedResources
 
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
-    queryDeletePredecessorsTasksFromDatabase(getTaskPredecessors(taskID))
+    deletePredecessorsTasksFromDatabase(getTaskPredecessors(taskID))
     addPredecessorsTasks(taskID, predecessorsTasks) 
 END updatePredecessorsTasks
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
-    queryDeleteSuccessorsTasksFromDatabase(getTaskSuccessors(taskID))
+    deleteSuccessorsTasksFromDatabase(getTaskSuccessors(taskID))
     addAssociatedResources(taskID, successorsTasks) 
 END updateSuccessorsTasks
 
 //tasks issues relation
-getIssuesWithTask(taskID:INT)
-    RETURN queryTaskIssuesRelationsFromDatabase(taskID, "task")
-END getIssuesWithTask
-getTaskWithIssue(issueID:INT)
-    RETURN queryTaskIssuesRelationsFromDatabase(issueID, "issue")
-END getIssuesWithIssue
-
 createTaskIssueRealtion(issueID:INT,taskID:INT)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToIssuesRelationsDatabase(issueID,taskID)
-        RETURN true
+
+    IF addToIssuesRelationsDatabase(issueID,taskID)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END addTaskIssueRealtion
 
 
 //tasks resources relation
-getResourcesWithTask(taskID:INT)
-    RETURN queryTaskResourcesRelationsFromDatabase(taskID, "task")
-END getResourcesWithTask
-getTaskWithResource(resourceID:INT)
-    RETURN queryTaskResourcesRelationsFromDatabase(resourceID, "resource")
-END getResourcesWithResource
-
 createTaskResourceRealtion(resourceID:INT,taskID:INT)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToResourcesRelationsDatabase(resourceID,taskID)
-        RETURN true
+
+    IF addToResourcesRelationsDatabase(resourceID,taskID)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END addTaskResourceRealtion
 
 //tasks predecessors relation
-getTaskPredecessors(taskID:INT)
-    RETURN queryTaskPredecessorsFromDatabase(taskID)
-END getTaskPredecessors
-
 createTaskPredecessor(taskID:INT,taskPredecessorID:INT)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToTaskPredecessorsDatabase(taskID,taskPredecessorID)
-        RETURN true
+
+    IF addToTaskPredecessorsDatabase(taskID,taskPredecessorID)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createTaskPredecessor
 
 //tasks successors relation
-getTaskSuccessors(taskID:INT)
-    RETURN queryTaskSuccessorsFromDatabase(taskID)
-END getTaskSuccessors
-
 createTaskSuccessor(taskID:INT,taskSuccessorID:INT)
-    //database attributes validations will be verified in gui and database part of the program
-    IF queryAddToTaskSuccessorsDatabase(taskID,taskSuccessorID)
-        RETURN true
+
+    IF addToTaskSuccessorsDatabase(taskID,taskSuccessorID)
+        RETURN operationCompletedSuccessfully
     ELSE
-        RETURN false
+        RETURN operationFailed
     END IF 
 END createTaskSuccessor
 
