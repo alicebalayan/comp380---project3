@@ -1,292 +1,7 @@
 //here goes the middleware pseudocode 
 
-//default values lists
-
-
-createPriorityDefault(priorityDefault:PriorityDefault)
-
-    IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createPriorityDefault
-deletePriorityDefault(priorityDefaultID:Int) 
-    IF priorityDefaultExists(priorityDefaultID)
-        deletePriorityDefaultFromDatabase(priorityDefaultID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deletePriorityDefault
-updatePriorityDefault(priorityDefault:PriorityDefault)  
-
-    IF updateTaskDatabase(priorityDefault.uniqueID,
-                                priorityDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updatePriorityDefault
-savePriorityDefault(priorityDefault:PriorityDefault)  
-    IF priorityDefaultExists(priorityDefault.uniqueID) 
-        IF updatePriorityDefault(priorityDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF createPriorityDefault(priorityDefault) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", priorityDefault)
-        END IF        
-    END IF 
-    RETURN priorityDefaultSaved
-END savePriorityDefault 
-
-createSeverityDefault(severityDefault:SeverityDefault)
-
-    IF addToSeverityDefaultDatabase(severityDefault.uniqueID, severityDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createSeverityDefault
-deleteSeverityDefault(severityDefaultID:Int) 
-    IF severityDefaultExists(severityDefaultID)
-        deleteSeverityDefaultFromDatabase(severityDefaultID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deleteSeverityDefault
-updateSeverityDefault(severityDefault:SeverityDefault)  
-
-    IF updateTaskDatabase(severityDefault.uniqueID,
-                                severityDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updateSeverityDefault
-saveSeverityDefault(severityDefault:SeverityDefault)  
-    IF severityDefaultExists(severityDefault.uniqueID) 
-        IF updateSeverityDefault(severityDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF createSeverityDefault(severityDefault) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", severityDefault)
-        END IF        
-    END IF 
-    RETURN severityDefaultSaved
-END saveSeverityDefault 
-createImpactDefault(impactDefault:ImpactDefault)
-
-    IF addToImpactDefaultDatabase(impactDefault.uniqueID, impactDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createImpactDefault
-deleteImpactDefault(impactDefaultID:Int) 
-    IF impactDefaultExists(impactDefaultID)
-        deleteImpactDefaultFromDatabase(impactDefaultID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deleteImpactDefault
-updateImpactDefault(impactDefault:ImpactDefault)  
-
-    IF updateTaskDatabase(impactDefault.uniqueID,
-                                impactDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updateImpactDefault
-saveImpactDefault(impactDefault:ImpactDefault)  
-    IF impactDefaultExists(impactDefault.uniqueID) 
-        IF updateImpactDefault(impactDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF createImpactDefault(impactDefault) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", impactDefault)
-        END IF        
-    END IF 
-    RETURN impactDefaultSaved
-END saveImpactDefault 
-//get one StatusDefault
-getStatusDefault(id:Int)
-    RETURN queryStatusDefaultDatabase(id)
-END getStatusDefault
-//get one queryStatusDefault
-getAllStatusDefault()
-    RETURN queryAllStatusDefaultDatabase()
-END getStatusDefault
-
-createStatusDefault(statusDefault:StatusDefault)
-
-    IF addToStatusDefaultDatabase(statusDefault.uniqueID, statusDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createStatusDefault
-deleteStatusDefault(statusDefaultID:Int) 
-    IF statusDefaultExists(statusDefaultID)
-        deleteStatusDefaultFromDatabase(statusDefaultID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deleteStatusDefault
-updateStatusDefault(statusDefault:StatusDefault)  
-
-    IF updateTaskDatabase(statusDefault.uniqueID,
-                                statusDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updateStatusDefault
-saveStatusDefault(statusDefault:StatusDefault)  
-    IF statusDefaultExists(statusDefault.uniqueID) 
-        IF updateStatusDefault(statusDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF createStatusDefault(statusDefault) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", statusDefault)
-        END IF        
-    END IF 
-    RETURN statusDefaultSaved
-END saveStatusDefault 
-//get one CategoryDefault
-getCategoryDefault(id:Int)
-    RETURN queryCategoryDefaultDatabase(id)
-END getCategoryDefault
-//get one queryCategoryDefault
-getAllCategoryDefault()
-    RETURN queryAllCategoryDefaultDatabase()
-END getCategoryDefault
-
-createCategoryDefault(categoryDefault:CategoryDefault)
-
-    IF addToCategoryDefaultDatabase(categoryDefault.uniqueID, categoryDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createCategoryDefault
-deleteCategoryDefault(categoryDefaultID:Int) 
-    IF categoryDefaultExists(categoryDefaultID)
-        deleteCategoryDefaultFromDatabase(categoryDefaultID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deleteCategoryDefault
-updateCategoryDefault(categoryDefault:CategoryDefault)  
-
-    IF updateTaskDatabase(categoryDefault.uniqueID,
-                                categoryDefault.name)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updateCategoryDefault
-saveCategoryDefault(categoryDefault:CategoryDefault)  
-    IF categoryDefaultExists(categoryDefault.uniqueID) 
-        IF updateCategoryDefault(categoryDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
-        END IF
-    ELSE 
-        IF createCategoryDefault(categoryDefault) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", categoryDefault)
-        END IF        
-    END IF 
-    RETURN categoryDefaultSaved
-END saveCategoryDefault 
-
-//requirement pseudocode
-//get requirements
-getRequirement(requirementID:Int)
-    RETURN queryRequirementDatabase(requirementID)
-END getRequirement
-getAllRequirement()
-    RETURN queryAllRequirementDatabase()
-END getRequirement
-
-//save the requirement 
-saveRequirement(requirement:Requirement) 
-    IF requirementExists(requirement.uniqueID) 
-        IF updateRequirement(requirement) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", requirement)
-        END IF
-    ELSE 
-        IF createRequirement(requirement) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", requirement)
-
-        END IF        
-    END IF 
-    RETURN requirementSaved 
-END saveRequirement 
-createRequirement(requirement:Requirement)
-
-    IF addToRequirementDatabase(requirement.uniqueID,
-                                    requirement.name,
-                                    requirement.deliverableID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createRequirement
-
-deleteRequirement(requirementID:INT)
-    IF requirementExists(requirementID)
-        Requirement requirement=queryRequirementDatabase(requirementID)
-        Deliverable[] otherRequirementsWithSameDeliverable=queryRequirementDatabaseWithConnectedDeliverable(requirement.deliverableID)
-        IF otherRequirementsWithSameDeliverable.length==0
-            deleteDeliverable(requirement.deliverableID)
-        END IF
-        deleteRequirementFromDatabase(requirementID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deleteRequirement
-//update Requirement  
-updateRequirement(requirement:Requirement)  
-
-    IF updateRequirementDatabase(requirement.uniqueID,
-                                    requirement.name,
-                                    requirement.deliverableID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updateRequirement
-
 //deliverable pseudocode
-//get deliverables
-getDeliverable(deliverableID:Int)
-    RETURN  queryDeliverableDatabase(deliverableID)
-END getDeliverable
-getAllDeliverable()
-    RETURN queryAllDeliverableDatabase()
-END getDeliverable
+
 
 createDeliverable(deliverable:Deliverable)
 
@@ -383,7 +98,7 @@ removeAssociatedRequirements(requirementID:INT)
 END removeAssociatedTasks
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
-        Task temp = queryTaskDatabase(task)
+        Task temp = getTaskFromDatabase(task)
         temp.deliverableID=deliverableID
         IF updateTask(temp) EQUALS operationFailed
             //displayUpdateFailed exist in gui
@@ -581,6 +296,264 @@ createTaskSuccessor(taskID:INT,taskSuccessorID:INT)
         RETURN operationFailed
     END IF 
 END createTaskSuccessor
+
+//default values lists
+createPriorityDefault(priorityDefault:PriorityDefault)
+
+    IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createPriorityDefault
+deletePriorityDefault(priorityDefaultID:Int) 
+    IF priorityDefaultExists(priorityDefaultID)
+        deletePriorityDefaultFromDatabase(priorityDefaultID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deletePriorityDefault
+updatePriorityDefault(priorityDefault:PriorityDefault)  
+
+    IF updateTaskDatabase(priorityDefault.uniqueID,
+                                priorityDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updatePriorityDefault
+savePriorityDefault(priorityDefault:PriorityDefault)  
+    IF priorityDefaultExists(priorityDefault.uniqueID) 
+        IF updatePriorityDefault(priorityDefault) EQUALS operationFailed
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF createPriorityDefault(priorityDefault) EQUALS operationFailed
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", priorityDefault)
+        END IF        
+    END IF 
+    RETURN priorityDefaultSaved
+END savePriorityDefault 
+
+createSeverityDefault(severityDefault:SeverityDefault)
+
+    IF addToSeverityDefaultDatabase(severityDefault.uniqueID, severityDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createSeverityDefault
+deleteSeverityDefault(severityDefaultID:Int) 
+    IF severityDefaultExists(severityDefaultID)
+        deleteSeverityDefaultFromDatabase(severityDefaultID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteSeverityDefault
+updateSeverityDefault(severityDefault:SeverityDefault)  
+
+    IF updateTaskDatabase(severityDefault.uniqueID,
+                                severityDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateSeverityDefault
+saveSeverityDefault(severityDefault:SeverityDefault)  
+    IF severityDefaultExists(severityDefault.uniqueID) 
+        IF updateSeverityDefault(severityDefault) EQUALS operationFailed
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF createSeverityDefault(severityDefault) EQUALS operationFailed
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", severityDefault)
+        END IF        
+    END IF 
+    RETURN severityDefaultSaved
+END saveSeverityDefault 
+createImpactDefault(impactDefault:ImpactDefault)
+
+    IF addToImpactDefaultDatabase(impactDefault.uniqueID, impactDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createImpactDefault
+deleteImpactDefault(impactDefaultID:Int) 
+    IF impactDefaultExists(impactDefaultID)
+        deleteImpactDefaultFromDatabase(impactDefaultID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteImpactDefault
+updateImpactDefault(impactDefault:ImpactDefault)  
+
+    IF updateTaskDatabase(impactDefault.uniqueID,
+                                impactDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateImpactDefault
+saveImpactDefault(impactDefault:ImpactDefault)  
+    IF impactDefaultExists(impactDefault.uniqueID) 
+        IF updateImpactDefault(impactDefault) EQUALS operationFailed
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF createImpactDefault(impactDefault) EQUALS operationFailed
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", impactDefault)
+        END IF        
+    END IF 
+    RETURN impactDefaultSaved
+END saveImpactDefault 
+
+createStatusDefault(statusDefault:StatusDefault)
+
+    IF addToStatusDefaultDatabase(statusDefault.uniqueID, statusDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createStatusDefault
+deleteStatusDefault(statusDefaultID:Int) 
+    IF statusDefaultExists(statusDefaultID)
+        deleteStatusDefaultFromDatabase(statusDefaultID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteStatusDefault
+updateStatusDefault(statusDefault:StatusDefault)  
+
+    IF updateTaskDatabase(statusDefault.uniqueID,
+                                statusDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateStatusDefault
+saveStatusDefault(statusDefault:StatusDefault)  
+    IF statusDefaultExists(statusDefault.uniqueID) 
+        IF updateStatusDefault(statusDefault) EQUALS operationFailed
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF createStatusDefault(statusDefault) EQUALS operationFailed
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", statusDefault)
+        END IF        
+    END IF 
+    RETURN statusDefaultSaved
+END saveStatusDefault 
+
+
+createCategoryDefault(categoryDefault:CategoryDefault)
+
+    IF addToCategoryDefaultDatabase(categoryDefault.uniqueID, categoryDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createCategoryDefault
+deleteCategoryDefault(categoryDefaultID:Int) 
+    IF categoryDefaultExists(categoryDefaultID)
+        deleteCategoryDefaultFromDatabase(categoryDefaultID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteCategoryDefault
+updateCategoryDefault(categoryDefault:CategoryDefault)  
+
+    IF updateTaskDatabase(categoryDefault.uniqueID,
+                                categoryDefault.name)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateCategoryDefault
+saveCategoryDefault(categoryDefault:CategoryDefault)  
+    IF categoryDefaultExists(categoryDefault.uniqueID) 
+        IF updateCategoryDefault(categoryDefault) EQUALS operationFailed
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", task)
+        END IF
+    ELSE 
+        IF createCategoryDefault(categoryDefault) EQUALS operationFailed
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", categoryDefault)
+        END IF        
+    END IF 
+    RETURN categoryDefaultSaved
+END saveCategoryDefault 
+
+//requirement pseudocode
+
+
+//save the requirement 
+saveRequirement(requirement:Requirement) 
+    IF requirementExists(requirement.uniqueID) 
+        IF updateRequirement(requirement) EQUALS operationFailed
+            //displayUpdateFailed exist in gui
+            RETURN displayUpdateFailed("ErrorSQL", requirement)
+        END IF
+    ELSE 
+        IF createRequirement(requirement) EQUALS operationFailed
+            //displayAddFailed exist in gui
+            RETURN displayAddFailed("ErrorSQL", requirement)
+
+        END IF        
+    END IF 
+    RETURN requirementSaved 
+END saveRequirement 
+createRequirement(requirement:Requirement)
+
+    IF addToRequirementDatabase(requirement.uniqueID,
+                                    requirement.name,
+                                    requirement.deliverableID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createRequirement
+
+deleteRequirement(requirementID:INT)
+    IF requirementExists(requirementID)
+        Requirement requirement=queryRequirementDatabase(requirementID)
+        Deliverable[] otherRequirementsWithSameDeliverable=queryRequirementDatabaseWithConnectedDeliverable(requirement.deliverableID)
+        IF otherRequirementsWithSameDeliverable.length==0
+            deleteDeliverable(requirement.deliverableID)
+        END IF
+        deleteRequirementFromDatabase(requirementID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteRequirement
+//update Requirement  
+updateRequirement(requirement:Requirement)  
+
+    IF updateRequirementDatabase(requirement.uniqueID,
+                                    requirement.name,
+                                    requirement.deliverableID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateRequirement
+
+
 
 
 
