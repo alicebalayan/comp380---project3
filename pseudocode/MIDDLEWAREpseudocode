@@ -1,10 +1,7 @@
 //here goes the middleware pseudocode 
 
 //deliverable pseudocode
-
-
 createDeliverable(deliverable:Deliverable)
-
     IF addToDeliverableDatabase(deliverable.uniqueID,
                                     deliverable.name,
                                     deliverable.description,
@@ -16,7 +13,6 @@ createDeliverable(deliverable:Deliverable)
 END createDeliverable
 //update the deliverable  
 updateDeliverable(deliverable:Deliverable)  
-
     IF updateDeliverableDatabase(deliverable.uniqueID,
                                         deliverable.name,
                                         deliverable.description,
@@ -48,13 +44,11 @@ saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequir
             updateAssociatedTasks(deliverable.uniqueID, associatedTasks) 
             updateAssociatedRequirements(deliverable.uniqueID, associatedRequirements) 
         ELSE
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", deliverable)
+            RETURN displayUpdateFailed()
         END IF
     ELSE 
         IF createDeliverable(deliverable) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", deliverable)
+            RETURN displayAddFailed()
         ELSE 
             addAssociatedTasks(deliverable.uniqueID, associatedTasks) 
             addAssociatedRequirements(deliverable.uniqueID, associatedRequirements) 
@@ -65,7 +59,7 @@ END saveDeliverable
 
 
 updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
-    Task[] tasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
+    get All Tasks Connected To Deliverable
     FOR EACH task IN tasks
         removeAssociatedTasks(task.uniqueID) 
     END FOR
@@ -73,55 +67,33 @@ updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[])
 END updateAssociatedTasks
 
 updateAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
-    Requirements[] requirements=queryRequirementDatabaseWithConnectedDeliverable(deliverableID)
+    get All Requirements Connected To Deliverable
     FOR EACH requirement IN requirements
         removeAssociatedRequirements(requirement.uniqueID) 
     END FOR
     addAssociatedRequirements(deliverableID, associatedTasks) 
 END updateAssociatedRequirements
 
-removeAssociatedTasks(taskID:INT) 
-    Task task=queryTaskDatabase(taskID)
-    task.deliverableID=NULL
-     IF updateTask(task) EQUALS operationFailed
-        //displayUpdateFailed exist in gui
-        RETURN displayUpdateFailed("ErrorSQL", temp)
-    END IF    
-END removeAssociatedTasks
-removeAssociatedRequirements(requirementID:INT) 
-    Requirement requirement=queryTaskDatabase(requirementID)
-    requirement.deliverableID=NULL
-     IF updateRequirement(requirement) EQUALS operationFailed
-        //displayUpdateFailed exist in gui
-        RETURN displayUpdateFailed("ErrorSQL", temp)
-    END IF    
-END removeAssociatedTasks
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
-        Task temp = getTaskFromDatabase(task)
-        temp.deliverableID=deliverableID
-        IF updateTask(temp) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", temp)
+        task.deliverableID=deliverableID
+        IF updateTask(task) EQUALS operationFailed
+            RETURN displayUpdateFailed()
         END IF
     END FOR
 END addAssociatedTasks
 
 addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
     FOR EACH requirement IN associatedRequirements
-        Requirement temp = getRequirement(requirement)
-        temp.deliverableID=deliverableID
-        IF updateRequirement(temp) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", temp)
+        requirement.deliverableID=deliverableID
+        IF updateRequirement(requirement) EQUALS operationFailed
+            RETURN displayUpdateFailed()
         END IF
     END FOR
 END addAssociatedRequirements
 
 //task pseudocode
-//create task  
 createTask(deliverable:Task)
-
     IF addToTaskDatabase(task.uniqueID,
                                 task.name,
                                 task.description,
@@ -144,7 +116,6 @@ createTask(deliverable:Task)
     END IF 
 END createTask
 
-//save task  
 saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecessorsTasks:INT[],successorsTasks:INT[]) 
     IF taskExists(task.uniqueID) 
         IF updateTask(task) 
@@ -153,13 +124,11 @@ saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecesso
             updatePredecessorsTasks(task.uniqueID, predecessorsTasks) 
             updateSuccessorsTasks(task.uniqueID, successorsTasks) 
         ELSE
-            //displayUpdateFailed exist in gui
-            RETURN displayUpdateFailed("ErrorSQL", task)
+            RETURN displayUpdateFailed()
         END IF
     ELSE 
         IF createTask(task) EQUALS operationFailed
-            //displayAddFailed exist in gui
-            RETURN displayAddFailed("ErrorSQL", task)
+            RETURN displayAddFailed()
         ELSE 
             addAssociatedIssues(task.uniqueID, associatedIssues) 
             addAssociatedResources(task.uniqueID, associatedResources) 
@@ -170,7 +139,6 @@ saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecesso
     END IF 
     RETURN taskSaved 
 END saveTask 
-//update task  
 updateTask(task:Task)  
 
     IF updateTaskDatabase(task.uniqueID,
@@ -194,7 +162,6 @@ updateTask(task:Task)
         RETURN operationFailed
     END IF 
 END updateTask
-//delete task 
 deleteTask(taskID:Int) 
     IF taskExists(taskID)
         deleteTaskFromDatabase(taskID) 
@@ -203,29 +170,24 @@ deleteTask(taskID:Int)
         RETURN operationFailed
     END IF
 END deleteTask
-
-
-
-
-//add those 
 addAssociatedIssues(taskID:INT, associatedIssues:INT[]) 
     FOR EACH issue IN associatedIssues
         IF createTaskIssueRealtion(issue,taskID) EQUALS operationFailed
-            RETURN displayUpdateFailed("ErrorSQL", "task issue relation")
+            RETURN displayUpdateFailed()
         END IF
     END FOR
 END addAssociatedIssues
 addAssociatedResources(taskID:INT, associatedResources:INT[]) 
     FOR EACH resource IN associatedResources
         IF createTaskResourceRealtion(resource,taskID) EQUALS operationFailed
-            RETURN displayUpdateFailed("ErrorSQL", "task resource relation")
+            RETURN displayUpdateFailed()
         END IF
     END FOR
 END addAssociatedResources
 addPredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
     FOR EACH predecessorTask IN predecessorsTasks
         IF createTaskPredecessor(issue,taskID) EQUALS operationFailed
-            RETURN displayUpdateFailed("ErrorSQL", "task predecessor relation")
+            RETURN displayUpdateFailed()
         END IF
     END FOR
 END addPredecessorsTasks
@@ -233,32 +195,31 @@ END addPredecessorsTasks
 addSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
     FOR EACH successorTask IN successorsTasks
         IF createTaskPredecessor(issue,taskID) EQUALS operationFailed
-            RETURN displayUpdateFailed("ErrorSQL", "task successor relation")
+            RETURN displayUpdateFailed()
         END IF
     END FOR
 END addSuccessorsTasks
 
 updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
-    deleteTaskIssuesRelationsFromDatabase(getIssuesWithTask(taskID))
+    deleteTaskIssuesRelationsFromDatabase(taskID)
     addAssociatedIssues(taskID, associatedIssues) 
 END updateAssociatedIssues 
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
-    deleteTaskResourcesRelationsFromDatabase(getResourcesWithTask(taskID))
+    deleteTaskResourcesRelationsFromDatabase(taskID)
     addAssociatedResources(taskID, associatedResources) 
 END updateAssociatedResources
 
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
-    deletePredecessorsTasksFromDatabase(getTaskPredecessors(taskID))
+    deletePredecessorsTasksFromDatabase(taskID)
     addPredecessorsTasks(taskID, predecessorsTasks) 
 END updatePredecessorsTasks
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
-    deleteSuccessorsTasksFromDatabase(getTaskSuccessors(taskID))
+    deleteSuccessorsTasksFromDatabase(taskID)
     addAssociatedResources(taskID, successorsTasks) 
 END updateSuccessorsTasks
 
 //tasks issues relation
 createTaskIssueRealtion(issueID:INT,taskID:INT)
-
     IF addToIssuesRelationsDatabase(issueID,taskID)
         RETURN operationCompletedSuccessfully
     ELSE
@@ -269,7 +230,6 @@ END addTaskIssueRealtion
 
 //tasks resources relation
 createTaskResourceRealtion(resourceID:INT,taskID:INT)
-
     IF addToResourcesRelationsDatabase(resourceID,taskID)
         RETURN operationCompletedSuccessfully
     ELSE
@@ -286,8 +246,6 @@ createTaskPredecessor(taskID:INT,taskPredecessorID:INT)
         RETURN operationFailed
     END IF 
 END createTaskPredecessor
-
-//tasks successors relation
 createTaskSuccessor(taskID:INT,taskSuccessorID:INT)
 
     IF addToTaskSuccessorsDatabase(taskID,taskSuccessorID)
@@ -326,7 +284,6 @@ END updatePriorityDefault
 savePriorityDefault(priorityDefault:PriorityDefault)  
     IF priorityDefaultExists(priorityDefault.uniqueID) 
         IF updatePriorityDefault(priorityDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
@@ -366,7 +323,7 @@ END updateSeverityDefault
 saveSeverityDefault(severityDefault:SeverityDefault)  
     IF severityDefaultExists(severityDefault.uniqueID) 
         IF updateSeverityDefault(severityDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
+
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
@@ -405,7 +362,7 @@ END updateImpactDefault
 saveImpactDefault(impactDefault:ImpactDefault)  
     IF impactDefaultExists(impactDefault.uniqueID) 
         IF updateImpactDefault(impactDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
+
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
@@ -445,7 +402,7 @@ END updateStatusDefault
 saveStatusDefault(statusDefault:StatusDefault)  
     IF statusDefaultExists(statusDefault.uniqueID) 
         IF updateStatusDefault(statusDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
+
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
@@ -486,7 +443,7 @@ END updateCategoryDefault
 saveCategoryDefault(categoryDefault:CategoryDefault)  
     IF categoryDefaultExists(categoryDefault.uniqueID) 
         IF updateCategoryDefault(categoryDefault) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
+
             RETURN displayUpdateFailed("ErrorSQL", task)
         END IF
     ELSE 
@@ -505,7 +462,7 @@ END saveCategoryDefault
 saveRequirement(requirement:Requirement) 
     IF requirementExists(requirement.uniqueID) 
         IF updateRequirement(requirement) EQUALS operationFailed
-            //displayUpdateFailed exist in gui
+
             RETURN displayUpdateFailed("ErrorSQL", requirement)
         END IF
     ELSE 
