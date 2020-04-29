@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-04-29T22:26:48.686Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="KxASDgzXlNW20nhC9i3n" version="13.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-29T22:34:57.100Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="s2pTBaY5wNZwNimXrVOh" version="13.0.3" type="github">
   <diagram id="fuKhKUKI9TPdpv6UsRDI" name="Page-1">
     <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -58,7 +58,7 @@
             <mxPoint x="979.5" y="150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-4" value="Create Task" style="endArrow=open;endSize=12;dashed=1;html=1;" edge="1" parent="1">
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-4" value="Create Task" style="endArrow=classic;dashed=1;html=1;" edge="1" parent="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="140" y="200" as="sourcePoint" />
             <mxPoint x="340" y="200" as="targetPoint" />
@@ -97,15 +97,6 @@
             <mxPoint x="980" y="400" as="sourcePoint" />
             <mxPoint x="140" y="400" as="targetPoint" />
             <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-11" value="save" style="endArrow=open;endSize=12;dashed=1;html=1;" edge="1" parent="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="140" y="440" as="sourcePoint" />
-            <mxPoint x="340" y="440" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="240" y="440" />
-            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-12" value="Task Attributes" style="endArrow=classic;html=1;" edge="1" parent="1">
