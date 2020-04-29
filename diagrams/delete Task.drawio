@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-04-29T22:29:40.814Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="S4YUaxGH_usd72xXVB8Z" version="13.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-29T22:35:13.373Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="LHvO1iN77CF8n7c5KTkc" version="13.0.3" type="github">
   <diagram id="fuKhKUKI9TPdpv6UsRDI" name="Page-1">
     <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -58,7 +58,7 @@
             <mxPoint x="979.5" y="150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-4" value="delete Task" style="endArrow=classic;endSize=12;dashed=1;html=1;" parent="1" edge="1">
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-4" value="delete Task" style="endArrow=classic;dashed=1;html=1;" parent="1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="140" y="200" as="sourcePoint" />
             <mxPoint x="340" y="200" as="targetPoint" />
