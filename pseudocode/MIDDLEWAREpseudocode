@@ -12,7 +12,6 @@ createDeliverable(deliverable:Deliverable)
         RETURN operationFailed
     END IF 
 END createDeliverable
-//update the deliverable  
 updateDeliverable(deliverable:Deliverable)  
     IF updateDeliverableDatabase(deliverable.uniqueID,
                                         deliverable.name,
@@ -27,6 +26,7 @@ END updateDeliverable
 deleteDeliverable(deliverableID:Int) 
     IF deliverableExists(deliverableID)
         unassociateTasks(deliverableID)
+        unassociateRequirements(deliverableID)
         deleteDeliverableFromDatabase(deliverableID) 
         RETURN operationCompletedSuccessfully
     ELSE
@@ -34,7 +34,8 @@ deleteDeliverable(deliverableID:Int)
     END IF
     
 END deleteDeliverable 
-
+//saveDeliverable is called by the gui with a deliverable object and 2 arrays of IDS for associated tasks and requirement issueID
+//it will check if the given deliverable exist annd update it otherwise it will create a new deliverable
 saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequirements:Int[] ) 
     IF deliverableExists(deliverable.uniqueID) 
         IF updateDeliverable(deliverable) 
@@ -57,22 +58,23 @@ END saveDeliverable
 
 updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     get All Tasks Connected To Deliverable
-    FOR EACH task IN tasks
-        unassociateTasks(task.uniqueID) 
+    FOR EACH task IN tasksConnectedToDeliverable
+        unassociateTask(task.uniqueID) 
     END FOR
     addAssociatedTasks(deliverableID, associatedTasks) 
 END updateAssociatedTasks
 
 updateAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
     get All Requirements Connected To Deliverable
-    FOR EACH requirement IN requirements
-        unassociateRequirements(requirement.uniqueID) 
+    FOR EACH requirement IN requirementsConnectedToDeliverable
+        unassociateRequirement(requirement.uniqueID) 
     END FOR
     addAssociatedRequirements(deliverableID, associatedTasks) 
 END updateAssociatedRequirements
 
 addAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     FOR EACH task IN associatedTasks
+        get the task object from database
         task.deliverableID=deliverableID
         IF updateTask(task) EQUALS operationFailed
             RETURN displayUpdateFailed()
@@ -82,6 +84,7 @@ END addAssociatedTasks
 
 addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
     FOR EACH requirement IN associatedRequirements
+        get the requirement object from database
         requirement.deliverableID=deliverableID
         IF updateRequirement(requirement) EQUALS operationFailed
             RETURN displayUpdateFailed()
@@ -112,7 +115,8 @@ createTask(task:Task)
         RETURN operationFailed
     END IF 
 END createTask
-
+//saveTask is called by the gui with a task object and arrays of IDs for associated Resources and predecessors Tasks and successors Tasks 
+//it will check if the given task exist annd update it otherwise it will create a new task and add all associations
 saveTask(task:Task, associatedIssues:INT[],associatedResources:INT[], predecessorsTasks:INT[],successorsTasks:INT[]) 
     IF taskExists(task.uniqueID) 
         IF updateTask(task) 
@@ -161,6 +165,11 @@ updateTask(task:Task)
 END updateTask
 deleteTask(taskID:Int) 
     IF taskExists(taskID)
+        unassoicateRsourcesFromTask(taskID)
+        unassoicateIssuesFromTask(taskID)
+        unassoicatePredecessorsTasks(taskID)
+        unassociateSuccessorsTasks(taskID)
+        unassociateChildTasks(taskID)
         deleteTaskFromDatabase(taskID) 
         RETURN operationCompletedSuccessfully
     ELSE
@@ -198,59 +207,23 @@ addSuccessorsTasks(taskID:INT, successorsTasks:INT[])
 END addSuccessorsTasks
 
 updateAssociatedIssues(taskID:INT, associatedIssues:INT[])
-    deleteTaskIssuesRelationsFromDatabase(taskID)
+    unassoicateIssuesFromTask(taskID)
     addAssociatedIssues(taskID, associatedIssues) 
 END updateAssociatedIssues 
 updateAssociatedResources(taskID:INT, associatedResources:INT[]) 
-    deleteTaskResourcesRelationsFromDatabase(taskID)
+    unassoicateRsourcesFromTask(taskID)
     addAssociatedResources(taskID, associatedResources) 
 END updateAssociatedResources
 
 updatePredecessorsTasks(taskID:INT, predecessorsTasks:INT[]) 
-    deletePredecessorsTasksFromDatabase(taskID)
+    unassoicatePredecessorsTasks(taskID)
     addPredecessorsTasks(taskID, predecessorsTasks) 
 END updatePredecessorsTasks
 updateSuccessorsTasks(taskID:INT, successorsTasks:INT[]) 
-    deleteSuccessorsTasksFromDatabase(taskID)
+    unassociateSuccessorsTasks(taskID)
     addAssociatedResources(taskID, successorsTasks) 
 END updateSuccessorsTasks
 
-//tasks issues relation
-createTaskIssueRealtion(issueID:INT,taskID:INT)
-    IF addToIssuesRelationsDatabase(issueID,taskID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END addTaskIssueRealtion
-
-
-//tasks resources relation
-createTaskResourceRealtion(resourceID:INT,taskID:INT)
-    IF addToResourcesRelationsDatabase(resourceID,taskID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END addTaskResourceRealtion
-
-//tasks predecessors relation
-createTaskPredecessor(taskID:INT,taskPredecessorID:INT)
-
-    IF addToTaskPredecessorsDatabase(taskID,taskPredecessorID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createTaskPredecessor
-createTaskSuccessor(taskID:INT,taskSuccessorID:INT)
-
-    IF addToTaskSuccessorsDatabase(taskID,taskSuccessorID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createTaskSuccessor
 //requirement pseudocode
 saveRequirement(requirement:Requirement) 
     IF requirementExists(requirement.uniqueID) 
@@ -266,7 +239,6 @@ saveRequirement(requirement:Requirement)
     RETURN requirementSaved 
 END saveRequirement 
 createRequirement(requirement:Requirement)
-
     IF addToRequirementDatabase(requirement.uniqueID,
                                     requirement.name,
                                     requirement.deliverableID)
@@ -284,6 +256,7 @@ deleteRequirement(requirementID:INT)
         RETURN operationFailed
     END IF
 END deleteRequirement
+
 updateRequirement(requirement:Requirement)  
     IF updateRequirementDatabase(requirement.uniqueID,
                                     requirement.name,
@@ -293,7 +266,20 @@ updateRequirement(requirement:Requirement)
         RETURN operationFailed
     END IF 
 END updateRequirement
-
+//saveRequirement is called by the gui with a requirement object and it will check if the given requirement exist and update it 
+//otherwise it will create a new requirement
+saveRequirement(requirement:Requirement) 
+    IF requirementExists(requirement.uniqueID) 
+        IF updateRequirement(requirement) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createRequirement(requirement) EQUALS operationFailed
+            RETURN displayAddFailed()
+        END IF        
+    END IF 
+    RETURN requirementSaved 
+END saveRequirement
 //issue pseudocode
 createIssue(issue:Issue)
     IF addToIssueDatabase(issue.uniqueID,
@@ -313,6 +299,8 @@ createIssue(issue:Issue)
         RETURN operationFailed
     END IF 
 END createIssue
+//saveIssue is called by the gui with a Issue object and arrays of IDs for associated Decisions and associated Action Items
+//it will check if the given Issue exist and update it otherwise it will create a new Issue
 saveIssue(issue:Issue, associatedDecisions:INT[],associatedActionItems:INT[]) 
     IF issueExists(issue.uniqueID) 
         IF updateIssue(issue) 
@@ -327,7 +315,6 @@ saveIssue(issue:Issue, associatedDecisions:INT[],associatedActionItems:INT[])
         ELSE 
             addAssociatedDecisions(issue.uniqueID, associatedDecisions) 
             addAssociatedActionItems(issue.uniqueID, associatedActionItems) 
-
         END IF        
     END IF 
     RETURN issueSaved 
@@ -353,6 +340,8 @@ updateIssue(issue:Issue)
 END updateIssue
 deleteIssue(issueID:Int) 
     IF issueExists(issueID)
+        unassociateDecisionsFromIssue(issueID)
+        unassociateActionItemsFromIssue(issueID)
         deleteIssueFromDatabase(issueID) 
         RETURN operationCompletedSuccessfully
     ELSE
@@ -360,12 +349,12 @@ deleteIssue(issueID:Int)
     END IF
 END deleteIssue
 updateAssociatedDecisions(issueID:INT, associatedDecisions:INT[]) 
-    deleteIssuesDecisionsRelationsFromDatabase(issueID)
+    unassociateDecisionsFromIssue(issueID)
     addAssociatedDecisions(issueID, associatedDecisions) 
 END updateAssociatedDecisions
 
 updateAssociatedActionItems(issueID:INT, associatedActionItems:INT[]) 
-    deleteIssuesActionItemsRelationsFromDatabase(issueID)
+    unassociateActionItemsFromIssue(issueID)
     addAssociatedActionItems(issueID, associatedActionItems) 
 END updateAssociatedActionItems
 
@@ -403,7 +392,8 @@ createActionItem(actionItem:ActionItem)
         RETURN operationFailed
     END IF 
 END createActionItem
-
+//saveActionItem is called by the gui with a Action Item object and array of IDs for  associated Resources
+//it will check if the given Action Item exist and update it otherwise it will create a new Action Item
 saveActionItem(actionItem:ActionItem, associatedResources:INT[]) 
     IF actionItemExists(actionItem.uniqueID) 
         IF updateActionItem(actionItem) 
@@ -440,6 +430,7 @@ updateActionItem(actionItem:ActionItem)
 END updateActionItem
 deleteActionItem(actionItemID:Int) 
     IF actionItemExists(actionItemID)
+        unassociateRsourcesFromActionItem(actionItemID)
         deleteActionItemFromDatabase(actionItemID) 
         RETURN operationCompletedSuccessfully
     ELSE
@@ -447,7 +438,7 @@ deleteActionItem(actionItemID:Int)
     END IF
 END deleteActionItem
 updateAssociatedResources(actionItemID:INT, associatedResources:INT[]) 
-    deleteActionItemResourcesRelationsFromDatabase(actionItemID)
+    unassociateRsourcesFromActionItem(actionItemID)
     addAssociatedResources(actionItemID, associatedResources) 
 END updateAssociatedResources
 addAssociatedResources(actionItemID:INT, associatedResources:INT[]) 
@@ -479,6 +470,8 @@ createDecision(decision:Decision)
         RETURN operationFailed
     END IF 
 END createDecision
+//saveDecision is called by the gui with a Decision object and arrays of IDs for  associated Resources, associated Reference Documents and associated Meeting Notes
+//it will check if the given Decision exist and update it otherwise it will create a new Decision
 saveDecision(decision:Decision, associatedResources:INT[],associatedReferenceDocuments:INT[],associatedMeetingNotes:INT[]) 
     IF decisionExists(decision.uniqueID) 
         IF updateDecision(decision) 
@@ -524,6 +517,9 @@ END updateDecision
 
 deleteDecision(decisionID:Int) 
     IF decisionExists(decisionID)
+        unassociateRsourcesFromDecision(decisionID)
+        unassociateReferenceDocumentsFromDecision(decisionID)
+        unassociateMeetingNotesFromDecision(decisionID)
         deleteDecisionFromDatabase(decisionID) 
         RETURN operationCompletedSuccessfully
     ELSE
@@ -531,15 +527,16 @@ deleteDecision(decisionID:Int)
     END IF
 END deleteDecision
 
-
-
 updateAssociatedResources(decisionID:INT, associatedResources:INT[]) 
-
+    unassociateRsourcesFromDecision(decisionID)
+    addAssociatedResources(decisionID, associatedReferenceDocuments)
+END updateAssociatedResources
 updateAssociatedReferenceDocuments(decisionID:INT, associatedReferenceDocuments:INT[]) 
-
+    unassociateReferenceDocumentsFromDecision(decisionID)
+    addAssociatedReferenceDocuments(decisionID, associatedReferenceDocuments)
 END updateAssociatedReferenceDocuments
 updateAssociatedMeetingNotes(decisionID:INT, associatedMeetingNotes:INT[]) 
-    deleteDecisionsMeetingNotesRelationsFromDatabase(decisionID)
+    unassociateMeetingNotesFromDecision(decisionID)
     addAssociatedMeetingNotes(decisionID, associatedMeetingNotes)
 END updateAssociatedMeetingNotes
 addAssociatedResources(decisionID:INT, associatedResources:INT[]) 
