@@ -460,6 +460,87 @@ addAssociatedResources(actionItemID:INT, associatedResources:INT[])
         END IF
     END FOR
 END addAssociatedResources
+
+//Decisions pseudocode
+createDecision(decision:Decision)
+    IF addToDecisionDatabase(decision.uniqueID,
+                                decision.name,
+                                decision.description,
+                                decision.priority,
+                                decision.impact,
+                                decision.dateCreated,
+                                decision.dateNeeded ,
+                                decision.dateMade,
+                                decision.expectedCompletionDate,
+                                decision.actualCompletionDate,
+                                decision.noteDate,
+                                decision.status,
+                                decision.statusDescription,
+                                decision.updateDate)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createDecision
+saveDecision(decision:Decision, associatedResources:INT[],associatedReferenceDocuments:INT[],associatedMeetingNotes:INT[]) 
+    IF decisionExists(decision.uniqueID) 
+        IF updateDecision(decision) 
+            updateAssociatedResources(decision.uniqueID, associatedResources) 
+            updateAssociatedReferenceDocuments(decision.uniqueID, associatedReferenceDocuments) 
+            updateAssociatedMeetingNotes(decision.uniqueID, associatedMeetingNotes) 
+        ELSE
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createDecision(decision) EQUALS operationFailed
+            RETURN displayAddFailed()
+        ELSE 
+            addAssociatedResources(decision.uniqueID, associatedResources) 
+            addAssociatedReferenceDocuments(decision.uniqueID, associatedReferenceDocuments) 
+            addAssociatedMeetingNotes(decision.uniqueID, associatedMeetingNotes) 
+
+        END IF        
+    END IF 
+    RETURN decisionSaved 
+END saveDecision
+
+updateDecision(decision:Decision)  
+    IF updateDecisionDatabase(decision.uniqueID,
+                                decision.name,
+                                decision.description,
+                                decision.priority,
+                                decision.impact,
+                                decision.dateCreated,
+                                decision.dateNeeded ,
+                                decision.dateMade,
+                                decision.expectedCompletionDate,
+                                decision.actualCompletionDate,
+                                decision.noteDate,
+                                decision.status,
+                                decision.statusDescription,
+                                decision.updateDate)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateDecision
+
+deleteDecision(decisionID:Int) 
+    IF decisionExists(decisionID)
+        deleteDecisionFromDatabase(decisionID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteDecision
+
+updateAssociatedResources(decision.uniqueID, associatedResources) 
+updateAssociatedReferenceDocuments(decision.uniqueID, associatedReferenceDocuments) 
+updateAssociatedMeetingNotes(decision.uniqueID, associatedMeetingNotes) 
+
+addAssociatedResources(decision.uniqueID, associatedResources) 
+addAssociatedReferenceDocuments(decision.uniqueID, associatedReferenceDocuments) 
+addAssociatedMeetingNotes(decision.uniqueID, associatedMeetingNotes) 
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
     IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
