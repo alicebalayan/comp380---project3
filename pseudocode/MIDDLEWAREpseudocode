@@ -1,4 +1,5 @@
 //here goes the middleware pseudocode 
+//comments describe what each function does
 
 //deliverable pseudocode
 createDeliverable(deliverable:Deliverable)
@@ -25,19 +26,15 @@ END updateDeliverable
 
 deleteDeliverable(deliverableID:Int) 
     IF deliverableExists(deliverableID)
-        Task[] associatedTasks=queryTaskDatabaseWithConnectedDeliverable(deliverableID)
-        FOR EACH task IN associatedTasks
-            removeAssociatedTasks(associatedTasks.uniqueID)
-            removeAssociated(associatedTasks.uniqueID)
-        END FOR
+        unassociateTasks(deliverableID)
         deleteDeliverableFromDatabase(deliverableID) 
         RETURN operationCompletedSuccessfully
     ELSE
         RETURN operationFailed
     END IF
+    
 END deleteDeliverable 
 
-//save the deliverable 
 saveDeliverable(deliverable:Deliverable, associatedTasks:INT[], associatedRequirements:Int[] ) 
     IF deliverableExists(deliverable.uniqueID) 
         IF updateDeliverable(deliverable) 
@@ -61,7 +58,7 @@ END saveDeliverable
 updateAssociatedTasks(deliverableID:INT, associatedTasks:INT[]) 
     get All Tasks Connected To Deliverable
     FOR EACH task IN tasks
-        removeAssociatedTasks(task.uniqueID) 
+        unassociateTasks(task.uniqueID) 
     END FOR
     addAssociatedTasks(deliverableID, associatedTasks) 
 END updateAssociatedTasks
@@ -69,7 +66,7 @@ END updateAssociatedTasks
 updateAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[]) 
     get All Requirements Connected To Deliverable
     FOR EACH requirement IN requirements
-        removeAssociatedRequirements(requirement.uniqueID) 
+        unassociateRequirements(requirement.uniqueID) 
     END FOR
     addAssociatedRequirements(deliverableID, associatedTasks) 
 END updateAssociatedRequirements
@@ -566,6 +563,133 @@ addAssociatedMeetingNotes(decisionID:INT, associatedMeetingNotes:INT[])
         END IF
     END FOR
 END addAssociatedMeetingNotes
+
+//Resources pseudocode
+createResource(resource:Resource)
+    IF addToResourceDatabase(resource.uniqueID,
+                                resource.name,
+                                resource.actionItemID,
+                                resource.decisionID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createResource
+updateResource(resource:Resource)  
+    IF updateResourceDatabase(resource.uniqueID,
+                                resource.name,
+                                resource.actionItemID,
+                                resource.decisionID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateResource
+
+saveResource(resource:Resource) 
+    IF resourceExists(resource.uniqueID) 
+        IF updateResource(resource) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createResource(resource) EQUALS operationFailed
+            RETURN displayAddFailed()
+        END IF        
+    END IF 
+    RETURN resourceSaved 
+END saveResource
+deleteResource(resourceID:Int) 
+    IF resourceExists(resourceID)
+        deleteResourceFromDatabase(resourceID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteResource
+//Reference Documents pseudocode
+createReferenceDocument(referenceDocument:ReferenceDocument)
+    IF addToReferenceDocumentDatabase(referenceDocument.uniqueID,
+                                referenceDocument.name,
+                                referenceDocument.decisionID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createReferenceDocument
+
+updateReferenceDocument(referenceDocument:ReferenceDocument)  
+    IF updateReferenceDocumentDatabase(referenceDocument.uniqueID,
+                                referenceDocument.name,
+                                referenceDocument.decisionID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateReferenceDocument
+
+saveReferenceDocument(referenceDocument:ReferenceDocument) 
+    IF referenceDocumentExists(referenceDocument.uniqueID) 
+        IF updateReferenceDocument(referenceDocument) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createReferenceDocument(referenceDocument) EQUALS operationFailed
+            RETURN displayAddFailed()
+        END IF        
+    END IF 
+    RETURN referenceDocumentSaved 
+END saveReferenceDocument
+deleteReferenceDocument(referenceDocumentID:Int) 
+    IF referenceDocumentExists(referenceDocumentID)
+        deleteReferenceDocumentFromDatabase(referenceDocumentID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteReferenceDocument
+
+//Meeting  Notes pseudocode
+createMeetingNote(meetingNote:MeetingNote)
+    IF addToMeetingNoteDatabase(meetingNote.uniqueID,
+                                meetingNote.name,
+                                meetingNote.note,
+                                meetingNote.decisionID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createMeetingNote
+
+updateMeetingNote(meetingNote:MeetingNote)  
+    IF updateMeetingNoteDatabase(meetingNote.uniqueID,
+                                meetingNote.name,
+                                meetingNote.note,
+                                meetingNote.decisionID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateMeetingNote
+saveMeetingNote(meetingNote:MeetingNote) 
+    IF meetingNoteExists(meetingNote.uniqueID) 
+        IF updateMeetingNote(meetingNote) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createMeetingNote(meetingNote) EQUALS operationFailed
+            RETURN displayAddFailed()
+        END IF        
+    END IF 
+    RETURN meetingNoteSaved 
+END saveMeetingNote
+deleteMeetingNote(meetingNoteID:Int) 
+    IF meetingNoteExists(meetingNoteID)
+        deleteMeetingNoteFromDatabase(meetingNoteID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteMeetingNote
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
     IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
