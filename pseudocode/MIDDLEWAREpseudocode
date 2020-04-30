@@ -298,7 +298,6 @@ updateRequirement(requirement:Requirement)
 END updateRequirement
 
 //issue pseudocode
-//task pseudocode
 createIssue(issue:Issue)
     IF addToIssueDatabase(issue.uniqueID,
                                 issue.name,
@@ -364,13 +363,13 @@ deleteIssue(issueID:Int)
     END IF
 END deleteIssue
 updateAssociatedDecisions(issueID:INT, associatedDecisions:INT[]) 
-    deleteIssuesDecisionsRelationsFromDatabase(taskID)
-    addAssociatedDecisions(taskID, associatedDecisions) 
+    deleteIssuesDecisionsRelationsFromDatabase(issueID)
+    addAssociatedDecisions(issueID, associatedDecisions) 
 END updateAssociatedDecisions
 
 updateAssociatedActionItems(issueID:INT, associatedActionItems:INT[]) 
-    deleteIssuesActionItemsRelationsFromDatabase(taskID)
-    addAssociatedActionItems(taskID, associatedActionItems) 
+    deleteIssuesActionItemsRelationsFromDatabase(issueID)
+    addAssociatedActionItems(issueID, associatedActionItems) 
 END updateAssociatedActionItems
 
 addAssociatedDecisions(issueID:INT, associatedDecisions:INT[]) 
@@ -389,6 +388,78 @@ addAssociatedActionItems(issueID:INT, associatedActionItems:INT[])
     END FOR
 END addAssociatedActionItems
 
+//Action Items pseudocode
+createActionItem(actionItem:ActionItem)
+    IF addToActionItemDatabase(actionItem.uniqueID,
+                                actionItem.name,
+                                actionItem.description,
+                                actionItem.dateCreated,
+                                actionItem.dateAssigned,
+                                actionItem.expectedCompletionDate,
+                                actionItem.actualCompletionDate,
+                                actionItem.status,
+                                actionItem.statusDescription,
+                                actionItem.updateDate,
+                                actionItem.issueID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createActionItem
+
+saveActionItem(actionItem:ActionItem, associatedResources:INT[]) 
+    IF actionItemExists(actionItem.uniqueID) 
+        IF updateActionItem(actionItem) 
+            updateAssociatedResources(actionItem.uniqueID, associatedResources) 
+        ELSE
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createActionItem(actionItem) EQUALS operationFailed
+            RETURN displayAddFailed()
+        ELSE 
+            addAssociatedResources(actionItem.uniqueID, associatedResources) 
+
+        END IF        
+    END IF 
+    RETURN actionItemSaved 
+END saveActionItem
+updateActionItem(actionItem:ActionItem)  
+    IF updateActionItemDatabase(actionItem.uniqueID,
+                                actionItem.name,
+                                actionItem.description,
+                                actionItem.dateCreated,
+                                actionItem.dateAssigned,
+                                actionItem.expectedCompletionDate,
+                                actionItem.actualCompletionDate,
+                                actionItem.status,
+                                actionItem.statusDescription,
+                                actionItem.updateDate,
+                                actionItem.issueID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateActionItem
+deleteActionItem(actionItemID:Int) 
+    IF actionItemExists(actionItemID)
+        deleteActionItemFromDatabase(actionItemID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteActionItem
+updateAssociatedResources(actionItemID:INT, associatedResources:INT[]) 
+    deleteActionItemResourcesRelationsFromDatabase(actionItemID)
+    addAssociatedResources(actionItemID, associatedResources) 
+END updateAssociatedResources
+addAssociatedResources(actionItemID:INT, associatedResources:INT[]) 
+    FOR EACH resource IN associatedResources
+        IF createActionItemRealtion(issueID,resource) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    END FOR
+END addAssociatedResources
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
     IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
