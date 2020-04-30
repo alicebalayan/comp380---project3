@@ -363,10 +363,32 @@ deleteIssue(issueID:Int)
         RETURN operationFailed
     END IF
 END deleteIssue
-updateAssociatedDecisions(issue.uniqueID, associatedDecisions) 
-updateAssociatedActionItems(issue.uniqueID, associatedActionItems) 
-addAssociatedDecisions(issue.uniqueID, associatedDecisions) 
-addAssociatedActionItems(issue.uniqueID, associatedActionItems) 
+updateAssociatedDecisions(issueID:INT, associatedDecisions:INT[]) 
+    deleteIssuesDecisionsRelationsFromDatabase(taskID)
+    addAssociatedDecisions(taskID, associatedDecisions) 
+END updateAssociatedDecisions
+
+updateAssociatedActionItems(issueID:INT, associatedActionItems:INT[]) 
+    deleteIssuesActionItemsRelationsFromDatabase(taskID)
+    addAssociatedActionItems(taskID, associatedActionItems) 
+END updateAssociatedActionItems
+
+addAssociatedDecisions(issueID:INT, associatedDecisions:INT[]) 
+    FOR EACH decision IN associatedDecisions
+        IF createActionItemRealtion(issueID,decision) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    END FOR
+END addAssociatedDecisions
+
+addAssociatedActionItems(issueID:INT, associatedActionItems:INT[]) 
+    FOR EACH actionItem IN associatedActionItems
+        IF createActionItemRealtion(issueID,actionItem) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    END FOR
+END addAssociatedActionItems
+
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
     IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
