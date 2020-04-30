@@ -471,11 +471,6 @@ END createRequirement
 
 deleteRequirement(requirementID:INT)
     IF requirementExists(requirementID)
-        get requirment from database
-        get deliverables conected to that requirement
-        FOR EACH deliverable IN deliverablesConectedRequirement
-            deleteDeliverable(deliverable)
-        END FOR
         deleteRequirementFromDatabase(requirementID) 
         RETURN operationCompletedSuccessfully
     ELSE
