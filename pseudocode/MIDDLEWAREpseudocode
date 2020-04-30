@@ -93,7 +93,7 @@ addAssociatedRequirements(deliverableID:INT, associatedRequirements:INT[])
 END addAssociatedRequirements
 
 //task pseudocode
-createTask(deliverable:Task)
+createTask(task:Task)
     IF addToTaskDatabase(task.uniqueID,
                                 task.name,
                                 task.description,
@@ -297,6 +297,76 @@ updateRequirement(requirement:Requirement)
     END IF 
 END updateRequirement
 
+//issue pseudocode
+//task pseudocode
+createIssue(issue:Issue)
+    IF addToIssueDatabase(issue.uniqueID,
+                                issue.name,
+                                issue.description,
+                                issue.priority,
+                                issue.severity,
+                                issue.dateRaised ,
+                                issue.dateAssigned,
+                                issue.expectedCompletionDate,
+                                issue.actualCompletionDate,
+                                issue.status,
+                                issue.statusDescription,
+                                issue.updateDate)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createIssue
+saveIssue(issue:Issue, associatedDecisions:INT[],associatedActionItems:INT[]) 
+    IF issueExists(issue.uniqueID) 
+        IF updateIssue(issue) 
+            updateAssociatedDecisions(issue.uniqueID, associatedDecisions) 
+            updateAssociatedActionItems(issue.uniqueID, associatedActionItems) 
+        ELSE
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createIssue(issue) EQUALS operationFailed
+            RETURN displayAddFailed()
+        ELSE 
+            addAssociatedDecisions(issue.uniqueID, associatedDecisions) 
+            addAssociatedActionItems(issue.uniqueID, associatedActionItems) 
+
+        END IF        
+    END IF 
+    RETURN issueSaved 
+END saveIssue 
+
+updateIssue(issue:Issue)  
+    IF updateIssueDatabase(issue.uniqueID,
+                                issue.name,
+                                issue.description,
+                                issue.priority,
+                                issue.severity,
+                                issue.dateRaised ,
+                                issue.dateAssigned,
+                                issue.expectedCompletionDate,
+                                issue.actualCompletionDate,
+                                issue.status,
+                                issue.statusDescription,
+                                issue.updateDate)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateIssue
+deleteIssue(issueID:Int) 
+    IF issueExists(issueID)
+        deleteIssueFromDatabase(issueID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteIssue
+updateAssociatedDecisions(issue.uniqueID, associatedDecisions) 
+updateAssociatedActionItems(issue.uniqueID, associatedActionItems) 
+addAssociatedDecisions(issue.uniqueID, associatedDecisions) 
+addAssociatedActionItems(issue.uniqueID, associatedActionItems) 
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
     IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
