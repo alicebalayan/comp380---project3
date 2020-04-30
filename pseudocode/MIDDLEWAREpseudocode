@@ -254,6 +254,48 @@ createTaskSuccessor(taskID:INT,taskSuccessorID:INT)
         RETURN operationFailed
     END IF 
 END createTaskSuccessor
+//requirement pseudocode
+saveRequirement(requirement:Requirement) 
+    IF requirementExists(requirement.uniqueID) 
+        IF updateRequirement(requirement) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    ELSE 
+        IF createRequirement(requirement) EQUALS operationFailed
+            RETURN displayAddFailed()
+
+        END IF        
+    END IF 
+    RETURN requirementSaved 
+END saveRequirement 
+createRequirement(requirement:Requirement)
+
+    IF addToRequirementDatabase(requirement.uniqueID,
+                                    requirement.name,
+                                    requirement.deliverableID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END createRequirement
+
+deleteRequirement(requirementID:INT)
+    IF requirementExists(requirementID)
+        deleteRequirementFromDatabase(requirementID) 
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF
+END deleteRequirement
+updateRequirement(requirement:Requirement)  
+    IF updateRequirementDatabase(requirement.uniqueID,
+                                    requirement.name,
+                                    requirement.deliverableID)
+        RETURN operationCompletedSuccessfully
+    ELSE
+        RETURN operationFailed
+    END IF 
+END updateRequirement
 
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
@@ -441,51 +483,6 @@ saveCategoryDefault(categoryDefault:CategoryDefault)
     RETURN categoryDefaultSaved
 END saveCategoryDefault 
 
-//requirement pseudocode
-
-
-//save the requirement 
-saveRequirement(requirement:Requirement) 
-    IF requirementExists(requirement.uniqueID) 
-        IF updateRequirement(requirement) EQUALS operationFailed
-            RETURN displayUpdateFailed()
-        END IF
-    ELSE 
-        IF createRequirement(requirement) EQUALS operationFailed
-            RETURN displayAddFailed()
-
-        END IF        
-    END IF 
-    RETURN requirementSaved 
-END saveRequirement 
-createRequirement(requirement:Requirement)
-
-    IF addToRequirementDatabase(requirement.uniqueID,
-                                    requirement.name,
-                                    requirement.deliverableID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END createRequirement
-
-deleteRequirement(requirementID:INT)
-    IF requirementExists(requirementID)
-        deleteRequirementFromDatabase(requirementID) 
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF
-END deleteRequirement
-updateRequirement(requirement:Requirement)  
-    IF updateRequirementDatabase(requirement.uniqueID,
-                                    requirement.name,
-                                    requirement.deliverableID)
-        RETURN operationCompletedSuccessfully
-    ELSE
-        RETURN operationFailed
-    END IF 
-END updateRequirement
 
 
 
