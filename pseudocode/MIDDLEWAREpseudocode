@@ -536,13 +536,36 @@ END deleteDecision
 
 
 
-updateAssociatedResources(decision.uniqueID, associatedResources) 
-updateAssociatedReferenceDocuments(decision.uniqueID, associatedReferenceDocuments) 
-updateAssociatedMeetingNotes(decision.uniqueID, associatedMeetingNotes) 
+updateAssociatedResources(decisionID:INT, associatedResources:INT[]) 
 
-addAssociatedResources(decision.uniqueID, associatedResources) 
-addAssociatedReferenceDocuments(decision.uniqueID, associatedReferenceDocuments) 
-addAssociatedMeetingNotes(decision.uniqueID, associatedMeetingNotes) 
+updateAssociatedReferenceDocuments(decisionID:INT, associatedReferenceDocuments:INT[]) 
+
+END updateAssociatedReferenceDocuments
+updateAssociatedMeetingNotes(decisionID:INT, associatedMeetingNotes:INT[]) 
+    deleteDecisionsMeetingNotesRelationsFromDatabase(decisionID)
+    addAssociatedMeetingNotes(decisionID, associatedMeetingNotes)
+END updateAssociatedMeetingNotes
+addAssociatedResources(decisionID:INT, associatedResources:INT[]) 
+   FOR EACH resource IN associatedResources
+        IF createDecisionResourceRealtion(decisionID,associatedResources) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    END FOR
+END addAssociatedResources
+addAssociatedReferenceDocuments(decisionID:INT, associatedReferenceDocuments:INT[]) 
+   FOR EACH referenceDocument IN associatedReferenceDocuments
+        IF createDecisionReferenceDocumentRealtion(decisionID,referenceDocument) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    END FOR
+END addAssociatedReferenceDocuments
+addAssociatedMeetingNotes(decisionID:INT, associatedMeetingNotes:INT[])
+   FOR EACH meetingNote IN associatedMeetingNotes
+        IF createDecisionMeetingNoteRealtion(decisionID,meetingNote) EQUALS operationFailed
+            RETURN displayUpdateFailed()
+        END IF
+    END FOR
+END addAssociatedMeetingNotes
 //default values lists
 createPriorityDefault(priorityDefault:PriorityDefault)
     IF addToPriorityDefaultDatabase(priorityDefault.uniqueID, priorityDefault.name)
