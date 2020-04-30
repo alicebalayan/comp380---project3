@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-04-30T02:58:01.762Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="lahYRK1sEJiEJVXedGgc" version="13.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-30T02:58:54.007Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="K-uLsZlh_6mxR33Rfry6" version="13.0.3" type="github">
   <diagram id="fuKhKUKI9TPdpv6UsRDI" name="Page-1">
     <mxGraphModel dx="1662" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -69,52 +69,52 @@
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-12" value="Task Attributes" style="endArrow=classic;html=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="480" as="sourcePoint" />
-            <mxPoint x="340" y="480" as="targetPoint" />
+            <mxPoint x="140" y="400" as="sourcePoint" />
+            <mxPoint x="340" y="400" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-13" value="associated Resource" style="endArrow=classic;html=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="520" as="sourcePoint" />
-            <mxPoint x="500" y="520" as="targetPoint" />
+            <mxPoint x="140" y="440" as="sourcePoint" />
+            <mxPoint x="500" y="440" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-14" value="associated Predecessor Tasks" style="endArrow=classic;html=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="560" as="sourcePoint" />
-            <mxPoint x="340" y="560" as="targetPoint" />
+            <mxPoint x="140" y="480" as="sourcePoint" />
+            <mxPoint x="340" y="480" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-15" value="associated Successor Tasks" style="endArrow=classic;html=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="600" as="sourcePoint" />
-            <mxPoint x="340" y="600" as="targetPoint" />
+            <mxPoint x="140" y="520" as="sourcePoint" />
+            <mxPoint x="340" y="520" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-16" value="Associate Issues" style="endArrow=classic;html=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="640" as="sourcePoint" />
-            <mxPoint x="660" y="640" as="targetPoint" />
+            <mxPoint x="140" y="560" as="sourcePoint" />
+            <mxPoint x="660" y="560" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-17" value="Saved" style="endArrow=classic;dashed=1;html=1;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="680" as="sourcePoint" />
-            <mxPoint x="140" y="680" as="targetPoint" />
+            <mxPoint x="340" y="600" as="sourcePoint" />
+            <mxPoint x="140" y="600" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-18" value="save" style="endArrow=classic;dashed=1;html=1;" edge="1" parent="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="140" y="440" as="sourcePoint" />
-            <mxPoint x="340" y="440" as="targetPoint" />
+            <mxPoint x="140" y="360" as="sourcePoint" />
+            <mxPoint x="340" y="360" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="240" y="440" />
+              <mxPoint x="240" y="360" />
             </Array>
           </mxGeometry>
         </mxCell>
