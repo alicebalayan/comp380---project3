@@ -33,7 +33,7 @@ def login():
 def dashboard(): 
     if not 'username' in session and session['username'] !="user":
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'])
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Deliverables')
 
 @app.route('/testSQL')
 def mySQL():

@@ -16,12 +16,22 @@ main {
 }
 
 #sideBar {
-    width: 20vw;
     background: #FBF5F5;
     height: 100vh;
     min-width: 300px;
+    transition: 200ms min-width,200ms width;
+    overflow: auto;
+    position: relative;
 }
+.collapsebar{
+    min-width: 50px!important;
+    width: 50px;
 
+}
+#accordion a {
+    text-decoration: none;
+    color: #000000;
+}
 #mainContent {
     overflow: visible;
     width: 100%;
@@ -29,8 +39,25 @@ main {
 
 .menuBtn {
     cursor: pointer;
+    padding: 5px 0 5px 0;
 }
-
+#projects .current:before {
+    content: " ";
+    width: 4px;
+    height: 40px;
+    background: #2D8FDD;
+}
+nav ul {
+    list-style: none;
+}
+nav ul li {
+    cursor: pointer;
+}
+nav .current {
+    border: #2D8FDD solid;
+    border-width: 0;
+    border-bottom-width: 3px;
+}
 .menuBtn:hover {
     background: rgba(255, 255, 255, 0.4);
 }

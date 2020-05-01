@@ -1,24 +1,136 @@
 {% extends "base.jinja" %}
 {% block title %}{{ title }}{% endblock %}
-
 {% block content %}
 <main>
     <section id="sideBar">
-        <div class="d-flex menuBtn"><h5 class="p-2 m-0"><i class="fas fa-bars m-2"></i><strong>Pane title</strong></h5></div>
+        <div class="d-flex menuBtn collapseBtn">
+            <h5 class="p-2 m-0"><i class="fas fa-bars m-2"></i><strong><span>Pane title</span></strong></h5>
+        </div>
         <form class="navbar-form navbar-right" role="search" style="width: 100%;">
-            <div class="form-group">
+            <div class="form-group searchBoxSide">
                 <input type="search" class="form-control" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default"></button>
         </form>
-        <div class="d-flex menuBtn"><h6 class="p-2 m-0"><i class="fas fa-home m-2"></i> <span>Dashboard<span></span></span></h6></div>
-        {# <ul>
-            <li>test</li>
-            <li>why</li>
-        </ul> #}
+        <div class="d-flex menuBtn">
+            <h6 class="p-2 m-0"><i class="fas fa-home m-2"></i> <span>Dashboard<span></span></span></h6>
+        </div>
+        <div class="panel-group mt-5" id="accordion">
+            <div>
+                <div class="menuBtn">
+                    <h6 class="p-2 m-0 d-flex"><i class="fa fa-tasks  m-2" aria-hidden="true"></i>
+                        <strong><span class="dropDown">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#projects" class="collapsed"
+                                    aria-expanded="false">
+                                    Projects <i class="fas fa-chevron-down m-2"></i></a>
+                            </span></strong></h6>
+                </div>
+                <div id="projects" class="panel-collapse collapse">
+                    <div class="d-flex menuBtn pl-5 current">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                1<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                2<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                3<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                4<span></span></span></h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="menuBtn">
+                    <h6 class="p-2 m-0 d-flex"><i class="fa fa-bug  m-2" aria-hidden="true"></i>
+                        <strong><span class="dropDown">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#reports" class="collapsed"
+                                    aria-expanded="false">
+                                    Reports <i class="fas fa-chevron-down m-2"></i></a>
+                            </span></strong></h6>
+                </div>
+                <div id="reports" class="panel-collapse collapse">
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                1<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                2<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                3<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                4<span></span></span></h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="menuBtn">
+                    <h6 class="p-2 m-0 d-flex"><i class="fa fa-question-circle  m-2" aria-hidden="true"></i>
+                        <strong><span class="dropDown">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#help" class="collapsed"
+                                    aria-expanded="false">
+                                    Help System <i class="fas fa-chevron-down m-2"></i></a>
+                            </span></strong></h6>
+                </div>
+                <div id="help" class="panel-collapse collapse">
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                1<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                2<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                3<span></span></span></h6>
+                    </div>
+                    <div class="d-flex menuBtn pl-5">
+                        <h6 class="p-2 m-0"><i class="fas fa-project-diagram m-2"></i> <span>Project
+                                4<span></span></span></h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div>
+        <div class="d-flex menuBtn settings mt-5">
+            <h6 class="p-2 m-0"><i class="fas fa-cog m-2"></i> <span>Settings<span></span></span></h6>
+        </div>
+    </div>
     </section>
     <section id="mainContent">
-
+        <section class="ml-3 mt-0">
+            <article>
+            <h1><strong>Project Name placeholder</strong></h1>
+            <nav>
+                <ul class="d-flex p-0">
+                    <li class="mr-4 {% if 'Deliverables'==page%}current{% endif %}">Deliverables</li>
+                    <li class="mr-4 {% if 'Tasks'==page%}current{% endif %}">Tasks</li>
+                    <li class="mr-4 {% if 'Issues'==page%}current{% endif %}">Issues</li>
+                    <li class="mr-4 {% if 'Action Items'==page%}current{% endif %}">Action Items</li>
+                    <li class="mr-4 {% if 'Decisions'==page%}current{% endif %}">Decisions</li>
+                    <li class="mr-4 {% if 'Resources'==page%}current{% endif %}">Resources</li>
+                    <li class="mr-4 {% if 'Risks'==page%}current{% endif %}">Risks</li>
+                    <li class="mr-4 {% if 'Requirments'==page%}current{% endif %}">Requirments</li>
+                    <li class="mr-4 {% if 'Changes'==page%}current{% endif %}">Changes</li>
+                    <li class="mr-4 {% if 'Reference Documents'==page%}current{% endif %}">Reference Documents</li>
+                    <li class="mr-4 {% if 'Components'==page%}current{% endif %}">Components</li>
+                    <li class="mr-4 {% if 'Defects'==page%}current{% endif %}">Defects</li>
+                </ul>
+            </nav>
+            </article>
+        
+        </section>
         {{self.footer()}}
     </section>
 </main>
