@@ -6,6 +6,10 @@ import pymysql.cursors
 
 import random
 import string
+def checkLogin():
+    if not session or (not 'username' in session and session['username'] !="user"):
+        return True
+    return False
 def randomString(stringLength=10):
     """Generate a random string of fixed length """
     letters = string.ascii_lowercase
@@ -31,9 +35,14 @@ def login():
     return redirect("/")
 @app.route('/dashboard')
 def dashboard(): 
-    if not 'username' in session and session['username'] !="user":
+    if checkLogin():
         return redirect("/logout")
     return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Deliverables')
+@app.route('/task')
+def task(): 
+    if checkLogin():
+        return redirect("/logout")
+    return  render_template('tasks.jinja', title='hello '+ session['username'], page='Tasks')
 
 @app.route('/testSQL')
 def mySQL():
