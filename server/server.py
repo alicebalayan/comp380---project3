@@ -1,26 +1,33 @@
-from flask import Flask
-from flask import render_template
-from flask import request
-from flask import Flask, session, redirect, url_for, escape, request
-import pymysql.cursors
+# Flask
+from flask import (
+    Flask,
+    render_template,
+    session,
+    redirect,
+    url_for,
+    escape,
+    request
+)
 
-import random
-import string
+# PyMySQL
+import pymysql.cursors
+# Random
+from os import urandom
+# Configuration
+from config import AppConfig
+
 def checkLogin():
-    if not session or (not 'username' in session and session['username'] !="user"):
-        return True
-    return False
-def randomString(stringLength=10):
-    """Generate a random string of fixed length """
-    letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(stringLength))
+    return not session or (not 'username' in session and session['username'] !="user")
+
 app = Flask(__name__)
-app.secret_key =  randomString()
+app.secret_key = urandom(16)
+
 @app.route("/")
 def index():
     if 'username' in session:
         return redirect("/dashboard")
     return  render_template('index.jinja', title='Please login')
+
 @app.route('/login',methods = ['POST','GET'])
 def login():
     if request.method== "GET":
@@ -33,11 +40,13 @@ def login():
         session['username'] = user
         return redirect("/dashboard")
     return redirect("/")
+
 @app.route('/dashboard')
 def dashboard(): 
     if checkLogin():
         return redirect("/logout")
     return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Deliverables')
+
 @app.route('/task')
 def task(): 
     if checkLogin():
@@ -47,12 +56,13 @@ def task():
 @app.route('/testSQL')
 def mySQL():
     # Connect to the database
-    connection = pymysql.connect(host='192.168.0.27',
-                                user='lizard',
-                                password='ashrab_shai',
-                                db='PMS',
-                                charset='utf8mb4',
-                                cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host=app.config['DATABASE_SERVER'],
+                                 port=app.config['DATABASE_PORT'],
+                                 user=app.config['DATABASE_USER'],
+                                 password=app.config['DATABASE_PASSWORD'],
+                                 db=app.config['DATABASE_DB'],
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
     try:
         with connection.cursor() as cursor:
             # Create a new record
@@ -60,15 +70,16 @@ def mySQL():
             cursor.execute(sql)
             result = cursor.fetchone()
             print(result)
-            return result
-
+            return str(result)
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         # connection.commit()
-
+    except Error as e:
+        print(e)
+        return e
     finally:
         connection.close()
-    
+        
 @app.route('/logout')
 def logout(): 
     if 'username' in session:
@@ -76,12 +87,7 @@ def logout():
         session.pop('username', None)
     return redirect("/")
 
-
-
-
-
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(debug=True,host= '0.0.0.0')
-    
+    app.config.from_object(AppConfig())
+    app.run(host= '0.0.0.0')
