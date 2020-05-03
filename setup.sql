@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     effort_completed DECIMAL,
     actual_effort DECIMAL,
     percent_complete DECIMAL,
-    deliverable_id INT NOT NULL
+    deliverable_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (deliverable_id)
       REFERENCES deliverables(id)
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS task_issue (
     FOREIGN KEY (issue_id)
       REFERENCES issues(id),
     FOREIGN KEY (task_id)
-      REFERENCES tasks(id),
+      REFERENCES tasks(id)
 );
 
 -- Table for action items
@@ -121,7 +121,6 @@ CREATE TABLE IF NOT EXISTS decisions (
     date_made DATE,
     expected_completion_date DATE,
     actual_completion_date DATE,
-    note_date DATE,
     status TEXT,
     status_description LONGTEXT,
     update_date DATE,
@@ -158,7 +157,6 @@ CREATE TABLE IF NOT EXISTS resources (
 CREATE TABLE IF NOT EXISTS task_resource (
     task_id INT NOT NULL,
     resource_id INT NOT NULL,
-    PRIMARY KEY (id),
     FOREIGN KEY (task_id)
       REFERENCES tasks(id),
     FOREIGN KEY (resource_id)
@@ -182,6 +180,7 @@ CREATE TABLE IF NOT EXISTS meeting_notes (
     id INT NOT NULL AUTO_INCREMENT,
     title TEXT,
     note LONGTEXT,
+    note_date DATE,
     decision_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (decision_id)

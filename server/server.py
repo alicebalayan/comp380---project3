@@ -22,6 +22,16 @@ def checkLogin():
 app = Flask(__name__)
 app.secret_key = urandom(16)
 
+def connect():
+    # Connection instance to be used with other functions
+    return pymysql.connect(host=app.config['DATABASE_SERVER'],
+                           port=app.config['DATABASE_PORT'],
+                           user=app.config['DATABASE_USER'],
+                           password=app.config['DATABASE_PASSWORD'],
+                           db=app.config['DATABASE_DB'],
+                           charset='utf8mb4',
+                           cursorclass=pymysql.cursors.DictCursor)
+
 @app.route("/")
 def index():
     if 'username' in session:
