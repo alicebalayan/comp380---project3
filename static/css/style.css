@@ -18,7 +18,7 @@ main {
 #sideBar {
     background: #FBF5F5;
     height: 100vh;
-    min-width: 253px;
+    min-width: 280px;
     transition: 200ms min-width,200ms width;
     overflow: auto;
     position: relative;
