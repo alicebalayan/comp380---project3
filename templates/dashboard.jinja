@@ -149,7 +149,7 @@
                 <section>
                 </section>
                 <section class="mr-5">
-                    <a class="btn btn-default">Create {{page[:-1]}}</a>
+                    <a class="btn btn-default" id="createbtn" href="javascript:create();" data-url="/create{{page[:-1]}}">Create {{page[:-1]}}</a>
                     <div class="form-group">
                         <H5>Sort</H5>
                         <select multiple class="form-control">
@@ -169,5 +169,9 @@
         </section>
         {{self.footer()}}
     </section>
+    <div class="modal" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample-label" aria-hidden="true">
+        
+    </div>
+
 </main>
 {% endblock %}

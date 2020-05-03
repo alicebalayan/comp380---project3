@@ -41,6 +41,11 @@ def dashboard():
 @app.route('/deliverables')
 def deliverables(): 
     return  dashboard()
+@app.route('/createDeliverable')
+def createDeliverable(): 
+    if checkLogin():
+        return redirect("/logout")
+    return  render_template('createDeliverable.jinja')
 @app.route('/tasks')
 def tasks(): 
     if checkLogin():
