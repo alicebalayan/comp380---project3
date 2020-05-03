@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-05-03T01:26:25.562Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="ARy7E4qb1fPck3SrSu_C" version="13.0.5" type="github">
+<mxfile host="app.diagrams.net" modified="2020-05-03T01:31:10.035Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="qTC2OfMaeGhtspMQTVxj" version="13.0.5" type="github">
   <diagram id="h3Ek2yhjag-Ijy3UuA3x" name="Page-1">
-    <mxGraphModel dx="12370" dy="1270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="10000" pageHeight="10000" math="0" shadow="0">
+    <mxGraphModel dx="10813" dy="435" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="10000" pageHeight="10000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -774,6 +774,43 @@
         </mxCell>
         <mxCell id="EN4bmFngzURgGS1C15jc-233" value="+ setDecisionID(int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="EN4bmFngzURgGS1C15jc-219">
           <mxGeometry y="346" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-242" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.333;entryY=1.103;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="EN4bmFngzURgGS1C15jc-235" target="AJkytsJuZ1-eA44GaWmQ-32">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2045" y="630" />
+              <mxPoint x="1840" y="630" />
+              <mxPoint x="1840" y="240" />
+              <mxPoint x="583" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-235" value="ReferenceDocument" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="650" width="390" height="216" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-236" value="- decisionID: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="26" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-237" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="52" width="390" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-238" value="+ createReferenceDocument(ReferenceDocument): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=4" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="60" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-239" value="+ updateReferenceDocument(ReferenceDocument): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=4" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="86" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-240" value="+ saveReferenceDocument(ReferenceDocument): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=4" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="112" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-241" value="+ deleteReferenceDocument(int): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=4" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="138" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-243" value="+ getDecisionID(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="164" width="390" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="EN4bmFngzURgGS1C15jc-244" value="+ setDecisionID(int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="EN4bmFngzURgGS1C15jc-235">
+          <mxGeometry y="190" width="390" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
