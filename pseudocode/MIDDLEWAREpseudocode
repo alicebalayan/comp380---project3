@@ -225,19 +225,6 @@ updateSuccessorsTasks(taskID:INT, successorsTasks:INT[])
 END updateSuccessorsTasks
 
 //requirement pseudocode
-saveRequirement(requirement:Requirement) 
-    IF requirementExists(requirement.uniqueID) 
-        IF updateRequirement(requirement) EQUALS operationFailed
-            RETURN displayUpdateFailed()
-        END IF
-    ELSE 
-        IF createRequirement(requirement) EQUALS operationFailed
-            RETURN displayAddFailed()
-
-        END IF        
-    END IF 
-    RETURN requirementSaved 
-END saveRequirement 
 createRequirement(requirement:Requirement)
     IF addToRequirementDatabase(requirement.uniqueID,
                                     requirement.name,
