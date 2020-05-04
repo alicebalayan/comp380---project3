@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-04-30T03:33:27.949Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="eFLCEWQXQDuSBvLL6Ich" version="13.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-05-04T01:31:24.401Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68" etag="W7q0Hdkkor-U7dauHVti" version="13.0.6" type="github">
   <diagram id="fuKhKUKI9TPdpv6UsRDI" name="Page-1">
-    <mxGraphModel dx="1662" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -32,12 +32,12 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="qZje0iIkWgZtfKszHh38-17" value="Issues" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="920" y="70" width="120" height="80" as="geometry" />
+          <mxGeometry x="600" y="70" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-2" value="" style="endArrow=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="980" y="720" as="sourcePoint" />
-            <mxPoint x="979.5" y="150" as="targetPoint" />
+            <mxPoint x="660" y="720" as="sourcePoint" />
+            <mxPoint x="659.5" y="150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-4" value="delete Task" style="endArrow=classic;dashed=1;html=1;" parent="1" edge="1">
@@ -46,7 +46,7 @@
             <mxPoint x="340" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-6" value="unassociate Resources" style="endArrow=classic;html=1;dashed=1;" parent="1" edge="1">
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-6" value="unassociate Resources" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry x="-0.1111" width="50" height="50" relative="1" as="geometry">
             <mxPoint x="140" y="240" as="sourcePoint" />
             <mxPoint x="500" y="240" as="targetPoint" />
@@ -60,68 +60,69 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-9" value="unassociate Successor Task" style="endArrow=classic;html=1;dashed=1;" parent="1" edge="1">
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-9" value="unassociate Successor Task" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry x="-0.1111" width="50" height="50" relative="1" as="geometry">
             <mxPoint x="140" y="320" as="sourcePoint" />
             <mxPoint x="340" y="320" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-10" value="unassociate Issues" style="endArrow=classic;dashed=1;html=1;" parent="1" edge="1">
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-10" value="unassociate Issues" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry x="-0.1111" width="50" height="50" relative="1" as="geometry">
             <mxPoint x="140" y="360" as="sourcePoint" />
-            <mxPoint x="980" y="360" as="targetPoint" />
+            <mxPoint x="660" y="360" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-11" value="save" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="1" edge="1">
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-11" value="delete attributes" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="140" y="440" as="sourcePoint" />
-            <mxPoint x="340" y="440" as="targetPoint" />
+            <mxPoint x="140" y="400" as="sourcePoint" />
+            <mxPoint x="340" y="400" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="240" y="440" />
+              <mxPoint x="240" y="400" />
             </Array>
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-12" value="Task Attributes" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="480" as="sourcePoint" />
-            <mxPoint x="340" y="480" as="targetPoint" />
+            <mxPoint x="140" y="440" as="sourcePoint" />
+            <mxPoint x="340" y="440" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-13" value="associated Resource" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="520" as="sourcePoint" />
-            <mxPoint x="500" y="520" as="targetPoint" />
+            <mxPoint x="140" y="480" as="sourcePoint" />
+            <mxPoint x="500" y="480" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-14" value="associated Predecessor Tasks" style="endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="520" as="sourcePoint" />
+            <mxPoint x="340" y="520" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-15" value="associated Successor Tasks" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="140" y="560" as="sourcePoint" />
             <mxPoint x="340" y="560" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uHhbq6WGqlBZ4b7MEo-g-15" value="associated Successor Tasks" style="endArrow=classic;html=1;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="600" as="sourcePoint" />
-            <mxPoint x="340" y="600" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-16" value="Associate Issues" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="140" y="640" as="sourcePoint" />
-            <mxPoint x="980" y="640" as="targetPoint" />
+            <mxPoint x="140" y="600" as="sourcePoint" />
+            <mxPoint x="660" y="600" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="uHhbq6WGqlBZ4b7MEo-g-17" value="Saved" style="endArrow=classic;dashed=1;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="680" as="sourcePoint" />
-            <mxPoint x="140" y="680" as="targetPoint" />
+            <mxPoint x="340" y="640" as="sourcePoint" />
+            <mxPoint x="140" y="640" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
