@@ -64,10 +64,7 @@ class CRUD(dict):
                 print(query)
                 cursor.execute(query)
                 result = cursor.fetchall()
-                # if result is not None:
-                #     self.update(result)
         finally:
-            # self.unique_id = unique_id
             connection.close()
             return result
     def update_remote(self) -> None:

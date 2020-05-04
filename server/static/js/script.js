@@ -22,3 +22,23 @@ function create() {
     $("#modal-sample").load(requestURL);
     $('#modal-sample').modal('show');
 }
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+function deleteItem(type,id) {
+    $("#deleteID").html(type.substring(0, 1)+pad(id,4));
+    $('#delete-modal').modal('show');
+    $("#confirmDelete").click(function () {
+        var requestURL = "/"+type+"Delete?id="+id;
+        $.ajax(requestURL);
+        $('#delete-modal').modal('hide');
+        location.reload();
+
+
+    });
+    // var requestURL = $("#createbtn").attr();
+
+    // $("#modal-sample").load(requestURL);
+}

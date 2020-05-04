@@ -47,7 +47,7 @@ def login():
 def dashboard(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Deliverables')
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Deliverables',items=Deliverable().retreiveAll())
 @app.route('/deliverables')
 def deliverables(): 
     return  dashboard()
@@ -56,6 +56,15 @@ def createDeliverable():
     if checkLogin():
         return redirect("/logout")
     return  render_template('createDeliverable.jinja')
+@app.route('/DeliverablesDelete',methods = ['GET'])
+def deleteDeliverable(): 
+    if checkLogin():
+        return redirect("/logout")
+    id = request.args['id']
+    d=Deliverable()
+    d.retreive(id)
+    d.delete()
+    return deliverables()
 @app.route('/tasks')
 def tasks(): 
     if checkLogin():

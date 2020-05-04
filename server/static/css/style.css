@@ -28,7 +28,7 @@ main {
     width: 50px;
 
 }
-#accordion a {
+#accordion a{
     text-decoration: none;
     color: #000000;
 }
@@ -91,7 +91,14 @@ select[multiple].form-control {
 }
 #sideBar a,
 nav li a,
-nav li a:hover{
+nav li a:hover,
+.unA,.unA:hover{
     text-decoration: none;
     color: black;
+}
+.itemTitle span {
+    line-height: 52px;
+}
+.titleBTN {
+    right: 5px;
 }
