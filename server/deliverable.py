@@ -8,3 +8,4 @@ class Deliverable(CRUD):
             'description': None,
             'due_date': None
         }
+    

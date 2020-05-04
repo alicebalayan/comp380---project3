@@ -1,12 +1,12 @@
 import pymysql
-
+# Configuration
 def connect():
     # Connection instance to be used with other functions
-    return pymysql.connect(host=AppConfig.DATABASE_SERVER(),
-                           port=AppConfig.DATABASE_PORT(),
-                           user=AppConfig.DATABASE_USER,
-                           password=AppConfig.DATABASE_PASSWORD,
-                           db=DATABASE_DB,
+    return pymysql.connect(host="unraid.bishoyabdelmalik.com",
+                           port=42069,
+                           user="lizard",
+                           password=open("pass.txt").read(),
+                           db="PMS",
                            charset='utf8mb4',
                            cursorclass=pymysql.cursors.DictCursor)
 class CRUD(dict):
@@ -55,7 +55,21 @@ class CRUD(dict):
         finally:
             self.unique_id = unique_id
             connection.close()
-
+    def retreiveAll(self) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table}"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchall()
+                # if result is not None:
+                #     self.update(result)
+        finally:
+            # self.unique_id = unique_id
+            connection.close()
+            return result
     def update_remote(self) -> None:
         # Update the DB record based on the local fields
         pass

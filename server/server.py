@@ -15,8 +15,7 @@ from flask import (
 import pymysql.cursors
 # Random
 from os import urandom
-# Configuration
-from config import AppConfig
+
 
 def checkLogin():
     return not session or (not 'username' in session and session['username'] !="user")
@@ -117,33 +116,7 @@ def settings():
     if checkLogin():
         return redirect("/logout")
     return  "working on it"
-@app.route('/testSQL')
-def mySQL():
-    # Connect to the database
-    connection = pymysql.connect(host=app.config['DATABASE_SERVER'],
-                                 port=app.config['DATABASE_PORT'],
-                                 user=app.config['DATABASE_USER'],
-                                 password=app.config['DATABASE_PASSWORD'],
-                                 db=app.config['DATABASE_DB'],
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor)
-    try:
-        with connection.cursor() as cursor:
-            # Create a new record
-            sql = "SHOW TABLES;"
-            cursor.execute(sql)
-            result = cursor.fetchone()
-            print(result)
-            return str(result)
-        # connection is not autocommit by default. So you must commit to save
-        # your changes.
-        # connection.commit()
-    except Error as e:
-        print(e)
-        return e
-    finally:
-        connection.close()
-        
+
 @app.route('/logout')
 def logout(): 
     if 'username' in session:
@@ -153,5 +126,5 @@ def logout():
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
-    app.config.from_object(AppConfig())
-    app.run(host= '0.0.0.0')
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.run(debug=True,host= '0.0.0.0')
