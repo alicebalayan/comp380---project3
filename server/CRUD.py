@@ -1,6 +1,14 @@
 import pymysql
-from server import connect
 
+def connect():
+    # Connection instance to be used with other functions
+    return pymysql.connect(host=AppConfig.DATABASE_SERVER(),
+                           port=AppConfig.DATABASE_PORT(),
+                           user=AppConfig.DATABASE_USER,
+                           password=AppConfig.DATABASE_PASSWORD,
+                           db=DATABASE_DB,
+                           charset='utf8mb4',
+                           cursorclass=pymysql.cursors.DictCursor)
 class CRUD(dict):
     """ CRUD class to be inherited by component classes. Do not instantiate!"""
     def __init__(self, table: str):

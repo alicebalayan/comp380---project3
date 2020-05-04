@@ -1,3 +1,5 @@
+from deliverable import Deliverable
+
 # Flask
 from flask import (
     Flask,
@@ -22,15 +24,6 @@ def checkLogin():
 app = Flask(__name__)
 app.secret_key = urandom(16)
 
-def connect():
-    # Connection instance to be used with other functions
-    return pymysql.connect(host=AppConfig.DATABASE_SERVER(),
-                           port=AppConfig.DATABASE_PORT(),
-                           user=AppConfig.DATABASE_USER,
-                           password=AppConfig.DATABASE_PASSWORD,
-                           db=DATABASE_DB,
-                           charset='utf8mb4',
-                           cursorclass=pymysql.cursors.DictCursor)
 
 @app.route("/")
 def index():
