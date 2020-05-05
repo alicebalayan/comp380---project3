@@ -78,6 +78,7 @@ def saveDeliverable():
     d["due_date"]=request.form['due_date']
     if 'itemID' in request.form:
         if len(request.form['itemID']) >0:
+            unAssociateTasks(request.form['itemID'])
             d.deleteRemote()
     d.create()
     if 'itemID' in request.form:
@@ -85,13 +86,28 @@ def saveDeliverable():
             d['id']=request.form['itemID']
         else:
             d.retreiveMostRecent()
-    # TODO: associate tasks with deliverables
+    for task in tasks:
+        t=Task()
+        t.retreive(int(task))
+        t['deliverable_id']=d['id']
+        t.deleteRemote()
+        t.create()
     return redirect("/deliverables")
+def unAssociateTasks(deliverableID):
+    t=Task()
+    associatedTasks=t.retreiveWithDeliverable(int(deliverableID))
+    for task in associatedTasks:
+        atask=Task()
+        atask.retreive(task['id'])
+        atask["deliverable_id"]=None
+        atask.deleteRemote()
+        atask.create()
 @app.route('/DeliverablesDelete',methods = ['GET'])
 def deleteDeliverable(): 
     if checkLogin():
         return redirect("/logout")
     id = request.args['id']
+    unAssociateTasks(id)
     d=Deliverable()
     d.retreive(id)
     d.delete()
@@ -101,6 +117,21 @@ def tasks():
     if checkLogin():
         return redirect("/logout")
     return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Tasks',items=Task().retreiveAll())
+@app.route('/createTask')
+def createTask(): 
+    if checkLogin():
+        return redirect("/logout")
+    return  render_template('createTask.jinja', page='Tasks',task=None,tasks=Task().retreiveAll())
+@app.route('/TasksDelete',methods = ['GET'])
+def deleteTask(): 
+    if checkLogin():
+        return redirect("/logout")
+    id = request.args['id']
+    unAssociateTasks(id)
+    t=Task()
+    t.retreive(id)
+    t.delete()
+    return tasks()
 @app.route('/issues')
 def issues(): 
     if checkLogin():

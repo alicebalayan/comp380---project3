@@ -30,19 +30,15 @@ function pad(num, size) {
     return s;
 }
 function deleteItem(type,id) {
-    $("#deleteID").html(type.substring(0, 1)+pad(id,4));
+    $("#deleteID").html(type.substring(0, 3).toUpperCase()+pad(id,4));
     $('#delete-modal').modal('show');
     $("#confirmDelete").click(function () {
         var requestURL = "/"+type+"Delete?id="+id;
-        $.ajax(requestURL);
+        $.ajax(requestURL).done(function() {
+            location.reload();
+        });
         $('#delete-modal').modal('hide');
-        location.reload();
-
-
     });
-    // var requestURL = $("#createbtn").attr();
-
-    // $("#modal-sample").load(requestURL);
 }
 function submitItem(){
     $("#itemForm").submit();

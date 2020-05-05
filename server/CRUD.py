@@ -32,7 +32,7 @@ class CRUD(dict):
                     f"INSERT INTO {self.table} (" +
                     (', '.join(f"{key}" for key in self.keys())) +
                     ") VALUES(" +
-                    (', '.join(self._type_check(value) for value in self.values())) +
+                    (', '.join(("NULL" if value is None else self._type_check(value)) for value in self.values())) +
                     ")"
                 )
                 print(query)
@@ -55,7 +55,7 @@ class CRUD(dict):
         finally:
             self.unique_id = unique_id
             connection.close()
-    def retreiveMostRecent(self, unique_id: int) -> None:
+    def retreiveMostRecent(self) -> None:
         # Populate the class preexsiting values
         connection = connect()
         try:
@@ -67,7 +67,6 @@ class CRUD(dict):
                 if result is not None:
                     self.update(result)
         finally:
-            self.unique_id = unique_id
             connection.close()
     def retreiveAll(self) -> None:
         # Populate the class preexsiting values
