@@ -16,7 +16,6 @@ $(".dropDownMenu").click(function () {
         togglesidebar();
     }
 });
-
 function create() {
     var requestURL = $("#createbtn").attr("data-url");
     $("#itemFormSaveBTN").click(function () {

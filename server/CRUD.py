@@ -55,6 +55,20 @@ class CRUD(dict):
         finally:
             self.unique_id = unique_id
             connection.close()
+    def retreiveMostRecent(self, unique_id: int) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table} ORDER BY `deliverables`.`id` DESC"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchone()
+                if result is not None:
+                    self.update(result)
+        finally:
+            self.unique_id = unique_id
+            connection.close()
     def retreiveAll(self) -> None:
         # Populate the class preexsiting values
         connection = connect()

@@ -55,7 +55,7 @@ def deliverables():
 def createDeliverable(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=None)
+    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=None,tasks=Task().retreiveAll())
 @app.route('/DeliverablesEdit',methods = ['GET'])
 def editDeliverable(): 
     if checkLogin():
@@ -63,7 +63,7 @@ def editDeliverable():
     id = request.args['id']
     d=Deliverable()
     d.retreive(id)
-    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=d)
+    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=d,tasks=Task().retreiveAll())
 @app.route('/saveDeliverable',methods = ['POST'])
 def saveDeliverable(): 
     if checkLogin():
@@ -72,6 +72,7 @@ def saveDeliverable():
     if 'itemID' in request.form:
         if len(request.form['itemID']) >0:
             d.retreive(int(request.form['itemID']))
+    tasks=request.form.getlist('tasks[]')
     d["title"]=request.form['itemName']
     d["description"]=request.form['description']
     d["due_date"]=request.form['due_date']
@@ -79,6 +80,12 @@ def saveDeliverable():
         if len(request.form['itemID']) >0:
             d.deleteRemote()
     d.create()
+    if 'itemID' in request.form:
+        if len(request.form['itemID']) >0:
+            d['id']=request.form['itemID']
+        else:
+            d.retreiveMostRecent()
+    # TODO: associate tasks with deliverables
     return redirect("/deliverables")
 @app.route('/DeliverablesDelete',methods = ['GET'])
 def deleteDeliverable(): 

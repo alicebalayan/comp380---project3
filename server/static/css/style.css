@@ -102,3 +102,9 @@ nav li a:hover,
 .titleBTN {
     right: 5px;
 }
+.scroll{
+    overflow-y: scroll;
+    height: 100px;
+    background: white;
+    border: #c8c8c8 1px solid;
+}
