@@ -1,4 +1,4 @@
-from deliverable import Deliverable
+from items import *
 
 # Flask
 from flask import (
@@ -93,7 +93,7 @@ def deleteDeliverable():
 def tasks(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Tasks')
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Tasks',items=Task().retreiveAll())
 @app.route('/issues')
 def issues(): 
     if checkLogin():
@@ -128,7 +128,7 @@ def requirments():
 def changes(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='changes')
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Changes')
 @app.route('/referenceDocuments')
 def referenceDocuments(): 
     if checkLogin():
