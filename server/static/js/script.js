@@ -7,6 +7,7 @@ function togglesidebar() {
     $('#sideBar .collapse').collapse('hide')
     collapse = (collapse) ? false : true;
 }
+
 $(".collapseBtn").click(function () {
     togglesidebar();
 });
@@ -18,7 +19,9 @@ $(".dropDownMenu").click(function () {
 
 function create() {
     var requestURL = $("#createbtn").attr("data-url");
-
+    $("#itemFormSaveBTN").click(function () {
+        $("#itemForm").submit();
+    });
     $("#modal-sample").load(requestURL);
     $('#modal-sample').modal('show');
 }
@@ -38,6 +41,19 @@ function deleteItem(type,id) {
 
 
     });
+    // var requestURL = $("#createbtn").attr();
+
+    // $("#modal-sample").load(requestURL);
+}
+function submitItem(){
+    $("#itemForm").submit();
+
+}
+function editItem(type,id) {
+   
+    var requestURL = "/"+type+"Edit?id="+id;
+    $("#modal-sample").load(requestURL);
+    $('#modal-sample').modal('show');
     // var requestURL = $("#createbtn").attr();
 
     // $("#modal-sample").load(requestURL);

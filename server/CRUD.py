@@ -16,7 +16,7 @@ class CRUD(dict):
         self.table = table
         self.unique_id = None
 
-    def _type_check(value):
+    def _type_check(self,value):
         # Type check for SQL queries
         if type(value) == str:
             return f'"{value}"'
@@ -67,10 +67,19 @@ class CRUD(dict):
         finally:
             connection.close()
             return result
-    def update_remote(self) -> None:
-        # Update the DB record based on the local fields
-        pass
-        
+    def deleteRemote(self) -> None:
+        # Delete the remote and local record
+        if self.unique_id is None:
+            return
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"DELETE FROM {self.table} WHERE id={self.unique_id}"
+                print(query)
+                cursor.execute(query)
+            connection.commit()
+        finally:
+            connection.close()    
     def delete(self) -> None:
         # Delete the remote and local record
         if self.unique_id is None:

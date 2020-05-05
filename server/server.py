@@ -55,7 +55,31 @@ def deliverables():
 def createDeliverable(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('createDeliverable.jinja')
+    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=None)
+@app.route('/DeliverablesEdit',methods = ['GET'])
+def editDeliverable(): 
+    if checkLogin():
+        return redirect("/logout")
+    id = request.args['id']
+    d=Deliverable()
+    d.retreive(id)
+    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=d)
+@app.route('/saveDeliverable',methods = ['POST'])
+def saveDeliverable(): 
+    if checkLogin():
+        return redirect("/logout")
+    d=Deliverable()
+    if 'itemID' in request.form:
+        if len(request.form['itemID']) >0:
+            d.retreive(int(request.form['itemID']))
+    d["title"]=request.form['itemName']
+    d["description"]=request.form['description']
+    d["due_date"]=request.form['due_date']
+    if 'itemID' in request.form:
+        if len(request.form['itemID']) >0:
+            d.deleteRemote()
+    d.create()
+    return redirect("/deliverables")
 @app.route('/DeliverablesDelete',methods = ['GET'])
 def deleteDeliverable(): 
     if checkLogin():
