@@ -98,12 +98,12 @@ def tasks():
 def issues(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Issues')
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Issues',items=Issue().retreiveAll())
 @app.route('/actionItems')
 def actionItems(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Action Items')
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Action Items',items=ActionItem().retreiveAll())
 @app.route('/decisions')
 def decisions(): 
     if checkLogin():

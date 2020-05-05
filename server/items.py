@@ -44,7 +44,7 @@ class Issue(CRUD):
             'status_description': None,
             'update_date': None,
         }
-class ActionItems(CRUD):
+class ActionItem(CRUD):
     def __init__(self):
         CRUD.__init__(self, 'action_items')
         self._dict = {
