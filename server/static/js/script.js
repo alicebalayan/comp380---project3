@@ -45,11 +45,7 @@ function submitItem(){
 
 }
 function editItem(type,id) {
-   
     var requestURL = "/"+type+"Edit?id="+id;
     $("#modal-sample").load(requestURL);
     $('#modal-sample').modal('show');
-    // var requestURL = $("#createbtn").attr();
-
-    // $("#modal-sample").load(requestURL);
 }
