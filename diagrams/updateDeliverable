@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-04-29T02:17:43.800Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36 Edg/81.0.416.64" etag="6cfS8l-aVyhmjzTer0uo" version="13.0.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-05-05T02:04:52.518Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68" etag="r-yprb5_MfIat1-K_Yzt" version="13.0.7" type="github">
   <diagram id="Zav4SbWWK-m339TntDjC" name="Page-1">
-    <mxGraphModel dx="1662" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="700" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -40,52 +40,78 @@
             <mxPoint x="659.29" y="150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="xOPmZJErnFpEDIDU6QMK-16" value="update deliverable attributes" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="1" edge="1">
+        <mxCell id="xOPmZJErnFpEDIDU6QMK-17" value="update associated tasks" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="140" y="200" as="sourcePoint" />
-            <mxPoint x="340" y="200" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="xOPmZJErnFpEDIDU6QMK-17" value="update associated tasks" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="1" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="140" y="240" as="sourcePoint" />
-            <mxPoint x="500" y="240" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="xOPmZJErnFpEDIDU6QMK-18" value="update associated requirement" style="endArrow=open;endSize=12;dashed=1;html=1;" parent="1" edge="1">
-          <mxGeometry x="-0.1" width="160" relative="1" as="geometry">
             <mxPoint x="140" y="280" as="sourcePoint" />
-            <mxPoint x="660" y="280" as="targetPoint" />
+            <mxPoint x="500" y="280" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xOPmZJErnFpEDIDU6QMK-18" value="update associated requirement" style="endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry x="-0.1" width="160" relative="1" as="geometry">
+            <mxPoint x="140" y="320" as="sourcePoint" />
+            <mxPoint x="660" y="320" as="targetPoint" />
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="250" y="280" />
+              <mxPoint x="250" y="320" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="vSEIY798adl5gfwCJqIQ-1" value="Deliverable attributes updated" style="endArrow=classic;html=1;" edge="1" parent="1">
+        <mxCell id="vSEIY798adl5gfwCJqIQ-1" value="Deliverable attributes updated" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="320" as="sourcePoint" />
-            <mxPoint x="140" y="320" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="vSEIY798adl5gfwCJqIQ-2" value="Associated tasks updated" style="endArrow=classic;html=1;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="500" y="360" as="sourcePoint" />
-            <mxPoint x="140" y="360" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="vSEIY798adl5gfwCJqIQ-3" value="Associated requirements updated" style="endArrow=classic;html=1;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="660" y="400" as="sourcePoint" />
+            <mxPoint x="340" y="400" as="sourcePoint" />
             <mxPoint x="140" y="400" as="targetPoint" />
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="vSEIY798adl5gfwCJqIQ-4" value="Deliverable updated" style="endArrow=classic;html=1;" edge="1" parent="1">
+        <mxCell id="vSEIY798adl5gfwCJqIQ-2" value="Associated tasks updated" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="440" as="sourcePoint" />
+            <mxPoint x="500" y="440" as="sourcePoint" />
             <mxPoint x="140" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSEIY798adl5gfwCJqIQ-3" value="Associated requirements updated" style="endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="660" y="480" as="sourcePoint" />
+            <mxPoint x="140" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vSEIY798adl5gfwCJqIQ-4" value="Deliverable updated" style="endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="560" as="sourcePoint" />
+            <mxPoint x="140" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oxXL5SM7mUWoejilOV7c-1" value="update Deliverable" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="140" y="200" as="sourcePoint" />
+            <mxPoint x="340" y="200" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oxXL5SM7mUWoejilOV7c-3" value="attributes to update" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="140" y="240" as="sourcePoint" />
+            <mxPoint x="340" y="240" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oxXL5SM7mUWoejilOV7c-4" value="save" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="140" y="360" as="sourcePoint" />
+            <mxPoint x="340" y="360" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oxXL5SM7mUWoejilOV7c-5" value="saved" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="520" as="sourcePoint" />
+            <mxPoint x="140" y="520" as="targetPoint" />
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
       </root>
