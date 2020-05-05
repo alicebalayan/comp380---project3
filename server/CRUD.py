@@ -5,7 +5,7 @@ def connect():
     return pymysql.connect(host="unraid.bishoyabdelmalik.com",
                            port=42069,
                            user="lizard",
-                           password=open("pass.txt").read(),
+                           password="ashrab_shai",
                            db="PMS",
                            charset='utf8mb4',
                            cursorclass=pymysql.cursors.DictCursor)
