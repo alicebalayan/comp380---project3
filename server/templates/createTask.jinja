@@ -13,6 +13,22 @@
                         value="{{task['id']}}">
                 </div>
                 <div class="form-group">
+                    <label for="type">Task Type</label>
+
+                    <div class="combobox">
+                        <select name="type" class="form-control">
+                            {%if task['type']==1%}
+                            <option value="1">Milestone</option>
+                            <option value="0">Regular Task</option>
+                            {% else %}
+                            <option value="0">Regular Task</option>
+                            <option value="1">Milestone</option>
+
+                            {%endif%}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="itemName">Name</label>
                     <input type="text" class="form-control" name="itemName" id="itemName" placeholder=""
                         value="{{task['title']}}">
@@ -30,14 +46,13 @@
                 <div class="form-group scroll pl-3 pr-3 pt-0">
                     {% for task in tasks  %}
                     {% if task['task_id'] is none or task['task_id']==task['id']%}
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="tasks[]" class="tasks" value="{{task['id']}}" 
-                                {% if task['task_id']==task['id'] %} checked {% endif %}
-                                >
-                                <span>{{task['title']}}</span>
-                            </label>
-                        </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="tasks[]" class="tasks" value="{{task['id']}}"
+                                {% if task['task_id']==task['id'] %} checked {% endif %}>
+                            <span>{{task['title']}}</span>
+                        </label>
+                    </div>
                     {% endif %}
                     {% endfor %}
                 </div>

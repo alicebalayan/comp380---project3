@@ -74,3 +74,11 @@ class ActionItem(CRUD):
             'update_date': None,
             'issue_id': None,
         }
+class Requirment(CRUD):
+    def __init__(self):
+        CRUD.__init__(self, 'requirements')
+        self._dict = {
+            'title': None,
+            'description': None,
+            'deliverable_id': None,
+        }

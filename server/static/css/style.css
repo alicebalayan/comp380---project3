@@ -108,3 +108,8 @@ nav li a:hover,
     background: white;
     border: #c8c8c8 1px solid;
 }
+select.form-control {
+ 
+     max-width: unset;
+    
+}

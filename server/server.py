@@ -132,6 +132,35 @@ def deleteTask():
     t.retreive(id)
     t.delete()
     return tasks()
+@app.route('/saveTask',methods = ['POST'])
+def saveTask(): 
+    if checkLogin():
+        return redirect("/logout")
+    # d=Task()
+    # if 'itemID' in request.form:
+    #     if len(request.form['itemID']) >0:
+    #         d.retreive(int(request.form['itemID']))
+    # tasks=request.form.getlist('tasks[]')
+    # d["title"]=request.form['itemName']
+    # d["description"]=request.form['description']
+    # d["due_date"]=request.form['due_date']
+    # if 'itemID' in request.form:
+    #     if len(request.form['itemID']) >0:
+    #         unAssociateTasks(request.form['itemID'])
+    #         d.deleteRemote()
+    # d.create()
+    # if 'itemID' in request.form:
+    #     if len(request.form['itemID']) >0:
+    #         d['id']=request.form['itemID']
+    #     else:
+    #         d.retreiveMostRecent()
+    # for task in tasks:
+    #     t=Task()
+    #     t.retreive(int(task))
+    #     t['deliverable_id']=d['id']
+    #     t.deleteRemote()
+    #     t.create()
+    return redirect("/deliverables")
 @app.route('/issues')
 def issues(): 
     if checkLogin():
@@ -161,7 +190,7 @@ def risks():
 def requirments(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Requirments')
+    return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Requirments',items=Requirment().retreiveAll())
 @app.route('/changes')
 def changes(): 
     if checkLogin():
