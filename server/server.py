@@ -55,7 +55,7 @@ def deliverables():
 def createDeliverable(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=None,tasks=Task().retreiveAll())
+    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=None,tasks=Task().retreiveAll(),requirments=Requirment().retreiveAll())
 @app.route('/DeliverablesEdit',methods = ['GET'])
 def editDeliverable(): 
     if checkLogin():
@@ -63,7 +63,7 @@ def editDeliverable():
     id = request.args['id']
     d=Deliverable()
     d.retreive(id)
-    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=d,tasks=Task().retreiveAll())
+    return  render_template('createDeliverable.jinja', page='Deliverables',deliverable=d,tasks=Task().retreiveAll(),requirments=Requirment().retreiveAll())
 @app.route('/saveDeliverable',methods = ['POST'])
 def saveDeliverable(): 
     if checkLogin():
@@ -73,6 +73,7 @@ def saveDeliverable():
         if len(request.form['itemID']) >0:
             d.retreive(int(request.form['itemID']))
     tasks=request.form.getlist('tasks[]')
+    requirments=request.form.getlist('requirments[]')
     d["title"]=request.form['itemName']
     d["description"]=request.form['description']
     d["due_date"]=request.form['due_date']
@@ -92,6 +93,12 @@ def saveDeliverable():
         t['deliverable_id']=d['id']
         t.deleteRemote()
         t.create()
+    for requirment in requirments:
+        r=Requirment()
+        r.retreive(int(requirment))
+        r['deliverable_id']=d['id']
+        r.deleteRemote()
+        r.create()
     return redirect("/deliverables")
 def unAssociateTasks(deliverableID):
     t=Task()
@@ -102,6 +109,15 @@ def unAssociateTasks(deliverableID):
         atask["deliverable_id"]=None
         atask.deleteRemote()
         atask.create()
+def unAssociateRequirments(deliverableID):
+    t=Requirment()
+    associatedRequirments=t.retreiveWithDeliverable(int(deliverableID))
+    for requirmentid in associatedRequirments:
+        requirment=Requirment()
+        requirment.retreive(requirmentid['id'])
+        requirment["deliverable_id"]=None
+        requirment.deleteRemote()
+        requirment.create()
 @app.route('/DeliverablesDelete',methods = ['GET'])
 def deleteDeliverable(): 
     if checkLogin():
@@ -127,7 +143,6 @@ def deleteTask():
     if checkLogin():
         return redirect("/logout")
     id = request.args['id']
-    unAssociateTasks(id)
     t=Task()
     t.retreive(id)
     t.delete()
@@ -160,7 +175,7 @@ def saveTask():
     #     t['deliverable_id']=d['id']
     #     t.deleteRemote()
     #     t.create()
-    return redirect("/deliverables")
+    return redirect("/tasks")
 @app.route('/issues')
 def issues(): 
     if checkLogin():
@@ -191,6 +206,49 @@ def requirments():
     if checkLogin():
         return redirect("/logout")
     return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Requirments',items=Requirment().retreiveAll())
+@app.route('/createRequirment')
+def createRequirment(): 
+    if checkLogin():
+        return redirect("/logout")
+    return  render_template('createRequirment.jinja', page='Requirments',requirment=None)
+@app.route('/RequirmentsDelete',methods = ['GET'])
+def deleteRequirment(): 
+    if checkLogin():
+        return redirect("/logout")
+    id = request.args['id']
+    r=Requirment()
+    r.retreive(id)
+    r.delete()
+    return requirments()
+@app.route('/saveRequirment',methods = ['POST'])
+def saveRequirment(): 
+    if checkLogin():
+        return redirect("/logout")
+    # d=Task()
+    # if 'itemID' in request.form:
+    #     if len(request.form['itemID']) >0:
+    #         d.retreive(int(request.form['itemID']))
+    # tasks=request.form.getlist('tasks[]')
+    # d["title"]=request.form['itemName']
+    # d["description"]=request.form['description']
+    # d["due_date"]=request.form['due_date']
+    # if 'itemID' in request.form:
+    #     if len(request.form['itemID']) >0:
+    #         unAssociateTasks(request.form['itemID'])
+    #         d.deleteRemote()
+    # d.create()
+    # if 'itemID' in request.form:
+    #     if len(request.form['itemID']) >0:
+    #         d['id']=request.form['itemID']
+    #     else:
+    #         d.retreiveMostRecent()
+    # for task in tasks:
+    #     t=Task()
+    #     t.retreive(int(task))
+    #     t['deliverable_id']=d['id']
+    #     t.deleteRemote()
+    #     t.create()
+    return redirect("/requirments")
 @app.route('/changes')
 def changes(): 
     if checkLogin():

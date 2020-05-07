@@ -1,0 +1,33 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-sample-label">
+                Create Requirment
+            </h4>
+        </div>
+        <div class="modal-body">
+            <form action="/save{{page[:-1]}}" id="itemForm" method="POST">
+                <div class="form-group d-none">
+                    <label for="itemID">id</label>
+                    <input type="number" class="form-control" name="itemID" id="itemName" placeholder=""
+                        value="{{requirment['id']}}">
+                </div>
+                <div class="form-group">
+                    <label for="itemName">Name</label>
+                    <input type="text" class="form-control" name="itemName" id="itemName" placeholder=""
+                        value="{{requirment['title']}}">
+                </div>
+                
+               
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" onclick="submitItem()" id="itemFormSaveBTN" class="btn btn-primary">
+                Add
+            </button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

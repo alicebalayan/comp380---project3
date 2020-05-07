@@ -41,6 +41,21 @@
                     {% endif %}
                     {% endfor %}
                 </div>
+                 <p class="form-group-label">Requirments</p>
+                <div class="form-group scroll pl-3 pr-3 pt-0">
+                    {% for requirment in requirments  %}
+                    {% if requirment['deliverable_id'] is none or deliverable['id']==requirment['deliverable_id']%}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="requirments[]" class="requirments" value="{{requirment['id']}}" 
+                                {% if deliverable['id']==requirment['deliverable_id'] %} checked {% endif %}
+                                >
+                                <span>{{requirment['title']}}</span>
+                            </label>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </form>
         </div>
         <div class="modal-footer">

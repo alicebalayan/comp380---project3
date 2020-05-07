@@ -82,3 +82,16 @@ class Requirment(CRUD):
             'description': None,
             'deliverable_id': None,
         }
+    def retreiveWithDeliverable(self, dunique_id: int) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table} WHERE deliverable_id={dunique_id}"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchall()
+
+        finally:
+            connection.close()
+            return result
