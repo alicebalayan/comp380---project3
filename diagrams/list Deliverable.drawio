@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-05-07T01:27:42.537Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68" etag="wKnt3YoncCdZri3Wzfzz" version="13.0.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-05-07T01:28:28.956Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68" etag="P5bE29-Eewa4KyOXpUh9" version="13.0.8" type="github">
   <diagram id="CUGvI7tW3XCBEVFrUISh" name="Page-1">
     <mxGraphModel dx="700" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -55,32 +55,38 @@
         </mxCell>
         <mxCell id="1R0jfy1b2duCC0lQI_ia-11" value="Send Deliverable Attributes" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="320" as="sourcePoint" />
-            <mxPoint x="140" y="320" as="targetPoint" />
+            <mxPoint x="340" y="360" as="sourcePoint" />
+            <mxPoint x="140" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1R0jfy1b2duCC0lQI_ia-12" value="Send Associated Tasks" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="500" y="360" as="sourcePoint" />
-            <mxPoint x="140" y="360" as="targetPoint" />
+            <mxPoint x="500" y="400" as="sourcePoint" />
+            <mxPoint x="140" y="400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1R0jfy1b2duCC0lQI_ia-13" value="Send Associated Requirements" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="660" y="400" as="sourcePoint" />
-            <mxPoint x="140" y="400" as="targetPoint" />
+            <mxPoint x="660" y="440" as="sourcePoint" />
+            <mxPoint x="140" y="440" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1R0jfy1b2duCC0lQI_ia-14" value="Deliverables listed" style="endArrow=classic;html=1;" parent="1" edge="1">
+        <mxCell id="1R0jfy1b2duCC0lQI_ia-14" value="Deliverables listed" style="endArrow=classic;html=1;dashed=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="340" y="440" as="sourcePoint" />
-            <mxPoint x="140" y="440" as="targetPoint" />
+            <mxPoint x="340" y="480" as="sourcePoint" />
+            <mxPoint x="140" y="480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1R0jfy1b2duCC0lQI_ia-15" value="retrieve associated Requirements" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="140" y="280" as="sourcePoint" />
             <mxPoint x="660" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JpOhgbgQR-tIt0cQX_mz-1" value="Send Deliverable UIDs" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="320" as="sourcePoint" />
+            <mxPoint x="140" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
