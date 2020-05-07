@@ -139,6 +139,26 @@ def createTask():
     if checkLogin():
         return redirect("/logout")
     return  render_template('createTask.jinja', page='Tasks',task=None,tasks=Task().retreiveAll())
+@app.route('/TasksEdit',methods = ['GET'])
+def editTask(): 
+    if checkLogin():
+        return redirect("/logout")
+    id = request.args['id']
+    t=Task()
+    t.retreive(id)
+    issuesAssignedObj=task_issue().retreiveWitTask(id)
+    issuesAssigned=[]
+    print(issuesAssignedObj)
+    for issue in issuesAssignedObj:
+        issuesAssigned.append(issue["issue_id"])
+    issues=Issue().retreiveAll()
+    resources=Resource().retreiveAll()
+    resourcesAssignedObj=task_resource().retreiveWitTask(id)
+    resourcesAssigned=[]
+    print(resourcesAssignedObj)
+    for resource in resourcesAssignedObj:
+        resourcesAssigned.append(resource["resource_id"])
+    return  render_template('createTask.jinja', page='Tasks',task=t,issuesAssigned=issuesAssigned,issues=issues,resourcesAssigned=resourcesAssigned,resources=resources,tasks=Task().retreiveAll())
 @app.route('/TasksDelete',methods = ['GET'])
 def deleteTask(): 
     if checkLogin():

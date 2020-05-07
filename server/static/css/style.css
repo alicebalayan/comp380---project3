@@ -113,3 +113,7 @@ select.form-control {
      max-width: unset;
     
 }
+h4#modal-sample-label {
+    margin: 0;
+    padding: 0;
+}

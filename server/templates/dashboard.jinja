@@ -161,10 +161,12 @@
                         </div>
                     </div>
                     <p class="text-black-50 p-0">
-                        {% if item.description|length > 100 %}
+                        {% if item.description is not none and item.description|length > 100 %}
                         {{item.description[:100]}}...
                         {% else %}
-                        {{item.description}}
+                        {%if item.description is not none%}
+                            {{item.description}}
+                        {% endif %}
                         {% endif %}
                     </p>
                     <hr>
