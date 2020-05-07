@@ -42,9 +42,11 @@ div#footer {
     position: relative;
     top: 33%;
 }
-
+.anItem,
 .menuBtn {
     cursor: pointer;
+}
+.menuBtn {
     padding: 5px 0 5px 0;
 }
 #projects .current:before {
