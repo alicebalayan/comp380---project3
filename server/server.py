@@ -207,11 +207,22 @@ def requirments():
     if checkLogin():
         return redirect("/logout")
     return  render_template('dashboard.jinja', title='hello '+ session['username'], page='Requirments',items=Requirment().retreiveAll())
+
+@app.route('/RequirmentsEdit',methods = ['GET'])
+def editRequirment(): 
+    if checkLogin():
+        return redirect("/logout")
+    print(request.args['id'])
+    print("\n")
+    r=Requirment()
+    r.retreive(request.args['id'])
+    print(r)
+    return  render_template('createRequirment.jinja', page='Requirments',requirment=r,deliverables=Deliverable().retreiveAll())
 @app.route('/createRequirment')
 def createRequirment(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('createRequirment.jinja', page='Requirments',requirment=None)
+    return  render_template('createRequirment.jinja', page='Requirments',requirment=None,deliverables=Deliverable().retreiveAll())
 @app.route('/RequirmentsDelete',methods = ['GET'])
 def deleteRequirment(): 
     if checkLogin():
@@ -225,30 +236,15 @@ def deleteRequirment():
 def saveRequirment(): 
     if checkLogin():
         return redirect("/logout")
-    # d=Task()
-    # if 'itemID' in request.form:
-    #     if len(request.form['itemID']) >0:
-    #         d.retreive(int(request.form['itemID']))
-    # tasks=request.form.getlist('tasks[]')
-    # d["title"]=request.form['itemName']
-    # d["description"]=request.form['description']
-    # d["due_date"]=request.form['due_date']
-    # if 'itemID' in request.form:
-    #     if len(request.form['itemID']) >0:
-    #         unAssociateTasks(request.form['itemID'])
-    #         d.deleteRemote()
-    # d.create()
-    # if 'itemID' in request.form:
-    #     if len(request.form['itemID']) >0:
-    #         d['id']=request.form['itemID']
-    #     else:
-    #         d.retreiveMostRecent()
-    # for task in tasks:
-    #     t=Task()
-    #     t.retreive(int(task))
-    #     t['deliverable_id']=d['id']
-    #     t.deleteRemote()
-    #     t.create()
+    r=Requirment()
+    if 'itemID' in request.form:
+        if len(request.form['itemID']) >0:
+            r.retreive(int(request.form['itemID']))
+            r.deleteRemote()
+    r["title"]=request.form['itemName']
+    r["deliverable_id"]=request.form['deliverable']
+    r.create()
+    
     return redirect("/requirments")
 @app.route('/changes')
 def changes(): 

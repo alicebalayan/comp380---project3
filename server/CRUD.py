@@ -32,7 +32,7 @@ class CRUD(dict):
                     f"INSERT INTO {self.table} (" +
                     (', '.join(f"{key}" for key in self.keys())) +
                     ") VALUES(" +
-                    (', '.join(("NULL" if value is None else self._type_check(value)) for value in self.values())) +
+                    (', '.join(("NULL" if value is None or value is "" else self._type_check(value)) for value in self.values())) +
                     ")"
                 )
                 print(query)
