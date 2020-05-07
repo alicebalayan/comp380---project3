@@ -49,3 +49,6 @@ function editItem(type,id) {
     $("#modal-sample").load(requestURL);
     $('#modal-sample').modal('show');
 }
+$('#modal-sample').on('hidden.bs.modal', function () {
+    $('#modal-sample').html('<div class="modal-dialog"><div class="modal-content"><h1><div class="progress-ring progress-large"><div class="progress-circle"></div><div class="progress-circle"></div><div class="progress-circle"></div><div class="progress-circle"></div><div class="progress-circle"></div></div>Loading..</h1></div></div>');
+});

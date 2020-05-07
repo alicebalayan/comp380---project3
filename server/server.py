@@ -80,6 +80,7 @@ def saveDeliverable():
     if 'itemID' in request.form:
         if len(request.form['itemID']) >0:
             unAssociateTasks(request.form['itemID'])
+            unAssociateRequirments(request.form['itemID'])
             d.deleteRemote()
     d.create()
     if 'itemID' in request.form:
