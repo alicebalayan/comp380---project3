@@ -138,7 +138,7 @@ def tasks():
 def createTask(): 
     if checkLogin():
         return redirect("/logout")
-    return  render_template('createTask.jinja', page='Tasks',task=None,tasks=Task().retreiveAll())
+    return  render_template('createTask.jinja', page='Tasks',task=None,issues=Issue().retreiveAll(),resources=Resource().retreiveAll(),tasks=Task().retreiveAll(),deliverables=Deliverable().retreiveAll())
 @app.route('/TasksEdit',methods = ['GET'])
 def editTask(): 
     if checkLogin():
@@ -158,7 +158,19 @@ def editTask():
     print(resourcesAssignedObj)
     for resource in resourcesAssignedObj:
         resourcesAssigned.append(resource["resource_id"])
-    return  render_template('createTask.jinja', page='Tasks',task=t,issuesAssigned=issuesAssigned,issues=issues,resourcesAssigned=resourcesAssigned,resources=resources,tasks=Task().retreiveAll())
+    predTasksObj=task_pred().retreiveWitTask(id)
+    predTasks=[]
+    print(predTasksObj)
+
+    for task in predTasksObj:
+        predTasks.append(task["predecessor_id"])
+    succTasksObj=task_succ().retreiveWitTask(id)
+    succTasks=[]
+    print(succTasksObj)
+
+    for task in succTasksObj:
+        succTasks.append(task["successor_id"])
+    return  render_template('createTask.jinja', page='Tasks',task=t,issuesAssigned=issuesAssigned,issues=issues,resourcesAssigned=resourcesAssigned,resources=resources,predTasks=predTasks,succTasks=succTasks,tasks=Task().retreiveAll(),deliverables=Deliverable().retreiveAll())
 @app.route('/TasksDelete',methods = ['GET'])
 def deleteTask(): 
     if checkLogin():
@@ -172,30 +184,58 @@ def deleteTask():
 def saveTask(): 
     if checkLogin():
         return redirect("/logout")
-    # d=Task()
-    # if 'itemID' in request.form:
-    #     if len(request.form['itemID']) >0:
-    #         d.retreive(int(request.form['itemID']))
-    # tasks=request.form.getlist('tasks[]')
-    # d["title"]=request.form['itemName']
-    # d["description"]=request.form['description']
-    # d["due_date"]=request.form['due_date']
-    # if 'itemID' in request.form:
-    #     if len(request.form['itemID']) >0:
-    #         unAssociateTasks(request.form['itemID'])
-    #         d.deleteRemote()
-    # d.create()
-    # if 'itemID' in request.form:
-    #     if len(request.form['itemID']) >0:
-    #         d['id']=request.form['itemID']
-    #     else:
-    #         d.retreiveMostRecent()
-    # for task in tasks:
-    #     t=Task()
-    #     t.retreive(int(task))
-    #     t['deliverable_id']=d['id']
-    #     t.deleteRemote()
-    #     t.create()
+    print(request.form)
+
+    t=Task()
+    predTasksObj=task_pred()
+    succTasksObj=task_succ()
+    associatedIssuesObj=task_issue()
+    associatedResourcesObj=task_resource()
+    if 'itemID' in request.form:
+        if len(request.form['itemID']) >0:
+            t.retreive(int(request.form['itemID']))
+            predTasksObj.deleteRemote(t["id"])
+            succTasksObj.deleteRemote(t["id"])
+            associatedIssuesObj.deleteRemoteTask(t["id"])
+            associatedResourcesObj.deleteRemoteTask(t["id"])
+            t.deleteRemote()
+          
+    
+    predTasks=request.form.getlist('predTasks[]')
+    succTasks=request.form.getlist('succTasks[]')
+    associatedIssues=request.form.getlist('issues[]')
+    associatedResources=request.form.getlist('resources[]')
+    t["title"]=request.form['itemName']
+    t["description"]=request.form['description']
+    t["type"]=request.form['type']
+    t["expected_effort"]=request.form['expected_effort']
+    t["actual_effort"]=request.form['actual_effort']
+    t["expected_duration"]=request.form['expected_duration']
+    t["actual_duration"]=request.form['actual_duration']
+    t["effort_completed"]=request.form['effort_completed']
+    t["percent_complete"]=request.form['percent_complete']
+    if 'deliverable' in request.form:
+        t["deliverable_id"]=request.form['deliverable']
+    t.create()
+    if 'itemID' in request.form:
+        if len(request.form['itemID']) <= 0:
+            t.retreiveMostRecent()
+    for task in predTasks:
+        predTasksObj["task_id"]=t["id"]
+        predTasksObj["predecessor_id"]=task
+        predTasksObj.create()
+    for task in succTasksObj:
+        succTasksObj["task_id"]=t["id"]
+        succTasksObj["successor_id"]=task
+        succTasksObj.create()
+    for issue in associatedIssues:
+        associatedIssuesObj["task_id"]=t["id"]
+        associatedIssuesObj["issue_id"]=issue
+        associatedIssuesObj.create()
+    for resource in associatedResources:
+        associatedResourcesObj["task_id"]=t["id"]
+        associatedResourcesObj["resource_id"]=resource
+        associatedResourcesObj.create()
     return redirect("/tasks")
 @app.route('/issues')
 def issues(): 

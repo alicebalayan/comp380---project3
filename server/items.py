@@ -136,8 +136,6 @@ class task_resource(CRUD):
             connection.close()
     def deleteRemoteResource(self, unique_id: int) -> None:
         # Delete the remote and local record
-        if self.unique_id is None:
-            return
         connection = connect()
         try:
             with connection.cursor() as cursor:
@@ -149,8 +147,6 @@ class task_resource(CRUD):
             connection.close() 
     def deleteRemoteTask(self, unique_id: int) -> None:
         # Delete the remote and local record
-        if self.unique_id is None:
-            return
         connection = connect()
         try:
             with connection.cursor() as cursor:
@@ -193,8 +189,6 @@ class task_issue(CRUD):
             connection.close()
     def deleteRemoteIssue(self, unique_id: int) -> None:
         # Delete the remote and local record
-        if self.unique_id is None:
-            return
         connection = connect()
         try:
             with connection.cursor() as cursor:
@@ -205,9 +199,6 @@ class task_issue(CRUD):
         finally:
             connection.close() 
     def deleteRemoteTask(self, unique_id: int) -> None:
-        # Delete the remote and local record
-        if self.unique_id is None:
-            return
         connection = connect()
         try:
             with connection.cursor() as cursor:
@@ -217,3 +208,61 @@ class task_issue(CRUD):
             connection.commit()
         finally:
             connection.close()     
+class task_pred(CRUD):
+    def __init__(self):
+        CRUD.__init__(self, 'task_pred')
+        self._dict = {
+            'task_id': None,
+            'predecessor_id ': None,
+        } 
+    def retreiveWitTask(self, tunique_id: int) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table} WHERE `task_id`={tunique_id}"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return result
+        finally:
+            connection.close()
+    def deleteRemote(self, unique_id: int) -> None:
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"DELETE FROM {self.table} WHERE task_id={unique_id}"
+                print(query)
+                cursor.execute(query)
+            connection.commit()
+        finally:
+            connection.close() 
+class task_succ(CRUD):
+    def __init__(self):
+        CRUD.__init__(self, 'task_succ')
+        self._dict = {
+            'task_id': None,
+            'predecessor_id ': None,
+        } 
+    def retreiveWitTask(self, tunique_id: int) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table} WHERE `task_id`={tunique_id}"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return result
+        finally:
+            connection.close()
+    def deleteRemote(self, unique_id: int) -> None:       
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"DELETE FROM {self.table} WHERE task_id={unique_id}"
+                print(query)
+                cursor.execute(query)
+            connection.commit()
+        finally:
+            connection.close() 

@@ -60,27 +60,27 @@
                 </div>
                 <div class="form-group">
                     <label for="expected_effort">Expected Effort</label>
-                    <input type="text" class="form-control" name="expected_effort" placeholder="" value="{{task['expected_effort']}}">
+                    <input type="number" class="form-control" name="expected_effort" placeholder="" value="{{task['expected_effort'] if task['expected_effort'] != None }}">
                 </div>
                 <div class="form-group">
                     <label for="actual_effort">Actual Effort</label>
-                    <input type="text" class="form-control" name="actual_effort" placeholder="" value="{{task['actual_effort']}}">
+                    <input type="text" class="form-control" name="actual_effort" placeholder="" value="{{task['actual_effort'] if task['actual_effort'] != None}}">
                 </div>
                 <div class="form-group">
                     <label for="expected_duration">Expected Duration</label>
-                    <input type="text" class="form-control" name="expected_duration" placeholder="" value="{{task['expected_duration']}}">
+                    <input type="text" class="form-control" name="expected_duration" placeholder="" value="{{task['expected_duration'] if task['expected_duration'] != None}}">
                 </div>
                 <div class="form-group">
                     <label for="actual_duration">Actual Duration</label>
-                    <input type="text" class="form-control" name="actual_duration" placeholder="" value="{{task['actual_duration']}}">
+                    <input type="text" class="form-control" name="actual_duration" placeholder="" value="{{task['actual_duration'] if task['actual_duration'] != None}}">
                 </div>
                 <div class="form-group">
                     <label for="effort_completed">Effort Complete</label>
-                    <input type="text" class="form-control" name="effort_completed" placeholder="" value="{{task['effort_completed']}}">
+                    <input type="text" class="form-control" name="effort_completed" placeholder="" value="{{task['effort_completed'] if task['effort_completed'] != None}}">
                 </div>
                 <div class="form-group">
                     <label for="percent_complete">Percent Complete</label>
-                    <input type="text" class="form-control" name="percent_complete" placeholder="" value="{{task['percent_complete']}}">
+                    <input type="text" class="form-control" name="percent_complete" placeholder="" value="{{task['percent_complete'] if task['percent_complete'] != None}}">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -89,32 +89,43 @@
                 <p class="form-group-label">Predecessor Tasks</p>
                 <div class="form-group scroll pl-3 pr-3 pt-0">
                     {% for task in tasks  %}
-                    {% if task['task_id'] is none or task['task_id']==task['id']%}
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="tasks[]" class="tasks" value="{{task['id']}}"
-                                {% if task['task_id']==task['id'] %} checked {% endif %}>
+                            <input type="checkbox" name="predTasks[]" class="tasks" value="{{task['id']}}"
+                                {% if task['id'] in predTasks %} checked {% endif %}>
                             <span>{{task['title']}}</span>
                         </label>
                     </div>
-                    {% endif %}
                     {% endfor %}
+                    
                 </div>
                 <p class="form-group-label">Successor Tasks</p>
                 <div class="form-group scroll pl-3 pr-3 pt-0">
                     {% for task in tasks  %}
-                    {% if task['task_id'] is none or task['task_id']==task['id']%}
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="tasks[]" class="tasks" value="{{task['id']}}"
-                                {% if task['task_id']==task['id'] %} checked {% endif %}>
+                            <input type="checkbox" name="succTasks[]" class="tasks" value="{{task['id']}}"
+                                {% if task['id'] in succTasks %} checked {% endif %}>
                             <span>{{task['title']}}</span>
                         </label>
                     </div>
-                    {% endif %}
                     {% endfor %}
                 </div>
+                <p class="form-group-label">Connected Deliverable</p>
+               
 
+                <div class="form-group">
+                    <div class="combobox">                    
+                        <select name="deliverable" class="form-control">                           
+                            <option value=""></option>
+
+                            {% for deliverable in deliverables  %}
+                                <option value="{{ deliverable['id'] }}">{{ deliverable['title']}}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -127,3 +138,6 @@
         </div>
     </div>
 </div>
+<script>
+    $("select[name='deliverable']").val("{{task['deliverable_id']}}");
+</script>

@@ -60,7 +60,7 @@ class CRUD(dict):
         connection = connect()
         try:
             with connection.cursor() as cursor:
-                query = f"SELECT * FROM {self.table} ORDER BY `deliverables`.`id` DESC"
+                query = f"SELECT * FROM {self.table} ORDER BY `id` DESC"
                 print(query)
                 cursor.execute(query)
                 result = cursor.fetchone()
