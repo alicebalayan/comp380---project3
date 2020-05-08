@@ -16,3 +16,9 @@
 - Reference Documents 
 - Resources 
 - Decisions
+
+### More..
+- JavaScript for front-end and intuitive UI
+- Pythong for back-end and on point functionality
+- SQL for flawless database control 
+- Docker for smooth deployment
