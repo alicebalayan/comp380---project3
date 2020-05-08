@@ -7,4 +7,12 @@
 - Microsoft Look and Feel
 - Better control of the project
 - Secure
-- Create, edit, delete important parts of the projects (Deliverables, Tasks, Issues)
+- Create, edit, delete important parts of the projects
+### Supported Components
+- Deliverables 
+- Tasks
+- Action Items 
+- Issues 
+- Reference Documents 
+- Resources 
+- Decisions
