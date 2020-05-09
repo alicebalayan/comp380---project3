@@ -191,16 +191,20 @@ def saveTask():
     succTasksObj=task_succ()
     associatedIssuesObj=task_issue()
     associatedResourcesObj=task_resource()
+    oldPredTasks=[]
+    oldSuccTasks=[]
     if 'itemID' in request.form:
         if len(request.form['itemID']) >0:
             t.retreive(int(request.form['itemID']))
             predTasksObj.deleteRemote(t["id"])
             succTasksObj.deleteRemote(t["id"])
+            oldPredTasks=task_pred().retreiveWitPredTask(int(request.form['itemID']))
+            oldSuccTasks=task_succ().retreiveWitSuccTask(int(request.form['itemID']))
+            task_pred().deleteRemotePredTask(int(request.form['itemID']))
+            task_succ().deleteRemoteSuccTask(int(request.form['itemID']))
             associatedIssuesObj.deleteRemoteTask(t["id"])
             associatedResourcesObj.deleteRemoteTask(t["id"])
             t.deleteRemote()
-          
-    
     predTasks=request.form.getlist('predTasks[]')
     succTasks=request.form.getlist('succTasks[]')
     associatedIssues=request.form.getlist('issues[]')
@@ -228,6 +232,16 @@ def saveTask():
         succTasksObj["task_id"]=t["id"]
         succTasksObj["successor_id"]=task
         succTasksObj.create()
+    for relation in oldSuccTasks:
+        succTasksObj=task_succ()
+        succTasksObj["task_id"]=relation["task_id"]
+        succTasksObj["successor_id"]=relation["successor_id"]
+        succTasksObj.create()
+    for relation in oldPredTasks:
+        predTasksObj=task_pred()
+        predTasksObj["task_id"]=relation["task_id"]
+        predTasksObj["predecessor_id"]=relation["predecessor_id"]
+        predTasksObj.create()
     for issue in associatedIssues:
         associatedIssuesObj["task_id"]=t["id"]
         associatedIssuesObj["issue_id"]=issue
@@ -302,7 +316,8 @@ def saveRequirment():
             r.retreive(int(request.form['itemID']))
             r.deleteRemote()
     r["title"]=request.form['itemName']
-    r["deliverable_id"]=request.form['deliverable']
+    if 'deliverable' in request.form:
+        r["deliverable_id"]=request.form['deliverable']
     r.create()
     
     return redirect("/requirments")

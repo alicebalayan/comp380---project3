@@ -237,6 +237,28 @@ class task_pred(CRUD):
             connection.commit()
         finally:
             connection.close() 
+    def retreiveWitPredTask(self, tunique_id: int) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table} WHERE `predecessor_id`={tunique_id}"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return result
+        finally:
+            connection.close()
+    def deleteRemotePredTask(self, unique_id: int) -> None:       
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"DELETE FROM {self.table} WHERE predecessor_id={unique_id}"
+                print(query)
+                cursor.execute(query)
+            connection.commit()
+        finally:
+            connection.close()
 class task_succ(CRUD):
     def __init__(self):
         CRUD.__init__(self, 'task_succ')
@@ -265,4 +287,26 @@ class task_succ(CRUD):
                 cursor.execute(query)
             connection.commit()
         finally:
-            connection.close() 
+            connection.close()
+    def retreiveWitSuccTask(self, tunique_id: int) -> None:
+        # Populate the class preexsiting values
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"SELECT * FROM {self.table} WHERE `successor_id`={tunique_id}"
+                print(query)
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return result
+        finally:
+            connection.close()
+    def deleteRemoteSuccTask(self, unique_id: int) -> None:       
+        connection = connect()
+        try:
+            with connection.cursor() as cursor:
+                query = f"DELETE FROM {self.table} WHERE successor_id={unique_id}"
+                print(query)
+                cursor.execute(query)
+            connection.commit()
+        finally:
+            connection.close()
