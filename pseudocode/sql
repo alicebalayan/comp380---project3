@@ -1,0 +1,73 @@
+//extra credit pseudocode for database 
+
+//table for deliverables 
+CREATE TABLE Deliverables (
+    uniqueIdDeliverable integer, 
+    nameDeliverable string, 
+    descriptionDeliverable text, 
+    dueDateDeliverable integer,
+); 
+
+//table for taks
+CREATE TABLE Tasks (
+    uniqueIdTask integer, 
+    nameTask string, 
+    descriptionTask text, 
+    resourceAssignedTask string, 
+    expectedStartDateTask integer, 
+    expectedEndDateTask integer, 
+    expectedDurationTask integer, 
+    expectedEffortTask string, 
+    actualStartDateTask integer, 
+    actualEndDateTask integer, 
+    actualDurationTask integer, 
+    effortCompletionTask string, 
+    actualEffortTask string, 
+    percentCompletedTask integer, 
+    uniqueIdDeliverable integer, //unique id of tasks goes here
+); 
+
+//table for issues
+CREATE TABLE Issues (
+    uniqueIdIssue integer, 
+    nameIssue string, 
+    descriptionIssue text, 
+    priorityIssue integer, 
+    severityIssue integer, 
+    dateRaisedIssue integer, 
+    dateAssignedIssue integer, 
+    expectedCompletionDateInssue integer, 
+    actualCompletionDateIssue integer, 
+    statusIssue integer,
+    statusDescriptionIssue text, 
+    updateDateIssue integer,
+);
+
+//table for action items 
+CREATE TABLE ActionItems (
+    uniqueIdActionItem integer,
+    nameActionItem text, 
+    descriptionActionItem text, 
+    dateCreatedActionItem integer, 
+    dateAssignedActionItem integer, 
+    resourceAssignedActionItem string, 
+    expectedCompletionDateActionItem integer, 
+    actualCompletionDateActionItem integer, 
+    statusActionItem integer, 
+    statusDescriptionActionItem text, 
+    updateDateActionItem integer, 
+    uniqueIdIssue integer, //unique id of issues goes here
+); 
+
+//table for resources 
+CREATE TABLE Resources (
+    uniqueIdResource integer, 
+    nameResource text, 
+    uniqueIdActionItem integer, //unique id of action items goes here
+); 
+
+//table for decisions
+CREATE TABLE Decisions (
+    uniqueIdDecision integer, 
+    
+); 
